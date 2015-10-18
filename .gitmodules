@@ -1,6 +1,0 @@
-[submodule "ardefact_web"]
-	path = ardefact_web
-	url = git@git.ardefact.com:~/new/ardefact_web.git
-[submodule "ardefact_api"]
-	path = ardefact_api
-	url = git@git.ardefact.com:~/new/ardefact_api.git
