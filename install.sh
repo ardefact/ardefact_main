@@ -13,6 +13,4 @@ if [ ! -d "$ARDEFACT_API_FOLDER" ]; then
     git clone git@git.ardefact.com:~/new/ardefact_api.git
 fi
 
-pushd ./${ARDEFACT_WEB_FOLDER}/ardefact-web; npm install
-popd
 pushd ./${ARDEFACT_API_FOLDER}/ardefact-api; npm install
