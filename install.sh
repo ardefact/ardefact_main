@@ -31,3 +31,5 @@ fi
 
 echo "--- Running npm install in ${ARDEFACT_API_FOLDER}/ardefact-api"
 pushd ./${ARDEFACT_API_FOLDER}/ardefact-api; npm install
+
+npm install -g requirejs
