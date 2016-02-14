@@ -55,7 +55,7 @@ def main():
         close_review_request(REVIEWBOARD_URL, USERNAME, PASSWORD,
                              review_request_id, description)
 	sys.stdout.flush()
-	print os.system("ssh www-data@wiki.ardefact.com /home/www-data/reviewboard_repos/updateall.sh")
+	print os.popen("ssh www-data@wiki.ardefact.com /home/www-data/reviewboard_repos/updateall.sh").read()
 
 
 if __name__ == '__main__':
