@@ -41,6 +41,8 @@ def main():
     review_id_to_commits = get_review_id_to_commits_map(lines, compiled_regex)
 
     print "-- POST-RECEIVE --"
+	print os.popen("ssh www-data@wiki.ardefact.com /home/www-data/reviewboard_repos/updateall.sh").read()
+
     sys.stdout.flush()
 
     # Close each review request in the dictionary as submitted.
@@ -55,7 +57,6 @@ def main():
         close_review_request(REVIEWBOARD_URL, USERNAME, PASSWORD,
                              review_request_id, description)
 	sys.stdout.flush()
-	print os.popen("ssh www-data@wiki.ardefact.com /home/www-data/reviewboard_repos/updateall.sh").read()
 
 
 if __name__ == '__main__':
