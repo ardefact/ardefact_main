@@ -16,6 +16,8 @@
 import logging
 import re
 import sys
+import os
+import string
 
 from rbtools.hooks.common import (get_review_request_approval,
                                   initialize_logging)
@@ -40,6 +42,16 @@ REQUIRE_REVIEW_REQUESTS = True
 # Option to decline a push if it contains any unapproved commits.
 DECLINE_UNAPPROVED_PUSH = True
 
+def isRBOverride(lines):
+	refRegex = re.compile('([0-9a-z]*) ([0-9a-z]*) .*')
+
+	for line in lines:
+		refs = refRegex.match(line)
+		commit = os.popen('git rev-list ' + refs.group(1) + '..' + refs.group(2)).read()
+		msg = os.popen('git cat-file commit ' + commit).read()
+		if string.find(msg, 'RBOVERRIDE') == -1:
+			return False
+	return True
 
 def main():
     initialize_logging()
@@ -47,10 +59,13 @@ def main():
     compiled_regex = re.compile(REGEX, REGEX_FLAGS)
     review_id_to_commits = get_review_id_to_commits_map(lines, compiled_regex)
 
-#    logging.warning(lines)
-#    logging.warning(review_id_to_commits)
-
     print "-- PRE-RECEIVE --"
+
+    # if we are doing an RBOOVERRIDE then terminate with success code
+    if isRBOverride(lines):
+	print "Skipping RB checks because RBOVERRIDE is present in commit message"
+	sys.exit(0)
+
     sys.stdout.flush()
 
     is_push_approved = True
