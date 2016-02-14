@@ -41,6 +41,7 @@ def main():
     review_id_to_commits = get_review_id_to_commits_map(lines, compiled_regex)
 
     print "-- POST-RECEIVE --"
+    # make sure we update local git repos that RB uses
 	print os.popen("ssh www-data@wiki.ardefact.com /home/www-data/reviewboard_repos/updateall.sh").read()
 
     sys.stdout.flush()
