@@ -1,0 +1,18 @@
+<code_scheme name="Ardefact Style">
+  <JSCodeStyleSettings>
+    <option name="SPACE_BEFORE_PROPERTY_COLON" value="true" />
+    <option name="ALIGN_OBJECT_PROPERTIES" value="2" />
+    <option name="ALIGN_MULTILINE_VAR_DECLARATION" value="true" />
+  </JSCodeStyleSettings>
+  <MultiMarkdownCodeStyleSettings>
+    <option name="RIGHT_MARGIN" value="72" />
+  </MultiMarkdownCodeStyleSettings>
+  <codeStyleSettings language="JavaScript">
+    <option name="LINE_COMMENT_AT_FIRST_COLUMN" value="true" />
+    <indentOptions>
+      <option name="INDENT_SIZE" value="2" />
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+      <option name="TAB_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+</code_scheme>
