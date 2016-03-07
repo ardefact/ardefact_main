@@ -4,6 +4,6 @@
 .DS_Store
 node_modules
 Icon
-
+build
 ardefact_api
 ardefact_web

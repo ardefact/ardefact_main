@@ -2,9 +2,9 @@
 
 ## First run - clone additional repositories and run npm install in appropriate folders
 ## Subsequent runs - update everything (assuming no unstaged changes exist) and re-run npm install where appropriate
-
-ARDEFACT_WEB_FOLDER="ardefact_web"
-ARDEFACT_API_FOLDER="ardefact_api"
+CURRENTDIR=$(pwd)
+ARDEFACT_WEB_FOLDER=$CURRENTDIR/"ardefact_web"
+ARDEFACT_API_FOLDER=$CURRENTDIR/"ardefact_api"
 
 echo "--- Updating ardefact_main"
 git pull --rebase
@@ -29,5 +29,5 @@ else
     popd
 fi
 
-echo "--- Running npm install in ${ARDEFACT_API_FOLDER}/ardefact-api"
-pushd ./${ARDEFACT_API_FOLDER}/ardefact-api; npm install
+#echo "--- Running npm install in ${ARDEFACT_API_FOLDER}/ardefact-api"
+#pushd ./${ARDEFACT_API_FOLDER}/ardefact-api; npm install
