@@ -4,11 +4,11 @@ ARDEFACT_WEB := $(CURRENT_DIR)/ardefact_web
 ARDEFACT_API := $(CURRENT_DIR)/ardefact_api
 #--- Exec tools Vars ---
 A_EXEC_NPM_DEFAULT := $(shell which npm)
+A_EXEC_JSHINT_DEFAULT := $(shell which jshint)
 
-START_TARGET_MSG := $(CURRENT_DIR)/makefileEcho.sh
-PP = $(START_TARGET_MSG)
+PP = $(CURRENT_DIR)/makefileEcho.sh
 
-GLOBAL_EXPORT = export PP=$(PP); export A_EXEC_NPM=$(A_EXEC_NPM_DEFAULT)
+GLOBAL_EXPORT = export PP=$(PP); export A_EXEC_NPM=$(A_EXEC_NPM_DEFAULT); export A_EXEC_JSHINT=$(A_EXEC_JSHINT_DEFAULT)
 
 SUBDIRS := $(ARDEFACT_WEB)
 
@@ -39,4 +39,9 @@ deploy_dev: build
 deploy_prod: build
 	@$(PP) "Deploying production version of server"
 	cd $(ARDEFACT_API)/ardefact-api; ./start_prod.sh ${ARGS}
+
+jshint:
+	@$(PP) "Running JSHINT on everything!"
+	$(GLOBAL_EXPORT); cd $(ARDEFACT_API); make jshint;
+	$(GLOBAL_EXPORT); cd $(ARDEFACT_WEB); make jshint;
 
