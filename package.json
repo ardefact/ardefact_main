@@ -1,0 +1,33 @@
+{
+  "name": "ardefact_main",
+  "version": "1.0.0",
+  "description": "Long live Ardefact!",
+  "main": "am",
+  "scripts": {
+    "make": "./am"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.ardefact.com:~/new/ardefact_main.git"
+  },
+  "author": "Lev Neiman",
+  "license": "private",
+  "private": true,
+  "dependencies": {
+    "bower": "^1.7.7",
+    "bunyan": "^1.8.0",
+    "bunyan-prettystream": "https://github.com/lan17/node-bunyan-prettystream.git",
+    "commander": "^2.9.0",
+    "data.maybe": "^1.2.1",
+    "lodash": "^4.6.1",
+    "lsof": "^0.1.0",
+    "q": "^1.4.1"
+  },
+  "engines": {
+    "node": "= 4.*.*"
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "node": true
+  }
+}

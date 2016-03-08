@@ -1,0 +1,156 @@
+#!/usr/bin/env node
+
+'use strict';
+
+// First include only standard packages in case we haven't installed dependencies yet.
+var PackageJson  = require('./package.json'),
+    FS           = require('fs'),
+    ChildProcess = require('child_process'),
+    Stream       = require('stream'),
+    Path         = require('path');
+
+// run npm install. 
+ChildProcess.execSync('npm install', {stdio : "inherit"});
+
+// at this point we should have all of the proper dependencies installed locally.
+var Bunyan       = require('bunyan'),
+    Lsof         = require('lsof'),
+    Commander    = require('commander'),
+    Maybe        = require('data.maybe'),
+    Net          = require('net'),
+    Q            = require('q'),
+    _            = require('lodash'),
+    PrettyStream = require('bunyan-prettystream');
+
+// Setup Logging
+
+const prettyStdOut = new PrettyStream();
+prettyStdOut.pipe(process.stdout);
+
+const LOG = Bunyan.createLogger(
+  {
+    name    : 'am',
+    level   : 'debug',
+    src     : true,
+    streams : [{name : "stdout", type : "raw", stream : prettyStdOut}]
+  });
+
+Q.onerror = error => LOG.error(error);
+
+// Discover and set important ENV vars
+
+const execCmdSync = (cmd) => {
+  return ChildProcess.execSync(cmd).toString().trim();
+};
+
+const ARDEFACT_ROOT = Maybe.fromNullable(process.env.ARDEFACT_ROOT).getOrElse(Path.resolve(__dirname));
+LOG.info(ARDEFACT_ROOT, `ARDEFACT_ROOT`);
+
+
+const ARDEFACT_EXEC_NPM = Maybe.fromNullable(process.env.ARDEFACT_EXEC_NPM).getOrElse(execCmdSync('which npm').toString());
+LOG.info(`Discovered npm at ${ARDEFACT_EXEC_NPM}`);
+
+const ARDEFACT_EXEC_NODE = Maybe.fromNullable(process.env.ARDEFACT_EXEC_NODE).getOrElse(execCmdSync('which node'));
+LOG.info(`Discovered node at ${ARDEFACT_EXEC_NODE}`);
+
+const ARDEFACT_EXEC_BUNYAN = Path.resolve(`${ARDEFACT_ROOT}/node_modules/bunyan/bin/bunyan`);
+
+// create .am
+const AM_PATH = Path.resolve(`${ARDEFACT_ROOT}/.am`);
+try {
+  FS.mkdirSync(AM_PATH);
+} catch (error) {
+  if (error.code !== 'EEXIST') {
+    LOG.error(error, `Couldn't create ${AM_PATH}`);
+    process.exit(1);
+  }
+}
+LOG.info(`Using ${AM_PATH} as working am directory`);
+
+/**
+ * Executes some command asynchronously and returns the output
+ * TODO:  Pipe all of the TTY crap
+ * @param cmd
+ * @param env
+ * @returns {*|promise}
+ */
+const execCmd = (cmd, env) => {
+  var deferred = Q.defer();
+
+  try {
+    var output = "";
+
+    const args = cmd.split(' ');
+    const cmd2 = args.shift();
+
+    const spawnOptions = {
+      env : env,
+    };
+
+    var stdOutStream = new Stream.PassThrough;
+    stdOutStream.on(
+      'data', chunk => {
+        output += chunk.toString();
+        console.log(chunk.toString());
+      });
+
+    var stdErrStream = new Stream.PassThrough;
+    stdErrStream.on(
+      'data', chunk => {
+        output += chunk.toString();
+        LOG.error(chunk.toString());
+      });
+
+    LOG.debug(`Executing '${cmd}' with options ${spawnOptions}`);
+
+    const child = ChildProcess.spawn(cmd2, args, spawnOptions);
+    child.stdout.pipe(stdOutStream);
+    child.stderr.pipe(stdErrStream);
+    child.on(
+      'close', () => {
+        LOG.info("Process finished");
+        deferred.resolve(output);
+      });
+
+  } catch (error) {
+    deferred.reject(error);
+  }
+  return deferred.promise;
+};
+
+const PATH = process.env.PATH;
+const BUILD_DIR = `${ARDEFACT_ROOT}/build`;
+
+const ARDEFACT_WEB = Maybe.fromNullable(process.env.ARDEFACT_WEB).getOrElse(`${ARDEFACT_ROOT}/ardefact/ardefact_web`);
+const ARDEFACT_API = Maybe.fromNullable(process.env.ARDEFACT_API).getOrElse(`${ARDEFACT_ROOT}/ardefact/ardefact_api`);
+
+const ENV = {
+  ARDEFACT_WEB : ARDEFACT_WEB,
+  ARDEFACT_API : ARDEFACT_API,
+  BUILD_DIR    : BUILD_DIR,
+
+  ARDEFACT_WEB_BUILD_DIR          : `${BUILD_DIR}/web`,
+  PP                              : `${ARDEFACT_ROOT}/makefileEcho.sh`,
+  ARDEFACT_EXEC_NPM               : ARDEFACT_EXEC_NPM,
+  ARDEFACT_EXEC_NODE              : ARDEFACT_EXEC_NODE,
+  ARDEFACT_EXEC_BUNYAN            : ARDEFACT_EXEC_BUNYAN,
+  ARDEFACT_EXEC_BOWER             : Maybe.fromNullable(process.env.ARDEFACT_EXEC_BOWER).getOrElse(execCmdSync('which bower')),
+  ARDEFACT_EXEC_JSHINT            : Maybe.fromNullable(process.env.ARDEFACT_EXEC_JSHINT).getOrElse(execCmdSync('which jshint')),
+  ARDEFACT_EXEC_PREPROCESS_STATIC : `${ARDEFACT_API}/ardefact-api/preProcessStaticContent.js`,
+  PATH                            : `${ARDEFACT_EXEC_NODE}:${PATH}`
+};
+
+const CMD = `make ${process.argv.slice(2)}`;
+
+const startTime = Date.now();
+
+execCmd(CMD, ENV).then(
+  output => {
+    LOG.info(`'${CMD}' took ` + ((Date.now() - startTime) / 1000.0) + ' seconds');
+    process.exit(0);
+  }).then(
+  null, error => {
+    LOG.error(error, 'Something went terribly wrong!');
+    process.exit(1);
+  });
+

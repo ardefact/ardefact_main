@@ -1,0 +1,3 @@
+ENABLE_PROXY = False
+REVIEWBOARD_URL = 'https://ardefact.com/rb/'
+REPOSITORY = 'ardefact_web'

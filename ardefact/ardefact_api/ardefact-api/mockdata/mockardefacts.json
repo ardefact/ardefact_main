@@ -1,0 +1,98 @@
+{
+  "01": {
+    "title": "Soap",
+    "description": "Fancy soap for fancy people from fancy location (Australia).",
+    "location": {
+      "lat": -34.397,
+      "lng": 150.644
+    }
+  },
+  "02": {
+    "title": "Candles",
+    "description": "Candles on white background.  From Japan.",
+    "location": {
+      "lat": 31.385296,
+      "lng": 130.907593
+    }
+  },
+  "03": {
+    "title": "Bells",
+    "description": "Please Ring them.  They are from Tahim Island (Philippines).",
+    "location": {
+      "lat": 14.343145,
+      "lng": 121.233788
+    }
+  },
+  "04": {
+    "title": "Bay Rum",
+    "description": "Drink it! In Cambodia!",
+    "location": {
+      "lat": 10.499044,
+      "lng": 103.649772
+    }
+  },
+  "05": {
+    "title": "Pipe",
+    "description": "A pipe from Indonesia!",
+    "location": {
+      "lat": -5.691987,
+      "lng": 122.48283
+    }
+  },
+  "06": {
+    "title": "Buttons",
+    "description": "Colorful Indonesian buttons!",
+    "location": {
+      "lat": -5.158308,
+      "lng": 119.421387
+    }
+  },
+  "07": {
+    "title": "Towels",
+    "description": "Cambodian towels",
+    "location": {
+      "lat": 13.527309,
+      "lng": 105.954208
+    }
+  },
+  "08": {
+    "title": "Ditch that Itch Balmn",
+    "description": "Ancient Cambodian cures",
+    "location": {
+      "lat": 11.574279,
+      "lng": 104.912224
+    }
+  },
+  "09": {
+    "title": "Bowls",
+    "description": "Cambodian bowls",
+    "location": {
+      "lat": 11.282520,
+      "lng": 104.803905
+    }
+  },
+  "10": {
+    "title": "Lock and Keys",
+    "description": "Steal my heart with these Cambodian lock and keys",
+    "location": {
+      "lat": 10.565173,
+      "lng": 104.189014
+    }
+  },
+  "11": {
+    "title": "Rocks and shit",
+    "description": "From Japan!",
+    "location": {
+      "lat": 35.650043,
+      "lng": 139.729614
+    }
+  },
+  "12": {
+    "title": "Pretty feathers",
+    "description": "From some Japanese master, no doubt",
+    "location": {
+      "lat": 35.098282,
+      "lng": 136.889648
+    }
+  }
+}
