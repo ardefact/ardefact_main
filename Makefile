@@ -28,7 +28,7 @@ nuke: clean
 
 deploy_dev: build
 	@$(PP) "Deploying debug version of server"
-	cd $(ARDEFACT_API)/ardefact-api; ./start_debug.sh ${ARGS} | $(ARDEFACT_EXEC_BUNYAN)
+	cd $(ARDEFACT_API)/ardefact-api; ./start_debug.sh  --static $(ARDEFACT_WEB_BUILD_DIR) $(ARDEFACT_CLI_ARGS) | $(ARDEFACT_EXEC_BUNYAN)
 
 deploy_prod: build
 	@$(PP) "Deploying production version of server"

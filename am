@@ -107,7 +107,7 @@ const execCmd = (cmd, env) => {
         LOG.error(chunk.toString());
       });
 
-    LOG.debug(`Executing '${cmd}' with options ${spawnOptions}`);
+    LOG.debug(`Executing '${cmd}' with options ${JSON.stringify(spawnOptions,1,1)}`);
 
     const child = ChildProcess.spawn(cmd2, args, spawnOptions);
     child.stdout.pipe(stdOutStream);
@@ -143,10 +143,13 @@ const ENV = {
   ARDEFACT_EXEC_BOWER             : Maybe.fromNullable(process.env.ARDEFACT_EXEC_BOWER).getOrElse(execCmdSync('which bower')),
   ARDEFACT_EXEC_JSHINT            : Maybe.fromNullable(process.env.ARDEFACT_EXEC_JSHINT).getOrElse(execCmdSync('which jshint')),
   ARDEFACT_EXEC_PREPROCESS_STATIC : `${ARDEFACT_API}/ardefact-api/preProcessStaticContent.js`,
-  PATH                            : `${ARDEFACT_EXEC_NODE}:${PATH}`
+
+  ARDEFACT_CLI_ARGS : process.argv.slice(3).join(' '),
+
+  PATH : `${ARDEFACT_EXEC_NODE}:${PATH}`
 };
 
-const CMD = `make ${process.argv.slice(2)}`;
+const CMD = `make ${process.argv.slice(2)[0]}`;
 
 const startTime = Date.now();
 

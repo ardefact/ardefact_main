@@ -6,17 +6,14 @@
         Ardefact
     </title>
 
-
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/index_dark.css">
+    <link rel="stylesheet" type="text/css" href="{{webRoot}}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="{{webRoot}}/css/index_dark.css">
 
     <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
 	<script type='text/javascript' src='https://fiddle.jshell.net/js/lib/mootools-core-1.3.2.js'></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="js/google_maps.js"></script>
-
-
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{googleMapsAPIKey}}&sensor=false"></script>
+	<script type="text/javascript" src="{{webRoot}}/js/google_maps.js"></script>
 </head>
 
 <body>
@@ -32,7 +29,6 @@
 			</div>
 		</div>
 
-
 		<div id="searchBar"></div>
 		<div id="mainContent">
 			<center>
@@ -42,10 +38,6 @@
 
 <!--		<script data-main="js/main" src="js/lib/require.js"></script> -->
 
-		<script data-main="js/main" src="js/lib/require.js"></script>
-
-
-	
+		<script data-main="js/main" src="{{webRoot}}/js/lib/require.js"></script>
 	</div>
-
 </body>

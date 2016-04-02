@@ -17,5 +17,4 @@ clean:
 
 jshint:
 	@$(PP) "Running JSHINT on the server"
-	cd ardefact-api; $(A_EXEC_JSHINT) .
-
+	cd ardefact-api; $(ARDEFACT_EXEC_JSHINT) .

@@ -19,8 +19,6 @@ var
     StaticRouter = require('./routers/StaticContentRouter'),
     Logging      = require('./../../../Logging');
 
-
-
 var LOG = Logging.createLogger(__filename);
 
 StaticRouter._.preProcessStaticContent(
