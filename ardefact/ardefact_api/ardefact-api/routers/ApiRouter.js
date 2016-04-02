@@ -18,7 +18,6 @@ function makeRouter(ArdefactApi, options) {
   restRouter.get("/aymbii", (req, res) => {
     LOG.debug("/aymbii");
     ArdefactApi.getAYMBII(req.query.uid).then(items => {
-      LOG.debug({items : items});
       res.writeHead(200, headers);
       res.end(JSON.stringify(items));
     }, err => {

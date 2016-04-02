@@ -1,6 +1,7 @@
 /**
  * Global API for listening to, and triggering events.
  *
+ * 
  */
 (function() {
   'use strict';

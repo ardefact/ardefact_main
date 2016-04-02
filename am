@@ -25,7 +25,8 @@ var Bunyan       = require('bunyan'),
     Net          = require('net'),
     Q            = require('q'),
     _            = require('lodash'),
-    PrettyStream = require('bunyan-prettystream');
+    PrettyStream = require('bunyan-prettystream'),
+    FileUtils    = require('./FileUtils');
 
 // Setup Logging
 
@@ -63,13 +64,9 @@ const ARDEFACT_EXEC_BUNYAN = Path.resolve(`${ARDEFACT_ROOT}/node_modules/bunyan/
 
 // create .am
 const AM_PATH = Path.resolve(`${ARDEFACT_ROOT}/.am`);
-try {
-  FS.mkdirSync(AM_PATH);
-} catch (error) {
-  if (error.code !== 'EEXIST') {
-    LOG.error(error, `Couldn't create ${AM_PATH}`);
+if (FileUtils.mkDirSafeSync(AM_PATH)) {
+    LOG.error(`Couldn't create ${AM_PATH}`);
     process.exit(1);
-  }
 }
 LOG.info(`Using ${AM_PATH} as working am directory`);
 
@@ -127,6 +124,8 @@ const execCmd = (cmd, env) => {
 const PATH = process.env.PATH;
 const BUILD_DIR = `${ARDEFACT_ROOT}/build`;
 
+FileUtils.mkDirSafeSync(BUILD_DIR);
+
 const ARDEFACT_WEB = Maybe.fromNullable(process.env.ARDEFACT_WEB).getOrElse(`${ARDEFACT_ROOT}/ardefact/ardefact_web`);
 const ARDEFACT_API = Maybe.fromNullable(process.env.ARDEFACT_API).getOrElse(`${ARDEFACT_ROOT}/ardefact/ardefact_api`);
 
@@ -134,6 +133,8 @@ const ENV = {
   ARDEFACT_WEB : ARDEFACT_WEB,
   ARDEFACT_API : ARDEFACT_API,
   BUILD_DIR    : BUILD_DIR,
+  
+  ARDEFACT_WEB_URL_ROOT : Maybe.fromNullable(process.env.ARDEFACT_WEB_URL_ROOT).getOrElse('http://localhost:8080'),
 
   ARDEFACT_WEB_BUILD_DIR          : `${BUILD_DIR}/web`,
   PP                              : `${ARDEFACT_ROOT}/makefileEcho.sh`,

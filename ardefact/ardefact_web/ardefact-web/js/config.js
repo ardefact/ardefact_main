@@ -3,10 +3,13 @@ Global config for client-side
 */
 (function() {
   'use strict';
+  
+  const webRoot = '{{webRoot}}';
 
   define([], function () {
     return {
-      apiUrlRoot : "/api"
+      webRoot: webRoot,
+      apiUrlRoot : `${webRoot}/api`
     };
   });
 }());

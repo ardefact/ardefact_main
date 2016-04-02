@@ -5,15 +5,16 @@
 
 var LOG = require('./../../../../Logging').createLogger(__filename);
 
-var FS      = require('fs-extra'),
-    Exec    = require('child_process'),
-    Maybe   = require('data.maybe'),
-    Babel   = require('babel-core'),
-    Path    = require('path'),
-    Q       = require('q'),
-    _       = require('lodash'),
-    Logging = require('./../../../../Logging'),
-    Config  = require('./../Config');
+var FS         = require('fs-extra'),
+    Exec       = require('child_process'),
+    Maybe      = require('data.maybe'),
+    Babel      = require('babel-core'),
+    Path       = require('path'),
+    Q          = require('q'),
+    _          = require('lodash'),
+    Handlebars = require('handlebars'),
+    Logging    = require('./../../../../Logging'),
+    Config     = require('./../Config');
 
 const DEFAULT_TMP_DIR_PATH = '../../tmp';
 
@@ -22,39 +23,62 @@ const DEFAULT_BABEL_EXCLUDE_REGEX = [
 ];
 
 var makeTree = files => {
-  var Node = function (name) {
+  
+  var Node = function (fullpath, name) {
+    this.fullpath = fullpath;
     this.name = name ? name : "";
     this.children = {};
+    this.parent = null;
+    this.stats = null;
+    
+    this.toString = () => {
+      var childrenStr = "";
+      _.each(this.children, (val, key) => {
+        childrenStr += val.toString();
+      });
+      return `${this.fullpath}:${_.size(this.children)}:${JSON.stringify(this.stats)}\n${childrenStr}`;
+    }
   };
 
-  var root = new Node("/");
-
-  var insertIntoTree = parts => {
+  var root = new Node("/", "/");
+  
+  var insertIntoTree = path => {
+    var promises = [];
+    const parts = path.split(Path.sep);
     var walker = root;
+    var pathPart = "";
     _.each(parts, part => {
+      pathPart += Path.sep + part;
       var node = walker.children[part];
       if (!node) {
-        node = walker.children[part] = new Node(part);
+        node = walker.children[part] = new Node(Path.resolve(pathPart), part);
+        node.parent = walker;
+        var node2 = node;
+        promises.push(Q.nfcall(FS.stat, path).then(stats => node2.stats = stats));
       }
       walker = node;
     });
+    return Q.all(promises);
   };
-  _.each(files, file => insertIntoTree(file.split(Path.sep)));
-  return root;
+
+  return Q.all(_.map(files, insertIntoTree)).then(() => root);
 };
 
 var findCommonRoot = rootNode => {
-  var ret = "";
+  LOG.info(rootNode.toString());
   var walker = rootNode;
-  while (walker) {
+  while (true) {
     const numChildren = _.size(walker.children);
-    ret += "/" + walker.name;
     if (numChildren > 1) {
       break;
     }
-    walker = walker.children[_.keys(walker.children)[0]];
+    const nextNode = walker.children[_.keys(walker.children)[0]];
+    if (nextNode === null || nextNode === undefined) {
+      break;
+    }
+    walker = nextNode;
   }
-  return Path.normalize(ret);
+  return walker.stats.isFile() ? walker.parent.fullpath : walker.fullpath;
 };
 
 /**
@@ -129,11 +153,14 @@ var getAllFiles = (root, _callback) => {
   return deferred.promise;
 };
 
-var copyFiles = (originalFiles, tmpRootFolder, _callback) => {
+var copyFiles = (staticRoot, originalFiles, tmpRootFolder, _callback) => {
   LOG.info(`Copying ${_.size(originalFiles)} files into ${tmpRootFolder}`);
   var deferred = Q.defer();
 
-  Q.fcall(() => makeTree(originalFiles)).then(findCommonRoot).then(Logging.debug(LOG, "Common root")).then(originalRoot => {
+//  makeTree(originalFiles)
+ //  .then(findCommonRoot)
+//   .then(Logging.debug(LOG, "Common root"))
+   (originalRoot => {
     const originalRootLength = _.size(originalRoot);
     var callback = (err, files) => {
       if (err) {
@@ -162,15 +189,13 @@ var copyFiles = (originalFiles, tmpRootFolder, _callback) => {
         }
       });
     });
-  }).then(()=> {
-  }, err=>LOG.error(err, "Whoops!  Copying failed!"));
+  })(staticRoot);
 
   return deferred.promise;
 };
 
-var requireJSConvert = (staticRoot, files, tmpDir) => {
+var requireJSConvert = (requireJsConfig, tmpDir) => {
   var deferred = Q.defer();
-  const requireJsConfig = require(`${staticRoot}/js/main`);
 
   // function to run r.js
   var runR = () => {
@@ -214,6 +239,9 @@ var requireJSConvert = (staticRoot, files, tmpDir) => {
 var babelTransformFiles = files => {
   var deferred = Q.defer();
   var semaphore = files.length;
+  if (semaphore === 0) {
+    deferred.resolve(files);
+  }
   LOG.info("Starting to babelify " + _.size(files) + " files.");
   _.each(files, file => {
     Babel.transformFile(file, {}, (err, data) => {
@@ -238,6 +266,28 @@ var babelTransformFiles = files => {
 };
 
 /**
+ * 
+ * @param sourceFile
+ * @param options
+ * @returns Promise with the output of handlebar
+ */
+var handleBarIt = (sourceFile, options) => {
+  return Q.nfcall(FS.readFile, sourceFile)
+          .then(stuff => Handlebars.compile(stuff.toString())(options)).then(x=>x, error => {
+      LOG.error(error, "couldn't handlebar " + sourceFile);
+      return error;
+    });
+};
+
+/**
+ * Assumes file was already copied and such
+ * @param file
+ */
+const postProcessfile = file => {
+  
+};
+
+/**
  * Prepare static content by
  * 1) Copying appropriate files to a tmpDir.
  * 2) Babelifying the right JS files.
@@ -253,24 +303,44 @@ var preProcessStaticContent = options => {
   const minify = Maybe.fromNullable(options.minify).getOrElse(true);
   const tmpFolder = Maybe.fromNullable(options.tmpDir).getOrElse(DEFAULT_TMP_DIR_PATH);
 
+  const includeRegex = _.map(Maybe.fromNullable(options.include).getOrElse([]), pattern => new RegExp(pattern));
   const excludeRegEx = _.map(Maybe.fromNullable(options.exclude).getOrElse([]), pattern => new RegExp(pattern));
   const doNotBabelify = _.map(Maybe.fromNullable(options.doNotBabelify).getOrElse(DEFAULT_BABEL_EXCLUDE_REGEX), pattern => new RegExp(pattern));
+  
+  LOG.debug(excludeRegEx, "Exclude regexes");
+  LOG.debug(includeRegex, "Include regexes");
+  LOG.debug(doNotBabelify, "Do not babelify regexes");
 
   var matchAny = (file, regexs) => _.any(regexs, regex => regex.test(file));
 
   var stopWatch = Logging.stopWatch();
 
-  return getAllFiles(staticRoot).then(stopWatch(sec => LOG.info("Got files in " + sec + " seconds"))).then(files => _.filter(files, file => !matchAny(file, excludeRegEx))).then(filteredFiles => copyFiles(filteredFiles, tmpFolder)).then(stopWatch(sec => LOG.info("Copying files took " + sec + " seconds"))).then(copiedFiles => {
-    return babelTransformFiles(_.filter(copiedFiles, file => file.endsWith(".js") && !matchAny(file, doNotBabelify))).then(stopWatch(sec => LOG.info("Babel transform took " + sec + " seconds"))).then(() => {
-      if (minify) {
-        return requireJSConvert(staticRoot, copiedFiles, tmpFolder).then(stopWatch(sec => LOG.info("r.js minification took " + sec + " seconds")));
-      } else {
-        var done = Q.defer();
-        done.resolve(copiedFiles);
-        return done.promise;
-      }
-    });
-  });
+  return getAllFiles(staticRoot)
+    .then(stopWatch(sec => LOG.info("Got files in " + sec + " seconds.")))
+    .then(files => _.filter(files, file => !matchAny(file, excludeRegEx)))
+    .then(files => _.filter(files, file => includeRegex.length === 0 ? true : matchAny(file, includeRegex)))
+    .then(stopWatch(sec => LOG.info(`Filtered files in ${sec} seconds.`)))
+    .then(filteredFiles => copyFiles(staticRoot, filteredFiles, tmpFolder))
+    .then(stopWatch(sec => LOG.info(`Copying files took ${sec} seconds`)))
+    .then(
+      copiedFiles => {
+        // handle bar appropriate files then babel transform them
+        return Q.all(_.map(_.filter(copiedFiles, file => (file.endsWith(".js") || file.endsWith(".html")) && !matchAny(file, doNotBabelify)), file => handleBarIt(file, options.handleBarOptions).then(templated => FS.writeFileSync(file, templated))))
+         .then(
+           () => {
+             return babelTransformFiles(_.filter(copiedFiles, file => file.endsWith(".js") && !matchAny(file, doNotBabelify)))
+               .then(stopWatch(sec => LOG.info("Babel transform took " + sec + " seconds"))).then(
+                 () => {
+                   if (minify) {
+                     return requireJSConvert(require(`${staticRoot}/js/main`), tmpFolder).then(stopWatch(sec => LOG.info("r.js minification took " + sec + " seconds")));
+                   } else {
+                     var done = Q.defer();
+                     done.resolve(copiedFiles);
+                     return done.promise;
+                   }
+                 });
+           });
+      });
 };
 
 var makeMinifyRouter = options => {
@@ -288,11 +358,13 @@ var makeMinifyRouter = options => {
   var watchedFiles = {};
 
   var watchFile = file => {
-    if (!(file in watchedFiles)) {
+    if (!(watchedFiles[file])) {
       LOG.debug("Now watching " + file);
       FS.watch(Path.resolve(file), event => {
         LOG.info(`path ${file} has been `, event);
         gData = null;
+        watchedFiles[file] = false;
+        watchFile(file);
       });
       watchedFiles[file] = true;
     }
@@ -302,7 +374,7 @@ var makeMinifyRouter = options => {
    * Builds static content if it has not been built or needs to be rebuilt.  Otherwise returns gData to callback.
    */
   var buildStaticContent = () => {
-    let deferredStaticContent = Q.defer();
+    const deferredStaticContent = Q.defer();
     if (gData !== null) {
       deferredStaticContent.resolve(gData);
     } else {
@@ -354,29 +426,76 @@ var makeMinifyRouter = options => {
 
   // build once
   // watch all files
-  getAllFiles(staticRoot).then(allFiles=> {
-    _.each(allFiles, file => {
-      watchFile(file);
-      watchFile(Path.dirname(file));
+  getAllFiles(staticRoot)
+    .then(allFiles=> {
+      _.each(allFiles, file => {
+        watchFile(file);
+        watchFile(Path.dirname(file));
     });
-  }).then(buildStaticContent).then(()=>deferedRouter.resolve(minifyRouter), err => deferedRouter.reject(err));
+  })
+    .then(buildStaticContent)
+    .then(()=>deferedRouter.resolve(minifyRouter), err => deferedRouter.reject(err));
 
   return deferedRouter.promise;
 };
 
+
+
 var makeDebugRouter = options => {
   // static debug router.  we just need to babelify js files
-  return (req, res, next) =>
-    Q.nfcall(Babel.transformFile, `${options.staticRoot}/js/${req.path}`).then(babelOutput => res.end(babelOutput.code),
-      error => {
-        res.writeHead(500);
-        res.end(JSON.stringify(error));
-      });
+  
+  var needToPreprocess = true;
 
+  var changedFiles = {};
+  var watchedFiles = {};
+  var watchFile = file => {
+    if (!(watchedFiles[file])) {
+      const fileName = Path.resolve(file);
+      FS.watch(fileName, event => {
+        LOG.debug(`path ${file} has been `, event);
+        needToPreprocess = true;
+        changedFiles[fileName] = true;
+        
+        watchedFiles[file] = false;
+        watchFile(file);
+      });
+      watchedFiles[file] = true;
+    }
+  };
+  
+  var preProcessDebug = () => {
+    if (!needToPreprocess) {
+      const deferred = Q.defer();
+      deferred.resolve();
+      return deferred.promise;
+    } else {
+      return getAllFiles(options.staticRoot)
+        .then(files => {
+          _.each(files, watchFile);
+          return files;
+        })
+        .then(files => preProcessStaticContent(_.extend({include: _.keys(changedFiles)}, options)))
+        .then(() => {
+          needToPreprocess = false;
+          changedFiles = {};
+        });
+      }
+  };
+
+  return (req, res, next) => {
+      preProcessDebug().then(() => {
+        next();
+    }).then(null, error => {
+      LOG.error(error, "Couldn't serve stuff....");
+    }).done();
+  }
 };
 
 module.exports = {
   makeRouter : options => {
+    if (!options.staticRoot || !options.headers) {
+      throw "missing staticRoot or headers";
+    }
     if (options.minify) {
       return makeMinifyRouter(options);
     } else {

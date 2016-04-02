@@ -13,7 +13,7 @@ module.exports = {
       next();
       setTimeout(() => {
         // TODO: Come up with good access logs pattern
-        LOG.info(req.ip, req.originalUrl, "access");
+//        LOG.info(req.ip, req.originalUrl, "access");
       }, 0);
     });
 

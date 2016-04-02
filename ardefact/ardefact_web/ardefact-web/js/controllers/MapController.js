@@ -20,7 +20,6 @@
 
     /**
      * Map between ardefact id and corresponding marker
-     * @type {{}}
      */
     var markersMap = {};
 

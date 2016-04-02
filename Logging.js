@@ -11,7 +11,7 @@ var createLogger = (name, options) => {
   if (name.indexOf(__dirname) != -1) {
     name = "ardefact-api" + name.substring(_.size(__dirname));
   }
-  var bunyanOptions = _.extend({name : name, level : CLIArgs.debug ? 'debug' : 'info'}, options ? options : {});
+  var bunyanOptions = _.extend({name : name, level : CLIArgs.debug ? 'debug' : 'info', src: CLIArgs.debug}, options ? options : {});
   return bunyan.createLogger(bunyanOptions);
 };
 
@@ -39,11 +39,12 @@ module.exports = {
   },
   stopWatch() {
     var start = new Date().getTime();
+    const originalStart = start;
     return func => {
       return stuff => {
         var end = new Date().getTime();
         if (func) {
-          func((end - start) / 1e3);
+          func((end - start) / 1e3, (end - originalStart) / 1e3);
         } else {
           DEFAULT_LOG.info("Took " + ((end - start) / 1e3) + " seconds ");
         }
