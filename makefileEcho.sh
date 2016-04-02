@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-echo "<--- $1 --->"
+echo -e "--- $1 ---"

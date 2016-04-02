@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+/**
+ * Ardefact make system.
+ * 
+ * Pretty much just sets up proper env variables then calls make.
+ */
 
 'use strict';
 
@@ -35,7 +40,8 @@ const LOG = Bunyan.createLogger(
     streams : [{name : "stdout", type : "raw", stream : prettyStdOut}]
   });
 
-Q.onerror = error => LOG.error(error);
+//Q.onerror = error => LOG.error(error);
+
 
 // Discover and set important ENV vars
 

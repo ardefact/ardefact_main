@@ -4,7 +4,7 @@ install: update build
 
 update:
 	@$(PP) "Retrieving/updating required git repos"
-	./install.sh
+	git pull --rebase
 
 rebuild: clean build
 
