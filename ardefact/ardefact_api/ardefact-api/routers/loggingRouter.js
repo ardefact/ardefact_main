@@ -1,7 +1,7 @@
 'use strict';
 
 var express      = require('express'),
-    createLogger = require('./../Logging').createLogger;
+    createLogger = require('./../../../../Logging').createLogger;
 
 var LOG = createLogger(__filename);
 

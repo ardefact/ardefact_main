@@ -2,7 +2,7 @@
 
 var bunyan = require('bunyan'),
     _      = require('lodash'),
-    GlobalVars = require('./GlobalVars');
+    GlobalVars = require('./ardefact/ardefact_api/ardefact-api/GlobalVars');
 
 var CLIArgs = GlobalVars.get(GlobalVars.KEYS.CLI_ARGS);
 

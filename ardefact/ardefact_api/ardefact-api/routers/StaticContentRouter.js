@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var LOG = require('./../Logging').createLogger(__filename);
+var LOG = require('./../../../../Logging').createLogger(__filename);
 
 var FS      = require('fs-extra'),
     Exec    = require('child_process'),
@@ -12,7 +12,7 @@ var FS      = require('fs-extra'),
     Path    = require('path'),
     Q       = require('q'),
     _       = require('lodash'),
-    Logging = require('./../Logging'),
+    Logging = require('./../../../../Logging'),
     Config  = require('./../Config');
 
 const DEFAULT_TMP_DIR_PATH = '../../tmp';

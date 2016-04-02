@@ -6,7 +6,7 @@
 global.CLIArgs = {debug : true};
 
 var StaticRouter = require('./routers/StaticContentRouter'),
-    Logging      = require('./Logging'),
+    Logging      = require('./../../../Logging'),
     Q            = require('q');
 
 var LOG = Logging.createLogger(__filename);

@@ -1,9 +1,9 @@
-.PHONY: clean
+.PHONY: ALL clean build bower minify copyToTmpFolder jshint
+
 currentDir := $(shell pwd)
 staticRoot := $(currentDir)/ardefact-web
 bowerDir := $(staticRoot)/bower_components
 
-.PHONY: ALL clean build bower minify copyToTmpFolder jshint
 
 ALL: bower
 
