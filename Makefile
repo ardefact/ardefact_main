@@ -2,6 +2,8 @@
 
 install: update build
 
+reinstall: clean update build
+
 update:
 	@$(PP) "Retrieving/updating required git repos"
 	git pull --rebase
