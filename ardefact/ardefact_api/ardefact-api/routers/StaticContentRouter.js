@@ -334,7 +334,7 @@ var preProcessStaticContent = options => {
     .then(
       copiedFiles => {
         // handle bar appropriate files then babel transform them
-        return Q.all(_.map(_.filter(copiedFiles, file => !file.endsWith("index.html") && (file.endsWith(".js") || file.endsWith(".html")) && !matchAny(file, doNotBabelify)), file => handleBarIt(file, options.handleBarOptions)
+        return Q.all(_.map(_.filter(copiedFiles, file => !file.endsWith("index.html") && (file.endsWith(".css") || file.endsWith(".js") || file.endsWith(".html")) && !matchAny(file, doNotBabelify)), file => handleBarIt(file, options.handleBarOptions)
           .then(templated => FS.writeFileSync(file, templated))))      
          .then(stopWatch(sec => LOG.info(`Handlebarring took ${sec} seconds`)))
          .then(
@@ -359,8 +359,8 @@ var preProcessStaticContent = options => {
             
             handleBarIt(indexFile, _.extend(
               {
-                cssReset : FS.readFileSync(Path.resolve(`${staticRoot}/css/reset.css`)).toString(),
-                cssArdefact: FS.readFileSync(Path.resolve(`${staticRoot}/css/index_dark.css`)).toString(),
+                cssReset : FS.readFileSync(Path.resolve(`${tmpFolder}/css/reset.css`)).toString(),
+                cssArdefact: FS.readFileSync(Path.resolve(`${tmpFolder}/css/index_dark.css`)).toString(),
                 requireJS: FS.readFileSync(Path.resolve(`${staticRoot}/js/lib/require.js`)).toString(),
                 ardefactMainJS: options.minify ? minifiedStuff : FS.readFileSync(Path.resolve(`${tmpFolder}/js/main.js`)).toString(),
                 ardefactGoogleMapsJS: FS.readFileSync(Path.resolve(`${tmpFolder}/js/google_maps.js`)).toString()
