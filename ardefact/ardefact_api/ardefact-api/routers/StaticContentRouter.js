@@ -207,10 +207,11 @@ var requireJSConvert = (requireJsConfig, tmpDir) => {
 
     var configData = JSON.stringify(rOptions);
     configData = `(${configData})`;
-    FS.writeFileSync(Path.resolve(tmpDir + "/js/rbuild.json"), configData);
+    const rbuildJsonPath = Path.resolve(tmpDir + "/js/rbuild.json");
+    FS.writeFileSync(rbuildJsonPath, configData);
     var tmpPath = Path.resolve(tmpDir + "/js");
     var rJsPath = Config.rPath;
-    var cmd = `cd "${tmpPath}";  ${rJsPath} -o rbuild.json`;
+    var cmd = `cd "${tmpPath}";  ${rJsPath} -o ${rbuildJsonPath}`;
     LOG.info("Will run requireJs for minification by running this command: " + cmd);
     Exec.exec(cmd, (err, sysout, syserr) => {
       if (err) {
@@ -287,6 +288,14 @@ const postProcessfile = file => {
   
 };
 
+const getCSS = (staticRoot) => {
+  var ret = "";
+  ret += FS.readFileSync(Path.resolve(`${staticRoot}/css/reset.css`)).toString() + "\n\n\n";
+  ret += FS.readFileSync(Path.resolve(`${staticRoot}/css/index_dark.css`)).toString();
+  
+  return ret;
+};
+
 /**
  * Prepare static content by
  * 1) Copying appropriate files to a tmpDir.
@@ -325,21 +334,41 @@ var preProcessStaticContent = options => {
     .then(
       copiedFiles => {
         // handle bar appropriate files then babel transform them
-        return Q.all(_.map(_.filter(copiedFiles, file => (file.endsWith(".js") || file.endsWith(".html")) && !matchAny(file, doNotBabelify)), file => handleBarIt(file, options.handleBarOptions).then(templated => FS.writeFileSync(file, templated))))
+        return Q.all(_.map(_.filter(copiedFiles, file => !file.endsWith("index.html") && (file.endsWith(".js") || file.endsWith(".html")) && !matchAny(file, doNotBabelify)), file => handleBarIt(file, options.handleBarOptions)
+          .then(templated => FS.writeFileSync(file, templated))))      
+         .then(stopWatch(sec => LOG.info(`Handlebarring took ${sec} seconds`)))
          .then(
            () => {
              return babelTransformFiles(_.filter(copiedFiles, file => file.endsWith(".js") && !matchAny(file, doNotBabelify)))
-               .then(stopWatch(sec => LOG.info("Babel transform took " + sec + " seconds"))).then(
+               .then(stopWatch(sec => LOG.info("Babel transform took " + sec + " seconds")))
+               .then(
                  () => {
                    if (minify) {
-                     return requireJSConvert(require(`${staticRoot}/js/main`), tmpFolder).then(stopWatch(sec => LOG.info("r.js minification took " + sec + " seconds")));
+                     return requireJSConvert(require(`${staticRoot}/js/main`), tmpFolder)
+                       .then(stopWatch(sec => LOG.info("r.js minification took " + sec + " seconds")));
                    } else {
                      var done = Q.defer();
                      done.resolve(copiedFiles);
                      return done.promise;
                    }
                  });
-           });
+           })
+          .then(minifiedStuff => {
+            LOG.info("MINFIIED STUFF" + minifiedStuff);
+            const indexFile = Path.resolve(`${tmpFolder}/index.html`);
+            
+            handleBarIt(indexFile, _.extend(
+              {
+                cssReset : FS.readFileSync(Path.resolve(`${staticRoot}/css/reset.css`)).toString(),
+                cssArdefact: FS.readFileSync(Path.resolve(`${staticRoot}/css/index_dark.css`)).toString(),
+                requireJS: FS.readFileSync(Path.resolve(`${staticRoot}/js/lib/require.js`)).toString(),
+                ardefactMainJS: options.minify ? minifiedStuff : FS.readFileSync(Path.resolve(`${tmpFolder}/js/main.js`)).toString(),
+                ardefactGoogleMapsJS: FS.readFileSync(Path.resolve(`${tmpFolder}/js/google_maps.js`)).toString()
+              },
+              options.handleBarOptions
+            ))
+              .then(indexHandlebarred => FS.writeFileSync(indexFile, indexHandlebarred));
+          });
       });
 };
 
@@ -347,9 +376,6 @@ var makeMinifyRouter = options => {
   var deferedRouter = Q.defer();
   const staticRoot = options.staticRoot;
   const headers = options.headers;
-  if (!staticRoot || !headers) {
-    throw "missing staticRoot or headers";
-  }
 
   var gData = null;
   var serverEtag = null;
@@ -392,7 +418,10 @@ var makeMinifyRouter = options => {
 
   var minifyRouter = (req, res, next) => {
     const userEtag = req.headers['if-none-match'];
+    
+    buildStaticContent().then(next());
 
+    /*
     buildStaticContent().then(postProcessedStaticData => {
       if (serverEtag == userEtag) {
         res.writeHead(304, jsHeaders);
@@ -422,6 +451,7 @@ var makeMinifyRouter = options => {
       res.writeHead(500, headers);
       res.end(JSON.stringify(err));
     });
+    */
   };
 
   // build once

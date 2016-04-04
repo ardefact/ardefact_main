@@ -102,11 +102,14 @@ staticContentRouter.makeRouter(
     }, cliArgs))
                    .then(
                      router => {
+                       /*
                        if (cliArgs.minify) {
                          app.use(`${rootURLPathname}/js/main.js`, router);
                        } else {
                          app.use('/', router);
                        }
+                       */
+                       app.use('/', router);
 
                        // everything else should be statically served.
                        app.use('/', Express.static(cliArgs.tmpdir));

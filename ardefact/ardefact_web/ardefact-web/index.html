@@ -6,14 +6,26 @@
         Ardefact
     </title>
 
+	<!--
     <link rel="stylesheet" type="text/css" href="{{webRoot}}/css/reset.css">
     <link rel="stylesheet" type="text/css" href="{{webRoot}}/css/index_dark.css">
+    -->
+	<style>
+		{{{cssReset}}}
+	</style>
+
+	<style>
+		{{{cssArdefact}}}
+	</style>
 
     <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
 	<script type='text/javascript' src='https://fiddle.jshell.net/js/lib/mootools-core-1.3.2.js'></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{googleMapsAPIKey}}&sensor=false"></script>
-	<script type="text/javascript" src="{{webRoot}}/js/google_maps.js"></script>
+<!--	<script type="text/javascript" src="{{webRoot}}/js/google_maps.js"></script> -->
+	<script>
+		{{{ardefactGoogleMapsJS}}}
+	</script>
 </head>
 
 <body>
@@ -32,6 +44,12 @@
 		</div>
 		<div id="footer"></div>
 
-		<script data-main="{{webRoot}}/js/main" src="{{webRoot}}/js/lib/require.js"></script>
+		<!--	<script data-main="{{webRoot}}/js/main" src="{{webRoot}}/js/lib/require.js"></script> -->
+		<script>
+			{{{requireJS}}}
+		</script>
+		<script>
+			{{{ardefactMainJS}}}
+		</script>
 	</div>
 </body>
