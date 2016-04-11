@@ -200,7 +200,6 @@ var requireJSConvert = (requireJsConfig, tmpDir) => {
   // function to run r.js
   var runR = () => {
     var rOptions = _.extend({
-      baseUrl : ".",
       name    : "main",
       out     : Path.resolve(`${tmpDir}/main-built.js`)
     }, requireJsConfig);
@@ -354,9 +353,7 @@ var preProcessStaticContent = options => {
                  });
            })
           .then(minifiedStuff => {
-            LOG.info("MINFIIED STUFF" + minifiedStuff);
             const indexFile = Path.resolve(`${tmpFolder}/index.html`);
-            
             handleBarIt(indexFile, _.extend(
               {
                 cssReset : FS.readFileSync(Path.resolve(`${tmpFolder}/css/reset.css`)).toString(),

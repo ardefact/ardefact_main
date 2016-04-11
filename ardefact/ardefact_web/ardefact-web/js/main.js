@@ -1,9 +1,12 @@
 (function() {
   'use strict';
+  
+  const isBrowser = typeof window !== 'undefined';
 
   const BOWER_ROOT = '../bower_components';
 
   var rjsConfig = {
+    baseUrl: isBrowser ? 'js' : '.',
     paths : {
       jquery     : `${BOWER_ROOT}/jquery/dist/jquery.min`,
 //      maybe      : `lib/data.maybe.umd.min`,
@@ -15,7 +18,7 @@
   };
 
 // if we are inside browser then inititalize the app
-  if (typeof window !== 'undefined') {
+  if (isBrowser) {
     require.config(rjsConfig);
 
     require([

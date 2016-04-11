@@ -134,7 +134,7 @@ const ENV = {
   ARDEFACT_API : ARDEFACT_API,
   BUILD_DIR    : BUILD_DIR,
   
-  ARDEFACT_WEB_URL_ROOT : Maybe.fromNullable(process.env.ARDEFACT_WEB_URL_ROOT).getOrElse('http://localhost:8080'),
+  ARDEFACT_WEB_URL_ROOT : Maybe.fromNullable(process.env.ARDEFACT_WEB_URL_ROOT).getOrElse('http://192.168.56.111:8080'),
 
   ARDEFACT_WEB_BUILD_DIR          : `${BUILD_DIR}/web`,
   PP                              : `${ARDEFACT_ROOT}/makefileEcho.sh`,
