@@ -3,6 +3,7 @@
 *.idea
 .am
 .DS_Store
+.vagrant
 node_modules
 Icon
 build
