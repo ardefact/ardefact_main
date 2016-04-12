@@ -475,16 +475,16 @@ var makeDebugRouter = options => {
 
   var changedFiles = {};
   var watchedFiles = {};
-  var watchFile = file => {
-    if (!(watchedFiles[file])) {
-      const fileName = Path.resolve(file);
-      FS.watch(fileName, event => {
+  const watchFile = file => {
+    const fileName = Path.resolve(file);
+    if (!(watchedFiles[fileName])) {
+      FS.watchFile(fileName, event => {
         LOG.debug(`path ${file} has been `, event);
         needToPreprocess = true;
         changedFiles[fileName] = true;
         
         watchedFiles[file] = false;
-        watchFile(file);
+//        watchFile(file);
       });
       watchedFiles[file] = true;
     }
