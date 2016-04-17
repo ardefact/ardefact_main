@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
   config.vm.box_download_checksum_type = "sha256"
 
   # mount the host shared folder
-  config.vm.synced_folder code_share_host_path, code_share_guest_path, mount_options: ["rw"]
+  config.vm.synced_folder code_share_host_path, code_share_guest_path, mount_options: ["ro"]
 
   config.vm.provider "virtualbox" do |vb|
     vb.memory = guest_mem
@@ -64,7 +64,7 @@ Vagrant.configure(2) do |config|
     mount -t overlayfs overlayfs -o lowerdir=#{overlay_lower},upperdir=#{overlay_upper} #{overlay_mount}
 
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-    sudo apt-get install -y nodejs git vim
+    sudo apt-get install -y nodejs git vim postgresql postgresql-contrib pgadmin3
     npm install -g bower
     npm install -g jshint
     npm install -g bunyan

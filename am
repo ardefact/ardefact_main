@@ -122,7 +122,7 @@ const execCmd = (cmd, env) => {
 };
 
 const PATH = process.env.PATH;
-const BUILD_DIR = `${ARDEFACT_ROOT}/build`;
+const BUILD_DIR = Path.resolve(`${process.env.HOME}/.ardefact/build`);
 
 FileUtils.mkDirSafeSync(BUILD_DIR);
 
