@@ -44,3 +44,9 @@ jshint:
 nothing:
 	@$(PP) "Just chilling"
 
+count_lines:
+	@$(PP) "Counting number of lines in JS sources"
+	find . | grep -v node_module | grep -v bower_component | grep -v .git | grep -v build | grep -v "r.js" | grep js | xargs cat | wc -l
+	@$(PP) "Counting number of lines in HTML and CSS sources"
+	find . | grep -v node_module | grep -v bower_component | grep -v .git | grep -v build | grep -v "r.js" | grep "html\\|css" | xargs cat | wc -l
+
