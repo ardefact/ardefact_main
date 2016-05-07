@@ -7,7 +7,7 @@ var q = require("q");
 var _ = require("lodash");
 var Maybe = require("data.maybe");
 
-var LOG = require('./../../../Logging').createLogger("Mock API");
+var LOG = require('./../../../common/Logging').createLogger("Mock API");
 
 var Api = {
   __mockArdefacts : null,

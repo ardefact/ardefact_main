@@ -17,7 +17,7 @@ cliArgs = GlobalVars.set(GlobalVars.KEYS.CLI_ARGS, cliArgs);
 var
     Q            = require('q'),
     StaticRouter = require('./routers/StaticContentRouter'),
-    Logging      = require('./../../../Logging');
+    Logging      = require('./../../../common/Logging');
 
 var LOG = Logging.createLogger(__filename);
 

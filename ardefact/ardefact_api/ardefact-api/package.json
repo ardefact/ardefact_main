@@ -26,7 +26,8 @@
     "lodash": "^3.10.1",
     "mongodb": "^2.1.18",
     "q": "^1.4.1",
-    "requirejs": "^2.1.20"
+    "requirejs": "^2.1.20",
+    "app-module-path": "https://github.com/lan17/app-module-path-node.git"
   },
   "jshintConfig": {
     "esversion": 6,

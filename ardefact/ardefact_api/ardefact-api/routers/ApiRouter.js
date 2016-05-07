@@ -6,7 +6,7 @@
 
 var express      = require('express'),
     _            = require('lodash'),
-    createLogger = require('./../../../../Logging').createLogger;
+    createLogger = require('./../../../../common/Logging').createLogger;
 
 var LOG = createLogger("apiRouter");
 

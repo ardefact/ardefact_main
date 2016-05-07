@@ -63,8 +63,14 @@ Vagrant.configure(2) do |config|
     echo "mounting overlayfs (lower: #{overlay_lower}, upper: #{overlay_upper}, mount: #{overlay_mount})"
     mount -t overlayfs overlayfs -o lowerdir=#{overlay_lower},upperdir=#{overlay_upper} #{overlay_mount}
 
+    # setup mongoDb
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+    echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+    sudo apt-get update
+
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-    sudo apt-get install -y nodejs git vim postgresql postgresql-contrib pgadmin3 default-jre zsh
+    sudo apt-get install -y nodejs git vim postgresql postgresql-contrib pgadmin3 default-jre zsh mongodb-org ack-grep
     npm install -g bower
     npm install -g jshint
     npm install -g bunyan
@@ -72,6 +78,9 @@ Vagrant.configure(2) do |config|
     # setup zsh
    cd "/home/#{vagrant_user}"; sudo -u #{vagrant_user} wget https://raw.githubusercontent.com/lan17/home/master/.zshrc
     chsh -s /usr/bin/zsh #{vagrant_user}
+
+
+
 
   SCRIPT
 

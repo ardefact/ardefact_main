@@ -1,8 +1,11 @@
+/**
+ * Configure and create loggers for the rest of the system
+ */
 'use strict';
 
 var bunyan = require('bunyan'),
     _      = require('lodash'),
-    GlobalVars = require('./ardefact/ardefact_api/ardefact-api/GlobalVars');
+    GlobalVars = require('./../ardefact/ardefact_api/ardefact-api/GlobalVars');
 
 var CLIArgs = GlobalVars.get(GlobalVars.KEYS.CLI_ARGS);
 

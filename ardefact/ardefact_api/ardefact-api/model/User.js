@@ -18,7 +18,8 @@ function User(json) {
   }
 
   this.commit = () => {
-    MongoDbConnectionManager.getConnection().then(db => {
+    MongoDbConnectionManager.getConnection()
+        .then(db => {
       
     });
   };

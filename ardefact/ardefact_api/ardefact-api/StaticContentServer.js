@@ -23,7 +23,7 @@ cliArgs.version(PackageJson.version).
 cliArgs.parse(process.argv);
 cliArgs = GlobalVars.set(GlobalVars.KEYS.CLI_ARGS, Object.freeze(cliArgs));
 
-var LOG = require('./../../../Logging').createLogger(__filename);
+var LOG = require('./../../../common/Logging').createLogger(__filename);
 
 if (!cliArgs.static || !cliArgs.port) {
   LOG.error("Required fields missing.");
