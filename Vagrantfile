@@ -73,7 +73,6 @@ Vagrant.configure(2) do |config|
    cd "/home/#{vagrant_user}"; sudo -u #{vagrant_user} wget https://raw.githubusercontent.com/lan17/home/master/.zshrc
     chsh -s /usr/bin/zsh #{vagrant_user}
 
-
   SCRIPT
 
   # NB: this is the primary VM. To build run
