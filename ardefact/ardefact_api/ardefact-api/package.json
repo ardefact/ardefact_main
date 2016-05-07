@@ -20,9 +20,11 @@
     "data.maybe": "^1.2.1",
     "express": "^4.13.3",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.13.0",
     "fs-extra": "^0.26.5",
     "handlebars": "^4.0.5",
     "lodash": "^3.10.1",
+    "mongodb": "^2.1.18",
     "q": "^1.4.1",
     "requirejs": "^2.1.20"
   },

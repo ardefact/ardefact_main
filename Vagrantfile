@@ -64,10 +64,16 @@ Vagrant.configure(2) do |config|
     mount -t overlayfs overlayfs -o lowerdir=#{overlay_lower},upperdir=#{overlay_upper} #{overlay_mount}
 
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-    sudo apt-get install -y nodejs git vim postgresql postgresql-contrib pgadmin3
+    sudo apt-get install -y nodejs git vim postgresql postgresql-contrib pgadmin3 default-jre zsh
     npm install -g bower
     npm install -g jshint
     npm install -g bunyan
+
+    # setup zsh
+   cd "/home/#{vagrant_user}"; sudo -u #{vagrant_user} wget https://raw.githubusercontent.com/lan17/home/master/.zshrc
+    chsh -s /usr/bin/zsh #{vagrant_user}
+
+
   SCRIPT
 
   # NB: this is the primary VM. To build run

@@ -63,14 +63,6 @@ const headers = {
   "Access-Control-Allow-Origin" : `${rootURL.protocol}//${rootURL.host}`
 };
 
-/*
-// run Bower for static content
-LOG.info("Running bower....");
-var bowerOutput = CP.execSync(`cd "${cliArgs.static}"; "${__dirname}/node_modules/bower/bin/bower" install -p`).toString();
-LOG.info(bowerOutput);
-*/
-
-
 var app = Express();
 
 var startApp = () => {
@@ -102,13 +94,6 @@ staticContentRouter.makeRouter(
     }, cliArgs))
                    .then(
                      router => {
-                       /*
-                       if (cliArgs.minify) {
-                         app.use(`${rootURLPathname}/js/main.js`, router);
-                       } else {
-                         app.use('/', router);
-                       }
-                       */
                        app.use('/', router);
 
                        // everything else should be statically served.

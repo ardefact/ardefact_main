@@ -20,6 +20,7 @@
     "jquery": "^2.2.0",
     "lodash": "^4.3.0",
     "backbone": "^1.2.3",
-    "data.min": "https://github.com/lan17/data.maybe.git"
+    "data.min": "https://github.com/lan17/data.maybe.git",
+    "jquery-autogrow": "*"
   }
 }
