@@ -38,6 +38,11 @@ nuke: clean
 	rm -rf ./.am
 	rm -rf node_modules
 
+script: build
+	@$(PP) "Will run $(ARDEFACT_CLI_ARGS)"
+	cd $(ARDEFACT_API)/ardefact-api;  $(ARDEFACT_EXEC_NODE) $(ARDEFACT_CLI_ARGS) | $(ARDEFACT_EXEC_BUNYAN)
+
+
 deploy_dev: build
 	@$(PP) "Deploying debug version of server"
 	cd $(ARDEFACT_API)/ardefact-api; ./start_debug.sh  "--static=$(ARDEFACT_WEB)/ardefact-web" "--webroot=$(ARDEFACT_WEB_URL_ROOT)" "--tmpdir=$(BUILD_DIR)" "$(ARDEFACT_CLI_ARGS)" | $(ARDEFACT_EXEC_BUNYAN)
@@ -52,6 +57,9 @@ jshint:
 	$(ARDEFACT_EXEC_JSHINT) .
 	cd $(ARDEFACT_API); make jshint;
 	cd $(ARDEFACT_WEB); make jshint;
+
+_test: build
+	cd $(ARDEFACT_API)/ardefact-api;  $(ARDEFACT_EXEC_NODE) _test.js
 
 count_lines:
 	@$(PP) "Counting number of lines in JS sources"

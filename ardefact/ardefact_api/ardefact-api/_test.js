@@ -6,30 +6,28 @@
 global.CLIArgs = {debug : true};
 
 var StaticRouter = require('./routers/StaticContentRouter'),
-    Logging      = require('./../../../common/Logging'),
-    Q            = require('q');
+    Logging      = require('common/Logging'),
+    DBSetup = require('db/setup'),
+    User = require('model/User');
 
-var LOG = Logging.createLogger(__filename);
+const LOG = Logging.createLogger(__filename);
+
+DBSetup.setup()
+       .then(() => LOG.info("setup complete"))
+       .then(() => User.byEmail("lev@ardefact.com"))
+       .then(user => LOG.info({result:user}))
+       .then(() => User.all())
+       .then(users => LOG.info(users, "all users"))
+  .catch(error => LOG.error(error));
+
 
 /*
- StaticRouter.getAllFiles("/home/lev/Desktop").
- then(console.log("got files")).
- then(files => StaticRouter._.copyFiles(files, "/home/lev/tmp/")).
- then(Logging.debug(LOG, "Dem files"), (err)=>console.log(err));
- */
 
-/*
- StaticRouter.getAllFiles("/home/lev/c0de").
- then(StaticRouter._.makeTree).
- then(StaticRouter._.findCommonRoot).
- then(console.log);
- */
+User.all().then(users => {
+  LOG.info({users: users}, "fuck");
+})
+  .catch(error => LOG.error(error, "shit"));
+  */
 
-StaticRouter._.preProcessStaticContent({
-  staticRoot    : "/home/lev/c0de/ardefact_main/ardefact_web/ardefact-web",
-  tmpDir        : "/home/lev/tmp",
-  doNotBabelify : [
-    ".*bower_components.*"
-  ]
-}).then(()=> {
-}, error => LOG.error(error));
+
+

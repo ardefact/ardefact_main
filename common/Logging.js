@@ -3,19 +3,26 @@
  */
 'use strict';
 
-var bunyan = require('bunyan'),
-    _      = require('lodash'),
+var Bunyan     = require('bunyan'),
+    Maybe      = require('data.maybe'),
+    _          = require('lodash'),
     GlobalVars = require('./../ardefact/ardefact_api/ardefact-api/GlobalVars');
 
-var CLIArgs = GlobalVars.get(GlobalVars.KEYS.CLI_ARGS);
 
 var createLogger = (name, options) => {
+  if (!options) {
+    options = {};
+  }
+  
   // if the name is a filename then subtract the root dir name from it
   if (name.indexOf(__dirname) != -1) {
     name = "ardefact-api" + name.substring(_.size(__dirname));
   }
-  var bunyanOptions = _.extend({name : name, level : CLIArgs.debug ? 'debug' : 'info', src: CLIArgs.debug}, options ? options : {});
-  return bunyan.createLogger(bunyanOptions);
+  if (!('debug' in options)) {
+    options.debug = false;
+  }
+  var bunyanOptions = _.extend({name : name, level : options.debug ? 'debug':'info', src: options.debug  }, options ? options : {});
+  return Bunyan.createLogger(bunyanOptions);
 };
 
 var DEFAULT_LOG = createLogger(__filename);

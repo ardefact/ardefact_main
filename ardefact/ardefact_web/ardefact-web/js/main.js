@@ -9,7 +9,6 @@
     baseUrl: isBrowser ? 'js' : '.',
     paths : {
       jquery     : `${BOWER_ROOT}/jquery/dist/jquery.min`,
-//      maybe      : `lib/data.maybe.umd.min`,
       maybe : `${BOWER_ROOT}/data.min/dist/data.maybe.umd.min`,
       underscore : `${BOWER_ROOT}/lodash/dist/lodash.min`,
       backbone   : `${BOWER_ROOT}/backbone/backbone-min`,

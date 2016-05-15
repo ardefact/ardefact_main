@@ -1,12 +1,27 @@
-{
-  "1": {
+[
+  {
     "firstName": "Ross",
     "lastName": "Gibson",
-    "description": "Ross Gibson is a neuroscientist, entrepreneur, and co-founder of Ardefact. As a seasoned adventurer and businessman with a taste for the spontaneous and luxurious, Ross relies on a savory blend of serendipity and research to find only the finest regional goods. While travelling, Ross is always on the lookout for items that are as wondrous as they are effective, whether that be at demonstrating amphibian anatomy or just getting you drunk."
+    "displayName": "bigW0rm",
+    "description": "Ross Gibson is a neuroscientist, entrepreneur, and co-founder of Ardefact. As a seasoned adventurer and businessman with a taste for the spontaneous and luxurious, Ross relies on a savory blend of serendipity and research to find only the finest regional goods. While travelling, Ross is always on the lookout for items that are as wondrous as they are effective, whether that be at demonstrating amphibian anatomy or just getting you drunk.",
+    "email": "ross@ardefact.com",
+    "password": ""
+
   },
-  "2": {
+  {
     "firstName": "Lev",
     "lastName": "Neiman",
-    "description": "Is a robot"
+    "displayName": "entheogen",
+    "description": "Is a robot",
+    "email": "lev@ardefact.com",
+    "password": "$2a$12$BZQEWZZzI6SJpdLENndHe.J.xdbP75mpxvq6ryklcrdxpr6xarNqi"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Wright-Spanner",
+    "displayName": "phiom",
+    "description": "Designs things.",
+    "email": "david@ardefact.com",
+    "password": ""
   }
-}
+]

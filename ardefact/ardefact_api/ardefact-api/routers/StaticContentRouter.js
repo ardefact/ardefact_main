@@ -3,7 +3,8 @@
  */
 'use strict';
 
-var LOG = require('./../../../../common/Logging').createLogger(__filename);
+
+var LOG = require('common/Logging').createLogger(__filename);
 
 var FS         = require('fs-extra'),
     Exec       = require('child_process'),
@@ -13,7 +14,7 @@ var FS         = require('fs-extra'),
     Q          = require('q'),
     _          = require('lodash'),
     Handlebars = require('handlebars'),
-    Logging    = require('./../../../../common/Logging'),
+    Logging    = require('common/Logging'),
     Config     = require('./../Config');
 
 const DEFAULT_TMP_DIR_PATH = '../../tmp';
@@ -37,7 +38,7 @@ var makeTree = files => {
         childrenStr += val.toString();
       });
       return `${this.fullpath}:${_.size(this.children)}:${JSON.stringify(this.stats)}\n${childrenStr}`;
-    }
+    };
   };
 
   var root = new Node("/", "/");
@@ -510,12 +511,12 @@ var makeDebugRouter = options => {
   };
 
   return (req, res, next) => {
-      preProcessDebug().then(() => {
+      return preProcessDebug().then(() => {
         next();
     }).then(null, error => {
       LOG.error(error, "Couldn't serve stuff....");
     }).done();
-  }
+  };
 };
 
 module.exports = {

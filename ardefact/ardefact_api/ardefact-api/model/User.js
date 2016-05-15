@@ -1,12 +1,17 @@
 'use strict';
 
-var _ = require('lodash');
+var _ = require('lodash'),
+    Q = require('q');
 
 var Config = require('../Config'),
-    MongoDbConnectionManager = require('./MongoDbConnectionManager'),
-  DbAware = require("./DbAware");
+    Logging = require('common/Logging'),
+    DB = require('db/DbHelper').getDb();
 
-const requiredFields = ["email", "password", "profilePhotoId"];
+const LOG = Logging.createLogger(__filename);
+
+const requiredFields = ["email", "password", "displayName"];
+
+const USER_COLLECTION = 'users';
 
 function User(json) {
   if (json) {
@@ -16,22 +21,16 @@ function User(json) {
     }});
     _.extend(this, json);
   }
+  LOG.info(DB.toString(), "shiii");
 
-  this.commit = () => {
-    MongoDbConnectionManager.getConnection()
-        .then(db => {
-      
-    });
-  };
+  this.commit = () => DB.put(USER_COLLECTION, this);
+}
 
-};
+User.COLLECTION = USER_COLLECTION;
 
+User.byEmail = email => DB.get(USER_COLLECTION, {email:email});
 
-User.prototype.byId = id => {
-  
+User.all = () => DB.all(USER_COLLECTION);
 
-};
+module.exports = User;
 
-module.export = {
-  User: User
-};

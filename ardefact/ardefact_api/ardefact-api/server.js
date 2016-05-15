@@ -18,7 +18,7 @@ cliArgs.version(PackageJson.version)
 cliArgs.parse(process.argv);
 
 if (!cliArgs.static) {
-  console.log("Missing static content root")
+  console.log("Missing static content root");
   cliArgs.help();
   process.exit(1);
 }
@@ -43,7 +43,7 @@ var Express             = require('express'),
     Babel               = require('babel-core'),
     Handlebars          = require('handlebars'),
     ArdefactApi         = require("./mockApi"),
-    createLogger        = require('./../../../common/Logging').createLogger,
+    createLogger        = require('common/Logging').createLogger,
     staticContentRouter = require('./routers/StaticContentRouter'),
     apiRouter           = require('./routers/ApiRouter'),
     loggingRouter       = require('./routers/loggingRouter');

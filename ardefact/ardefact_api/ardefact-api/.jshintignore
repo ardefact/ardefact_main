@@ -1,2 +1,4 @@
 lib/r.js
+require.js
 node_modules
+bower_components

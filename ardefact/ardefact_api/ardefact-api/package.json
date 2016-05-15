@@ -13,11 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "babel-core": "^5.8.29",
+    "bcrypt": "^0.8.5",
     "bower": "^1.7.7",
     "bunyan": "^1.5.1",
     "commander": "^2.9.0",
     "compression": "^1.6.0",
-    "data.maybe": "^1.2.1",
+    "data.maybe": "https://github.com/lan17/data.maybe.git",
     "express": "^4.13.3",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
@@ -27,7 +28,7 @@
     "mongodb": "^2.1.18",
     "q": "^1.4.1",
     "requirejs": "^2.1.20",
-    "app-module-path": "https://github.com/lan17/app-module-path-node.git"
+    "passport": "^0.3.2"
   },
   "jshintConfig": {
     "esversion": 6,

@@ -132,11 +132,13 @@ const ARDEFACT_API = Maybe.fromNullable(process.env.ARDEFACT_API)
     .getOrElse(`${ARDEFACT_ROOT}/ardefact/ardefact_api`);
 
 const ENV = {
+  ARDEFACT_ROOT: ARDEFACT_ROOT,
   ARDEFACT_WEB : ARDEFACT_WEB,
   ARDEFACT_API : ARDEFACT_API,
   BUILD_DIR    : BUILD_DIR,
   
-  ARDEFACT_WEB_URL_ROOT : Maybe.fromNullable(process.env.ARDEFACT_WEB_URL_ROOT).getOrElse('http://192.168.56.111:8080'),
+  ARDEFACT_WEB_URL_ROOT : Maybe.fromNullable(process.env.ARDEFACT_WEB_URL_ROOT)
+                               .getOrElse('http://192.168.56.111:8080'),
 
   ARDEFACT_WEB_BUILD_DIR          : `${BUILD_DIR}/web`,
   PP                              : `${ARDEFACT_ROOT}/makefileEcho.sh`,
@@ -151,7 +153,8 @@ const ENV = {
 
   ARDEFACT_CLI_ARGS : process.argv.slice(3).join(' '),
 
-  PATH : `${ARDEFACT_EXEC_NODE}:${PATH}`
+  PATH : `${ARDEFACT_EXEC_NODE}:${PATH}`,
+  NODE_PATH : `${ARDEFACT_ROOT}:${ARDEFACT_API}/ardefact-api`
 };
 
 const CMD = `make ${process.argv.slice(2)[0]}`;
