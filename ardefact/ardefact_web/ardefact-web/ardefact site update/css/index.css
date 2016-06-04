@@ -1,0 +1,931 @@
+
+
+/******** Basic Elements ********/ 
+
+body {
+	width: 100% ;	
+	height: 100% ;
+	background-color: #FBF9F2 ;
+	position: relative ;
+    font-family: "helvetica" ;
+	/* font-family: 'Lato', sans-serif ; */
+    /* font-family: 'Source Sans Pro', sans-serif;  */
+    /* font-weight: 300;  */
+    z-index: 0 ;    
+}
+
+a {
+	outline: none ;
+	text-decoration: none ;
+}
+
+a:link { 
+	color: #333 ;
+}
+
+a:visited {
+	color: #333 ;	
+}
+
+a:hover { 
+	color: #333 ;
+}
+
+a:active { 
+	color: #333 ;
+}
+
+
+/******** ClearFix ********/
+
+.clearFix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearFix {
+    display: inline-block;
+}
+
+html[xmlns] .clearFix {
+    display: block;
+}
+
+* html .clearFix {
+    height: 1%;
+}
+
+
+/******** Navigation Bar ********/
+	
+.navBar {
+	height: 64px ;
+	width: 100% ;
+	background-color: #FBF9F2 ;
+	position: fixed ;
+    z-index: 400 ;
+	box-shadow: 0 0 0 2px rgba(0,0,0,0.1) ;
+}
+
+.navBar_links_left {
+	float: left;
+	margin-left: 10% ;
+}
+
+.navBar_links_right {
+	float: right;
+	margin-right: 10% ;
+}
+
+.navBar_links_left_textArea {
+	width: 108px ;
+	float: left ;
+}
+
+.navBar_links_right_textArea {
+	padding-left: 16px ;
+	float: right ;
+}
+
+.navBar_links_logo {
+	float: left ;
+	margin-top: 16px ;
+	margin-right: 16px ;
+	outline: 0 ;
+}
+
+.navBar_links_text {
+	font-size: 18px ;
+	font-weight: 300 ;
+	text-align: center ;
+	color: #333 ;
+	padding-top: 24px ;
+}
+
+.navBar_links_text:hover {
+    text-decoration: underline ;
+}
+
+
+/******** Map ********/
+
+.aboveMapPadding {
+    padding-top: 64px ;
+}
+
+.worldMap {
+	height: 240px ;
+	background-color: #252525 ;
+	position: relative ;
+    z-index: 100 ;
+    width: 100% ;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+#worldMap {
+	height: 240px ;
+	width: 100% ;
+	position: relative ;
+    z-index: 100 ;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+.worldMap:hover, #worldMap:hover {
+    height: 320px ;
+}
+
+.itemMap {
+	height: 160px ;
+	background-color: #252525 ;
+	position: relative ;
+    z-index: 100 ;
+    width: 100% ;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+#itemMap {
+	height: 160px ;
+	width: 100% ;
+	position: relative ;
+    z-index: 100 ;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+.itemMap:hover, #itemMap:hover {
+    height: 240px ;
+}
+
+.travelerMap {
+	height: 200px ;
+	background-color: #252525 ;
+	position: relative ;
+    z-index: 100 ;
+    width: 100% ;
+}
+
+#travelerMap {
+	height: 200px ;
+	width: 100% ;
+	position: relative ;
+    z-index: 100 ;
+}
+
+
+/******** Search Bar ********/
+
+#searchBar {
+	background-color: #FBF9F2 ;
+	position: relative ;
+	z-index: 300 ;
+    width: 100% ;
+	box-shadow: 
+        0px -2px 0px 0px rgba(0,0,0,0.1),
+        0px 2px 0px 0px rgba(0,0,0,0.1) ;
+}
+
+#searchBar.sticky {
+    position: fixed ;
+    top: 64px ;
+}
+
+/******** Search EXPANDED ********/ 
+
+.expandedSearchText {
+    font-size: 18px ;
+}   
+
+.expandedSearchPadding {
+    padding-top: 16px ;
+}   
+
+.expandedSearchBackground {
+    background-position: 8px 32%; 
+}
+
+.expandedInputPadding {
+    padding-bottom: 4px ;
+    padding-left: 36px ;    
+}
+
+/******** Search CONDENSED ********/ 
+
+.condensedSearchText {
+    font-size: 16px ;
+}
+
+.condensedSearchPadding {
+    padding-bottom: 12px ;
+    padding-top: 8px ;
+}    
+
+.condensedSearchBackground {
+    background-position: 8px 8%; 
+}
+
+.condensedInputPadding {
+    padding-bottom: 4px ;
+    padding-left: 32px ;
+}
+
+/******** Search Input Row ********/ 
+
+.searchBarInputRow {
+	margin: 0 auto ;
+    text-align: center ;
+    padding-right: 16px ;
+    padding-left: 16px ;
+}
+
+.searchBarInputRow form {
+    display: inline ;
+    height: 100% ;
+}
+
+.searchNarrativeIntro {
+	color: #333 ;
+    line-height: 32px ;
+    display: inline ;
+    text-align: center ;
+}
+
+@media screen and (max-width: 640px) {
+    .searchNarrativeIntro {
+        color: #333 ;
+        line-height: 32px ;
+        display: block ;
+        text-align: center ;
+    }
+}
+
+.searchNarrativeBetween {
+	color: #333 ;
+    line-height: 32px ;
+    display: inline ;
+    text-align: center ;
+}
+
+#searchInputItem {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    display: inline ;
+    text-align: left ;
+    background-image: url('../images/icons/something_icon.png') ; 
+    background-repeat: no-repeat ;     
+    padding-right: 6px ;
+    margin-right: 4px !important;
+    margin-left: 4px !important;     
+    border-top: 0 ;
+    border-right: 0 ;
+    border-left: 0 ;
+    border-bottom: 2px dotted #aaaaaa ;
+    background-color: transparent ;
+    margin: 0 auto 0 auto ;
+    overflow: visible ;
+    -webkit-transition-duration: 0.25s ;
+    transition-duration: 0.25s ;
+    width: 10% ;  
+    color: #f67280 ;
+    cursor: text;
+}
+
+#searchInputLocation {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    display: inline ;
+    background-image: url('../images/icons/place_icon.png') ; 
+    background-repeat: no-repeat ;  
+    padding-right: 6px ;
+    margin-right: 4px !important;
+    margin-left: 4px !important;  
+    border-top: 0 ;
+    border-right: 0 ;
+    border-left: 0 ;
+    border-bottom: 2px dotted #aaaaaa ;
+    background-color: transparent ;
+    margin: 0 auto 0 auto ;
+    overflow: visible ;
+    -webkit-transition-duration: 0.25s ;
+    transition-duration: 0.25s ;
+    width: 10% ;  
+    color: #c06c84 ;
+    cursor: text;
+}
+
+#searchInputLocation:focus, #searchInputItem:focus {
+    border-bottom: 2px dotted #777 ;    
+}
+
+input::-webkit-input-placeholder {
+    color: #999999 !important;
+    font-style: normal ;
+    font-weight: 300 !important ;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+} 
+
+input:-moz-placeholder {
+    color: #999999 !important;
+    font-style: normal ;
+    font-weight: 300 !important ;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+input::-moz-placeholder {  
+    color: #999999 !important;
+    font-weight: 300 !important ;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+input:-ms-input-placeholder {  
+    color: #999999 !important;
+    font-weight: 300 !important ;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+input:hover::-webkit-input-placeholder {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+} 
+
+input:hover:-moz-placeholder {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+input:hover::-moz-placeholder {  
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+input:hover:-ms-input-placeholder {  
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+input:focus::-webkit-input-placeholder { 
+    color:transparent !important; 
+}
+
+input:focus:-moz-placeholder { 
+    color:transparent !important; 
+} 
+
+input:focus::-moz-placeholder { 
+    color:transparent !important; 
+} 
+
+input:focus:-ms-input-placeholder { 
+    color:transparent !important; 
+} 
+
+
+/******** Search Filter Row ********/ 
+
+.searchBarFilterRow {
+	margin: 0 auto ;
+    text-align: center ;
+    padding-bottom: 24px ;
+    padding-right: 16px ;
+    padding-left: 16px ;
+}
+
+.searchBarFilterRow form {
+    display: inline-block ;
+    height: 100% ;
+    margin-top: 16px ;
+}
+
+.filterNarrativeIntro {
+	color: #333 ;
+    line-height: 32px ;
+    display: inline ;
+    text-align: center ;
+    margin-right: 0px ;
+}
+
+.filterNarrativeEnd {
+	color: #333 ;
+    line-height: 32px ;
+    display: inline ;
+    text-align: center ;
+    margin-left: 2px ;
+}
+
+#searchFilterItems {
+    display: none ;
+}    
+
+#searchFilterAssemblages {
+    display: none ;
+}
+
+#searchFilterTravelers {
+    display: none ;
+}
+    
+input[type="checkbox"] + label { 
+    cursor: pointer ;
+    background: transparent ;
+	color: #999 ;
+    line-height: 32px ;
+    text-align: center ;
+    border: 1px solid #999 ;
+    padding-top: 2px ;
+    padding-right: 8px ;    
+    padding-bottom: 4px ;    
+    padding-left: 32px ;
+    position: relative ;
+    margin-left: 6px ;
+    margin-right: 6px ;
+}
+
+input#searchFilterItems[type="checkbox"] + label {
+    background: url("../images/icons/item_icon_inactive.png") ; 
+    background-repeat: no-repeat ; 
+    background-position: 8px 50% ; 
+}
+
+input#searchFilterAssemblages[type="checkbox"] + label {
+    background: url("../images/icons/assemblage_icon_inactive.png") ; 
+    background-repeat: no-repeat ; 
+    background-position: 8px 50% ; 
+}
+
+input#searchFilterTravelers[type="checkbox"] + label {
+    background: url("../images/icons/traveler_icon_inactive.png") ; 
+    background-repeat: no-repeat ; 
+    background-position: 8px 45% ; 
+}
+
+
+input#searchFilterItems[type="checkbox"] + label:hover {
+
+    border: 1px solid #f67280 ;
+}
+
+input#searchFilterItems[type="checkbox"]:checked + label {
+    color: #f67280 ;
+    font-weight: 400 ;
+    border: 2px solid #f67280 ;
+    background: url("../images/icons/item_icon_active.png") ; 
+    background-repeat: no-repeat ; 
+    background-position: 8px 45%;
+}
+
+input#searchFilterAssemblages[type="checkbox"] + label:hover {
+
+    border: 1px solid #c06c84 ;
+}
+
+input#searchFilterAssemblages[type="checkbox"]:checked + label {
+    color: #c06c84 ;
+    font-weight: 400 ;
+    border: 2px solid #c06c84 ;
+    background: url("../images/icons/assemblage_icon_active.png") ; 
+    background-repeat: no-repeat ; 
+    background-position: 8px 45% ;
+}
+
+input#searchFilterTravelers[type="checkbox"] + label:hover {
+
+    border: 1px solid #6c5878 ;
+}
+
+input#searchFilterTravelers[type="checkbox"]:checked + label {
+    color: #6c5878 ;
+    font-weight: 400 ;
+    border: 2px solid #6c5878 ;
+    background: url("../images/icons/traveler_icon_active.png") ; 
+    background-repeat: no-repeat ; 
+    background-position: 8px 45% ;
+}
+
+
+
+/******** horizontal border ********/ 
+
+.horizontalBorder {
+	position: relative ;
+	top: 0 ;
+	margin-left: 10% ;
+	margin-right: 10% ;
+	border-bottom: solid 2px #666 ;
+}
+
+
+/******** Search Results ********/ 
+
+#searchResultsArea {
+	background-color: #FBF9F2 ;
+	position: relative ;
+	margin-top: 16px ;
+	margin-left: 10% ;
+	margin-right: 10% ;
+    margin-bottom: 16px ;
+	z-index: 200 ;
+}
+
+.searchResult {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding: 8px ;
+    width: 33.33% ;
+    float: left;
+}
+
+@media screen and (max-width: 640px) {
+    .searchResult {
+        box-sizing: border-box ;
+        display: block ;
+        padding: 8px 0px 8px 0px;
+        width: 100% ;
+    }
+}
+
+.searchResultImage {
+    border-top: 1px solid #ccc ;
+    border-right: 1px solid #ccc ;
+    border-left: 1px solid #ccc ;
+}
+
+.searchResultImage img {
+	max-width: 100% ;
+	height: auto ;
+	display: block ;
+    margin: 0 ;
+    padding: 0 ;
+}
+
+.searchResultDetails {
+    background-color: transparent ;
+    color: #333 ;
+    padding: 8px ;
+    border-bottom: 1px solid #ccc ;
+    border-right: 1px solid #ccc ;
+    border-left: 1px solid #ccc ;
+}
+
+.searchResultItemName { 
+    border-bottom: 1px solid #ccc ;
+    margin-bottom: 8px ;
+    padding-bottom: 8px ;
+    padding-top: 2px ;
+    font-size: 16px ;
+    background-repeat: no-repeat ; 
+    background-image: url(../images/icons/item_icon_16px.png); 
+    padding-left: 24px ;
+    display: block ;  
+}
+
+.searchResultAssemblageName {
+    border-bottom: 1px solid #ccc ;
+    margin-bottom: 8px ;
+    padding-bottom: 8px ;
+    padding-top: 2px ;
+    font-size: 16px ;
+    background-repeat: no-repeat ; 
+    background-image: url(../images/icons/assemblage_icon_16px.png); 
+    padding-left: 24px ;
+    display: block ;    
+}
+
+.searchResultTravelerName {
+    border-bottom: 1px solid #ccc ;
+    margin-bottom: 8px ;
+    padding-bottom: 8px ;
+    padding-top: 2px ;
+    font-size: 16px ;
+    background-repeat: no-repeat ; 
+    background-image: url(../images/icons/traveler_icon_16px.png); 
+    padding-left: 24px ;
+    display: block ;     
+}
+
+.searchResultLocation {
+    border-bottom: 1px solid #ccc ;
+    margin-bottom: 8px ;
+    padding-bottom: 8px ;
+    font-size: 16px ; 
+    background-image: url(../images/icons/flags/Japan_Flag_h16px.png); 
+    background-repeat: no-repeat ; 
+    padding-left: 32px ;
+    display: block ;  
+}
+
+.searchResultTravelerDeparture {
+    font-size: 16px ;
+    background-image: url(../images/icons/note_icon.png); 
+    background-repeat: no-repeat ; 
+    padding-left: 24px ;
+    display: inline-block ;  
+}
+
+.searchResultItemPrice {
+    font-size: 16px ;  
+    background-image: url(../images/icons/note_icon.png); 
+    background-size: contain;
+    background-repeat: no-repeat ; 
+    padding-left: 24px ;
+    display: inline-block ;  
+}
+
+.searchResultAssemblageTags {
+    font-size: 16px ;
+    height: 16px ;  
+    background-image: url(../images/icons/note_icon.png); 
+    background-size: contain;
+    background-repeat: no-repeat ; 
+    padding-left: 24px ;
+    display: inline-block ;
+}
+
+/******** 'Show More Items' Button ********/ 
+
+.searchMoreButtonArea {
+    display: block ;
+    clear: both ;
+    position: relative ;
+    margin-left: 10% ;
+    margin-right: 10% ; 
+}
+
+button#moreButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: transparent;
+    border: 4px solid #6c5878;
+    padding: 10px 15px;
+    color: #6c5878;
+    text-align: center;
+    width: 100% ;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+button#moreButton:hover {
+  border: 4px solid #f8b195;
+  color: #f8b195;
+}
+
+
+/******** Item Stuff ********/ 
+
+#itemArea {
+	background-color: #FBF9F2 ;
+	position: relative ;
+	z-index: 300 ;
+	padding-top: 24px ;
+	margin-left: 10% ;
+	margin-right: 10% ;
+	z-index: 200 ;  
+	box-shadow: 0px -2px 0px 0px rgba(0,0,0,0.1) ;     
+}
+
+#itemPhotoColumn {
+    width: 50% ;
+    float: left ;
+}
+
+#itemInfoColumn {
+    width: 50% ;
+    float: left ;
+    box-sizing: border-box ;
+    padding-left: 8px ;
+}
+
+#itemPhotoFeatured {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding-bottom: 16px ;
+    padding-right: 16px ;    
+    width: 100% ;
+    float: left;
+}
+
+.itemPhotoHalf {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding-bottom: 16px ;
+    padding-right: 16px ;
+    width: 50% ;
+    float: left;
+}
+
+.itemPhotoThird {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding-bottom: 16px ;
+    padding-right: 16px ;
+    width: 33.33% ;
+    float: left;
+}
+
+#itemPhotoFeatured img, .itemPhotoHalf img, .itemPhotoThird img {
+	max-width: 100% ;
+	height: auto ;
+	display: block ;
+    margin: 0 ;
+    padding: 0 ;
+    border: 1px solid #ccc ;
+}
+
+#itemTitle {
+    font-size: 28px ;
+    margin-bottom: 16px ;
+    background-image: url(../images/icons/item_icon_28px.png); 
+    background-repeat: no-repeat ; 
+    padding-left: 36px ;
+}
+                
+#itemLocation {
+    font-size: 20px ;
+    background-image: url(../images/icons/flags/Japan_Flag_h20px.png); 
+    background-repeat: no-repeat ;
+    padding-left: 38px ;
+}             
+
+
+#itemDetailsArea {
+    border: 2px solid #ccc ; 
+    padding: 16px ;  
+    margin-top: 24px ;
+    margin-bottom: 24px ;
+    background: white ;
+    line-height: 20px ;
+    position: relative ;
+    font-size: 16px ;
+}
+
+#itemCost {
+    padding-bottom: 16px ;
+}
+
+#costTag {
+    color: #6c5878 ; 
+}
+
+#costTag:hover {
+    text-decoration: underline; 
+}
+
+#itemDistance {
+    padding-bottom: 16px ;    
+} 
+
+#distanceTag {
+    color: #6c5878 ;
+}
+
+#distanceTag:hover {
+    text-decoration: underline;
+}
+
+#itemRarity {
+    padding-bottom: 16px ;    
+}
+
+#rarityTag {
+    color: #6c5878 ;
+}
+
+#rarityTag:hover {
+    text-decoration: underline;
+}
+
+#itemTags {
+    padding-bottom: 16px ;    
+}
+
+#itemSummary {
+    padding-bottom: 16px ; 
+    padding-top: 16px ;
+    border-top: 1px dashed #999 ;
+}
+
+#userSignature {
+    font-size: 18px ;
+    background-image: url(../images/users/Ross_32px.jpg); 
+    background-repeat: no-repeat ;
+    padding-left: 40px ;
+    height: 32px ;
+    line-height: 32px ;
+}               
+
+#requestButtonArea {
+    display: block ;
+    clear: both ;
+    position: relative ;
+}
+
+button#requestButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: #6c5878;
+    border: none ;
+    padding: 10px 15px;
+    color: white ;
+    text-align: center;
+    width: 100% ;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+button#requestButton:hover {
+    background-color: #f8b195;
+}
+
+
+/******** Assemblage Stuff ********/ 
+
+
+
+/******** Footer ********/ 
+
+.footerBorder {
+	position: relative ;
+	margin-left: 10% ;
+	margin-right: 10% ;
+    margin-top: 64px ;
+	border-bottom: solid 2px #999 ;
+}
+
+.footerArea {
+    margin-left: 10% ;
+    margin-right: 10% ;
+    margin-top: 32px ;
+    margin-bottom: 32px ;
+}
+
+.footerCopyright {
+    color: #666 ;
+}
+    

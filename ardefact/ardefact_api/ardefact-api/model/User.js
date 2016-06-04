@@ -23,7 +23,9 @@ function User(json) {
   }
   LOG.info(DB.toString(), "shiii");
 
-  this.commit = () => DB.put(USER_COLLECTION, this);
+  this.commit = () => DB.put(USER_COLLECTION,
+                             {email: this.email}, 
+                             this);
 }
 
 User.COLLECTION = USER_COLLECTION;

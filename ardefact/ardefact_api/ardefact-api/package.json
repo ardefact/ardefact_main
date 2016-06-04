@@ -13,11 +13,14 @@
   "license": "ISC",
   "dependencies": {
     "babel-core": "^5.8.29",
-    "bcrypt": "^0.8.5",
+    "bcrypt": "^0.8.6",
+    "body-parser": "^1.15.1",
     "bower": "^1.7.7",
     "bunyan": "^1.5.1",
     "commander": "^2.9.0",
     "compression": "^1.6.0",
+    "connect-mongo": "^1.2.0",
+    "cookie-parser": "^1.4.3",
     "data.maybe": "https://github.com/lan17/data.maybe.git",
     "express": "^4.13.3",
     "express-handlebars": "^3.0.0",
@@ -26,9 +29,10 @@
     "handlebars": "^4.0.5",
     "lodash": "^3.10.1",
     "mongodb": "^2.1.18",
+    "passport": "^0.3.2",
     "q": "^1.4.1",
     "requirejs": "^2.1.20",
-    "passport": "^0.3.2"
+    "uuid": "^2.0.2"
   },
   "jshintConfig": {
     "esversion": 6,

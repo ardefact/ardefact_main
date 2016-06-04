@@ -358,7 +358,7 @@ var preProcessStaticContent = options => {
             handleBarIt(indexFile, _.extend(
               {
                 cssReset : FS.readFileSync(Path.resolve(`${tmpFolder}/css/reset.css`)).toString(),
-                cssArdefact: FS.readFileSync(Path.resolve(`${tmpFolder}/css/index_dark.css`)).toString(),
+                cssArdefact: FS.readFileSync(Path.resolve(`${tmpFolder}/css/new_style.css`)).toString(),
                 requireJS: FS.readFileSync(Path.resolve(`${staticRoot}/js/lib/require.js`)).toString(),
                 ardefactMainJS: options.minify ? minifiedStuff : FS.readFileSync(Path.resolve(`${tmpFolder}/js/main.js`)).toString(),
                 ardefactGoogleMapsJS: FS.readFileSync(Path.resolve(`${tmpFolder}/js/google_maps.js`)).toString()
@@ -485,7 +485,7 @@ var makeDebugRouter = options => {
         changedFiles[fileName] = true;
         
         watchedFiles[file] = false;
-//        watchFile(file);
+//       watchFile(file);
       });
       watchedFiles[file] = true;
     }
@@ -511,11 +511,10 @@ var makeDebugRouter = options => {
   };
 
   return (req, res, next) => {
-      return preProcessDebug().then(() => {
-        next();
-    }).then(null, error => {
-      LOG.error(error, "Couldn't serve stuff....");
-    }).done();
+      return preProcessDebug()
+        .then(() => next())
+        .catch(error => LOG.error(error, "Couldn't serve stuff...."))
+        .done();
   };
 };
 

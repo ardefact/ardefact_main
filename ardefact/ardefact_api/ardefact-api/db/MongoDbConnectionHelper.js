@@ -58,17 +58,18 @@ const get = (collection, query) => {
     });
 };
 
-const put = (collection, object) => {
+const put = (collection, filter, object) => {
   return getConnection()
     .then(db => {
       const deferred = Q.defer();
-      db.collection(collection).replaceOne({email: object.email}, object, (err, result) => {
-        if (err) {
-          deferred.reject(err);
-        } else {
-          deferred.resolve();
-        }
-      });
+      try {
+        db.collection(collection).replaceOne(filter, 
+                                             object, 
+                                             {upsert : true});
+        deferred.resolve();
+      } catch(error) {
+        deferred.reject(error);
+      }
       return deferred.promise;
   });
 };

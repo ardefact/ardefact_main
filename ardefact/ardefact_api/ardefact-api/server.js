@@ -1,10 +1,15 @@
 'use strict';
 
+const Session = require('express-session');
+const MongoStore = require('connect-mongo')(Session);
+
+
 var PackageJson = require('./package.json'),
     cliArgs     = require('commander'),
     Path        = require('path'),
     Config      = require("./Config"),
     Q           = require('q'),
+    Uuid = require('uuid'),
     GlobalVars  = require('./GlobalVars');
 
 cliArgs.version(PackageJson.version)
@@ -31,14 +36,12 @@ if (cliArgs.minify === undefined) {
   cliArgs.minify = false;
 }
 
-
 cliArgs = GlobalVars.set(GlobalVars.KEYS.CLI_ARGS, Object.freeze(cliArgs));
 
 var Express             = require('express'),
     FS                  = require('fs'),
     URL                 = require('url'),
     _                   = require('lodash'),
-    Path                = require('path'),
     CP                  = require('child_process'),
     Babel               = require('babel-core'),
     Handlebars          = require('handlebars'),
@@ -65,6 +68,17 @@ const headers = {
 
 var app = Express();
 
+var createSession = () => {
+  const session = Session(
+    {
+      secret: 'some secret, i dunno',
+      genid: req => Uuid.v4(),
+      store: new MongoStore({dbPromise: require('db/MongoDbConnectionHelper')._getConnection()}),
+    }
+  );
+  return session;
+};
+
 var startApp = () => {
   var server = app.listen(
     cliArgs.port, function () {
@@ -74,6 +88,7 @@ var startApp = () => {
     });
 };
 
+app.use(createSession());
 app.use(require('compression')({level : 1}));
 app.use(loggingRouter.makeRouter());
 app.use(`/api`, apiRouter.makeRouter(ArdefactApi, {headers : headers}));

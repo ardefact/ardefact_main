@@ -1,0 +1,182 @@
+
+body {
+	width: 100% ;	
+	height: 100% ;
+	background-color: #252525 ;
+	position: relative ;
+    z-index: -6 ;
+}
+
+a {
+	outline: none ;
+	text-decoration: none ;
+}
+
+a:link { 
+	color: #ccc ;
+}
+
+a:visited {
+	color: #ccc ;	
+}
+
+a:hover { 
+	color: #ccc ;
+}
+
+a:active { 
+	color: #ccc ;
+}
+
+/******** Navigation Bar ********/
+	
+.navBar {
+	height: 64px ;
+	width: 100% ;
+	background-color: #252525 ;
+	position: fixed ;
+    z-index: 1 ;
+	;
+}
+
+.navBar_links_left {
+	float: left;
+	margin-left: 10% ;
+}
+
+.navBar_links_right {
+	float: right;
+	margin-right: 10% ;
+}
+
+.navBar_links_left_textArea {
+	width: 108px ;
+	float: left ;
+}
+
+.navBar_links_right_textArea {
+	padding-left: 16px ;
+	float: right ;
+}
+
+.navBar_links_logo {
+	width: 171px ;
+	height: 20px ;
+	float: left ;
+	margin-top: 22px ;
+	margin-right: 16px ;
+	outline: 0 ;
+}
+
+.navBar_links_text {
+	font-family: 'Lato', sans-serif ;
+	font-size: 18px ;
+	font-weight: 300 ;
+	text-align: center ;
+	color: #333 ;
+	padding-top: 24px ;
+}
+
+
+/******** Map ********/
+
+.map {
+	height: 450px ;
+	background-color: #252525 ;
+	position: relative ;
+    z-index: -3 ;
+	margin-left: 10% ;
+	margin-right: 10% ;
+}
+
+#map {
+	height:450px ;
+	width: 100% ;
+	position: relative ;
+    z-index: -3 ;
+}
+
+/******** Search Bar ********/
+
+.searchBar {
+	height: 64px ;
+	max-height: 64px ;
+	background-color: #252525 ;
+	position: relative ;
+	z-index: -1 ;
+}
+
+.horizontalBorder {
+	position: relative ;
+	top: 0 ;
+	margin-left: 10% ;
+	margin-right: 10% ;
+	border-bottom: solid 2px #666 ;
+}
+
+span {
+	border-bottom: dotted 2px #9A632D ;
+	padding-bottom: 4px;
+	padding-left: 34px ;
+	padding-right: 8px ;
+    max-width: 200px;
+	height: 1em ;
+	outline: 0;
+}
+
+.searchNarrativeArea {
+	margin-left: 10% ;
+	margin-right: 10% ;
+	height: 100% ;
+}
+
+.searchNarrativeText {
+	font-family: 'Lato', sans-serif ;
+	color: #ccc ;
+	font-size: 20px ;
+	font-weight: 300 ;
+	margin-top: 20px ;
+	margin-left: 8px ;	
+	margin-right: 8px ;
+	float: left ;
+}
+
+.expandingTextField {
+	font-family: 'Lato', sans-serif ;
+	color: #444 ;	
+	font-size: 20px ;
+	font-weight: 300 ;   
+	float: left ;
+	margin-top: 20px ;
+}
+
+
+/******** Search Results ********/ 
+
+.searchResultsArea {
+	background-color: #252525 ;
+	position: relative ;
+	z-index: -2 ;
+	margin-top: 16px ;
+	margin-left: 10% ;
+	margin-right: 10% ;
+    -moz-column-count: 5;
+    -webkit-column-count: 5;
+    column-count: 5;
+    -moz-column-gap: 1em;
+    -webkit-column-gap: 1em;
+    column-gap: 1em;	
+}
+
+.searchResult {
+    display: inline-block ;
+	background-color: #eee ;
+    margin: 0 0 0.7em 0 ;
+    width: 100% ;
+}
+
+img {
+	max-width: 100% ;
+	height: auto ;
+	display: block ;
+}

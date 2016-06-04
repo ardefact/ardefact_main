@@ -21,6 +21,6 @@
     "lodash": "^4.3.0",
     "backbone": "^1.2.3",
     "data.min": "https://github.com/lan17/data.maybe.git",
-    "jquery-autogrow": "*"
+    "js-cookie": "^2.1.1"
   }
 }

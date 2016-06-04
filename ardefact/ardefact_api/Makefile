@@ -3,8 +3,6 @@ currentDir := $(shell pwd)
 
 .PHONY: ALL build install clean jshint
 
-ALL: bower
-
 build: install
 
 install:

@@ -9,20 +9,21 @@
     'controllers/MapController',
     'views/SearchBarView',
     'views/ArdefactSearchResultView',
-    'text!templates/SRP.html'], function ($, _,
-                                          Backbone,
-                                          Utils,
-                                          MapController,
-                                          SearchBarView,
-                                          ArdefactSearchResultView,
-                                          SRPHtml) {
+    'text!templates/SRP.html'], 
+         ($, _, 
+          Backbone,
+          Utils,
+          MapController,
+          SearchBarView,
+          ArdefactSearchResultView,
+          SRPHtml) => {
 
     var STATE_LOADING = 0;
     var STATE_LOADED = 1;
 
     var view = Backbone.View.extend({
       el         : "#mainContent",
-      initialize : function () {
+      initialize() {
         var that = this;
         this.collection.on("sync", function (event) {
           that.renderSearchResults();
@@ -31,7 +32,7 @@
         this.searchBarView = new SearchBarView();
       },
 
-      render : function () {
+      render() {
         console.log("rendering SRP...");
 
         this.$el.html(SRPHtml);
@@ -41,7 +42,7 @@
         return this.renderSearchResults();
       },
 
-      renderSearchResults : function () {
+      renderSearchResults() {
         var $list = $("#searchResults");
         $list.html("");
 

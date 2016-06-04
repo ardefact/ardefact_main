@@ -12,6 +12,8 @@
       maybe : `${BOWER_ROOT}/data.min/dist/data.maybe.umd.min`,
       underscore : `${BOWER_ROOT}/lodash/dist/lodash.min`,
       backbone   : `${BOWER_ROOT}/backbone/backbone-min`,
+      js_cookie  : `${BOWER_ROOT}/js-cookie/src/js.cookie`,
+      js_autogrow: `lib/jquery.auto-grow-input`,
       templates  : '../templates',
     }
   };

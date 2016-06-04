@@ -30,7 +30,7 @@
        */
       fireEvent(eventname) {
         if (!eventname) {
-          console.log("EMPTY EVENT NAME WTF!");
+          throw "Event name can't be empty";
         }
         // make sure we pass any optional parameters to event by passing them on to trigger function
         GLOBAL_DISPATCHER_OBJECT.trigger.apply(GLOBAL_DISPATCHER_OBJECT, [eventname].concat(Array.prototype.slice.call(arguments, 1)));

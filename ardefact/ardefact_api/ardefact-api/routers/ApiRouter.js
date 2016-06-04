@@ -6,12 +6,23 @@
 
 var express      = require('express'),
     _            = require('lodash'),
+    CookieParser = require('cookie-parser'),
+    Q = require('q'),
+    Bcrypt       = require('bcrypt'),
+    BodyParser   = require('body-parser'),
     createLogger = require('common/Logging').createLogger;
+
+var User = require('model/User');
 
 var LOG = createLogger("apiRouter");
 
 function makeRouter(ArdefactApi, options) {
   var restRouter = express.Router();
+
+  restRouter.use(CookieParser());
+
+  restRouter.use(BodyParser.urlencoded({ extended: false }));
+  restRouter.use(BodyParser.json());
 
   var headers = _.extend({"Content-Type" : "application/json"}, options.headers);
 
@@ -60,6 +71,37 @@ function makeRouter(ArdefactApi, options) {
       res.end(JSON.stringify(ardefacts));
     });
 
+  });
+
+  restRouter.post("/login", (req, res) => {
+    LOG.info(req.body, "body of request");
+    
+    const writeError = error => {
+      LOG.error(error, "login error");
+      res.writeHead(403, headers);
+      res.end();
+    };
+
+    User.byEmail(req.body.email)
+        .then(user => {
+          if (user && user.length === 1) {
+            LOG.info(user, "USA");
+            return Q.nfcall(Bcrypt.compare, req.body.password, user[0].password)
+              .then(success => {
+                if (success) {
+                  req.session.authenticated = true;
+                  res.cookie("authenticated", "true")
+                  res.writeHead(200, headers);
+                  res.end("true");
+                } else {
+                  throw "passwords do not match";
+                }
+              })
+          } else {
+            throw "user not found";
+          }
+        }).
+      catch(writeError);
   });
 
   return restRouter;

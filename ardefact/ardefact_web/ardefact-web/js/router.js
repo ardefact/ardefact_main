@@ -4,12 +4,14 @@
   define(['jquery',
       'underscore',
       'backbone',
+      'js_cookie',
       'Events',
       'config',
       'utils',
       'constants',
       'controllers/SearchBarController',
       'controllers/SRPController',
+      'views/LoginPageView',
       'views/HeaderView',
       'views/ArdefactSearchResultView',
       'views/ArdefactPageView',
@@ -17,27 +19,32 @@
     ($,
      _,
      Backbone,
+     JsCookie,
      Events,
      Config,
      Utils,
      Constants,
      SearchBarController,
      SRPController,
+     LoginPageView,
      HeaderView,
      ArdefactSearchResultView,
      ArdefactPageView,
      ArdefactPageModel) => {
       var initialize = function () {
 
+        const authCheck = () => 'true' === JsCookie.get(Constants.COOKIE_KEYS.AUTHENTICATED);
+
         var ArdefactRouter = Backbone.Router.extend({
           routes : {
-            ""             : "searchPage",
+            ""             : "homePage",
             "ardefact/:id" : "ardefactPage"
           },
 
           initialize : function () {
             console.log("initializing..");
 
+            /*
             this.searchBarController = new SearchBarController();
             this.srpController = new SRPController();
             this.srpController.fetch();
@@ -55,11 +62,41 @@
                 }
               }
             });
+            */
+            
+            Events.listenToEvent(this, 
+                                 Constants.EVENTS.LOGIN_SUCCESSFUL,
+                                 () => {
+                                   this.homePage();
+                                 }
+            );
 
             this.headerView = new HeaderView();
+            this.loginPageView = new LoginPageView();
           },
 
-          searchPage : function () {
+          // require auth check for each page.
+          // redirect to login page if fails.
+          execute(callback, args, name) {
+            if (!authCheck()) {
+              this.loginPage();
+            }
+            else {
+              if (callback) {
+                callback.apply(this, args);
+              }
+            }
+          },
+          
+          loginPage() {
+            this.loginPageView.render();
+          },
+          
+          homePage() {
+            alert("LOGGED IN, KIND SIR!");
+          },
+
+          searchPage() {
             console.log("Search page..");
 
             $(".map").show();

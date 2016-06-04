@@ -6,9 +6,9 @@
 
   define(['underscore',
     'backbone',
-    'config'], function (_, Backbone, Config) {
+    'config'], (_, Backbone, Config) => {
     var model = Backbone.Model.extend({
-      url      : function () {
+      url() {
         return Config.apiUrlRoot + "/ardefact?id=" + this.id;
       },
       defaults : {
