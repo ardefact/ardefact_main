@@ -358,7 +358,7 @@ var preProcessStaticContent = options => {
             handleBarIt(indexFile, _.extend(
               {
                 cssReset : FS.readFileSync(Path.resolve(`${tmpFolder}/css/reset.css`)).toString(),
-                cssArdefact: FS.readFileSync(Path.resolve(`${tmpFolder}/css/new_style.css`)).toString(),
+                cssArdefact: FS.readFileSync(Path.resolve(`${tmpFolder}/css/new_style_2.css`)).toString(),
                 requireJS: FS.readFileSync(Path.resolve(`${staticRoot}/js/lib/require.js`)).toString(),
                 ardefactMainJS: options.minify ? minifiedStuff : FS.readFileSync(Path.resolve(`${tmpFolder}/js/main.js`)).toString(),
                 ardefactGoogleMapsJS: FS.readFileSync(Path.resolve(`${tmpFolder}/js/google_maps.js`)).toString()

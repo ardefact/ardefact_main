@@ -13,6 +13,7 @@
       'controllers/SRPController',
       'views/LoginPageView',
       'views/HeaderView',
+      'views/FooterView',
       'views/ArdefactSearchResultView',
       'views/ArdefactPageView',
       'models/ArdefactPageModel'],
@@ -28,6 +29,7 @@
      SRPController,
      LoginPageView,
      HeaderView,
+     FooterView,
      ArdefactSearchResultView,
      ArdefactPageView,
      ArdefactPageModel) => {
@@ -72,6 +74,7 @@
             );
 
             this.headerView = new HeaderView();
+            this.footerView = new FooterView();
             this.loginPageView = new LoginPageView();
           },
 
@@ -93,7 +96,9 @@
           },
           
           homePage() {
-            alert("LOGGED IN, KIND SIR!");
+            console.log("Home page...");
+            this.footerView.render();
+            this.headerView.render();
           },
 
           searchPage() {
