@@ -23,8 +23,8 @@ hostname = "ardefact.local"
 
 Vagrant.configure(2) do |config|
   config.vm.box = "trusty-cloud-image"
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/20160323/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-  config.vm.box_download_checksum = "bb5024fb519ab548f47fbd428d59570e8140598fcb61abe5549bc1b70ab59111"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box_download_checksum = "f124023ef7f4c7eda08dd930aa4b8e13bb14db14b5f6383b9c55543fe163482b"
   config.vm.box_download_checksum_type = "sha256"
 
   # mount the host shared folder

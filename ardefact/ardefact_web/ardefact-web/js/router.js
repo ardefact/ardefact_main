@@ -40,7 +40,9 @@
         var ArdefactRouter = Backbone.Router.extend({
           routes : {
             ""             : "homePage",
-            "ardefact/:id" : "ardefactPage"
+            "ardefact/:id" : "ardefactPage",
+            "newArdefact"  : "newArdefactPage"
+
           },
 
           initialize : function () {
@@ -73,6 +75,19 @@
                                  }
             );
 
+            Events.listenToEvent(this,
+                                 Constants.EVENTS.LOGOUT,
+                                 () => {
+                                   $.post(
+                                     `${Config.apiUrlRoot}/logout`
+                                   );
+                                   JsCookie.remove(Constants.COOKIE_KEYS.AUTHENTICATED);
+                                   JsCookie.remove(Constants.COOKIE_KEYS.SESSION_COOKIE);
+                                   this.loginPage();
+                                 }
+
+            );
+
             this.headerView = new HeaderView();
             this.footerView = new FooterView();
             this.loginPageView = new LoginPageView();
@@ -92,6 +107,8 @@
           },
           
           loginPage() {
+            Utils.unrenderView(this.headerView);
+            Utils.unrenderView(this.footerView);
             this.loginPageView.render();
           },
           
@@ -99,6 +116,11 @@
             console.log("Home page...");
             this.footerView.render();
             this.headerView.render();
+          },
+          
+          
+          newArdefactPage() {
+            
           },
 
           searchPage() {

@@ -45,7 +45,7 @@
                     setTimeout(
                       () =>
                         Events.fireEvent(
-                          Constants.EVENTS.AUTHENTICATED), 500);
+                          Constants.EVENTS.LOGIN_SUCCESSFUL), 500);
 
                   });
 

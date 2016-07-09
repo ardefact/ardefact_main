@@ -90,18 +90,35 @@ function makeRouter(ArdefactApi, options) {
               .then(success => {
                 if (success) {
                   req.session.authenticated = true;
-                  res.cookie("authenticated", "true")
+                  res.cookie("authenticated", "true");
                   res.writeHead(200, headers);
                   res.end("true");
                 } else {
                   throw "passwords do not match";
                 }
-              })
+              });
           } else {
             throw "user not found";
           }
         }).
       catch(writeError);
+  });
+  
+  restRouter.post("/logout", (req, res) => {
+    if (req.session && req.session.store) {
+      req.session.store.clear(error => {
+        if (error) {
+          LOG.error(error, "couldn't logout");
+          res.writeHead(500, headers);
+        } else {
+          res.writeHead(200, headers);
+        }
+        res.end();
+      });
+    } else {
+      res.writeHead(200, headers);
+      res.end();
+    }
   });
 
   return restRouter;
