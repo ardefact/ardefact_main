@@ -1,3 +1,3 @@
 Ardefact source 
 
-## [https://github.com/ardefact/ardefact_main/wiki/GettingStarted](https://github.com/ardefact/ardefact_main/wiki/GettingStarted)
+## [Getting Started](https://github.com/ardefact/ardefact_main/wiki/GettingStarted)
