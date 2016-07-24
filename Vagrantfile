@@ -79,6 +79,9 @@ Vagrant.configure(2) do |config|
    cd "/home/#{vagrant_user}"; sudo -u #{vagrant_user} wget https://raw.githubusercontent.com/lan17/home/master/.zshrc
     chsh -s /usr/bin/zsh #{vagrant_user}
 
+    # put mount command as convenience into home
+    cd "/home/#{vagrant_user}"; echo "mount -t overlayfs overlayfs -o lowerdir=#{overlay_lower},upperdir=#{overlay_upper} #{overlay_mount}" > mount_overlayfs.sh; chmod +x mount_overlayfs.sh
+
 
   SCRIPT
 
