@@ -24,7 +24,7 @@ hostname = "ardefact.local"
 Vagrant.configure(2) do |config|
   config.vm.box = "trusty-cloud-image"
   config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-  config.vm.box_download_checksum = "f124023ef7f4c7eda08dd930aa4b8e13bb14db14b5f6383b9c55543fe163482b"
+  config.vm.box_download_checksum = "dda56cc05cb211df8ad23c3c4777eaf1be6571950b134b5317f09dc085eeacec"
   config.vm.box_download_checksum_type = "sha256"
 
   # mount the host shared folder
@@ -85,11 +85,6 @@ Vagrant.configure(2) do |config|
 
   SCRIPT
 
-  # NB: this is the primary VM. To build run
-  #    $ vagrant up
-  # [though 'vagrant up default' will also work, the 'default' is redudnant]
-  # Once built, avahi-daemon should guarantee the instance will be accessible
-  # from https://reddit.local/
   config.vm.define "default", primary: true do |ardefactlocal|
       ardefactlocal.vm.hostname = hostname
       # host-only network interface
