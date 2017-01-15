@@ -27,6 +27,8 @@ Vagrant.configure(2) do |config|
   config.vm.box_download_checksum = "5c2854b524d2945b42ff1017e14bdc989ca1b042038fb97a298ecc0d8c118097"
   config.vm.box_download_checksum_type = "sha256"
 
+   config.ssh.forward_agent = true
+
   # mount the host shared folder
   config.vm.synced_folder code_share_host_path, code_share_guest_path, mount_options: ["ro"]
 
@@ -82,7 +84,8 @@ Vagrant.configure(2) do |config|
     # put mount command as convenience into home
     cd "/home/#{vagrant_user}"; echo "mount -t overlayfs overlayfs -o lowerdir=#{overlay_lower},upperdir=#{overlay_upper} #{overlay_mount}" > mount_overlayfs.sh; chmod +x mount_overlayfs.sh
 
-
+    ssh-keyscan -H github.com >> /home/${vagrant_user}/.ssh/known_hosts
+    chown ${vagrant_user} /home/${vagrant_user}/.ssh
   SCRIPT
 
   config.vm.define "default", primary: true do |ardefactlocal|
@@ -90,4 +93,6 @@ Vagrant.configure(2) do |config|
       # host-only network interface
       ardefactlocal.vm.network "private_network", ip: guest_ip
   end
+
+
 end
