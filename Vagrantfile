@@ -86,6 +86,9 @@ Vagrant.configure(2) do |config|
 
     ssh-keyscan -H github.com >> /home/${vagrant_user}/.ssh/known_hosts
     chown ${vagrant_user} /home/${vagrant_user}/.ssh
+
+	# to make npm link easier
+    chown #{vagrant_user} /usr/lib/node_modules
   SCRIPT
 
   config.vm.define "default", primary: true do |ardefactlocal|
