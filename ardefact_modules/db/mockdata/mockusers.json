@@ -1,0 +1,43 @@
+[
+  {
+    "first_name": "Ross",
+    "last_name": "Gibson",
+    "display_name": "bigW0rm",
+    "bio": "Ross Gibson is a neuroscientist, entrepreneur, and co-founder of Ardefact. As a seasoned adventurer and businessman with a taste for the spontaneous and luxurious, Ross relies on a savory blend of serendipity and research to find only the finest regional goods. While travelling, Ross is always on the lookout for items that are as wondrous as they are effective, whether that be at demonstrating amphibian anatomy or just getting you drunk.",
+    "email": "ross@ardefact.com",
+    "password": "$2a$04$7EG9HUVFMykhzENAzqT/FuNEHfUVqjnHvPWQgPO.cGUWyaNjKMKFG",
+    "traveler": true
+  },
+  {
+    "first_name": "Lev",
+    "last_name": "Neiman",
+    "display_name": "entheogen",
+    "bio": "Is a robot",
+    "email": "lev@ardefact.com",
+    "password": "$2a$04$7EG9HUVFMykhzENAzqT/FuNEHfUVqjnHvPWQgPO.cGUWyaNjKMKFG",
+    "traveler": true,
+    "main_picture": {
+      "uris": {
+        "full": "lev.jpg"
+      }
+    }
+  },
+  {
+    "first_name": "David",
+    "last_name": "Wright-Spanner",
+    "display_name": "phiom",
+    "bio": "Designs things.",
+    "email": "david@ardefact.com",
+    "password": "$2a$04$7EG9HUVFMykhzENAzqT/FuNEHfUVqjnHvPWQgPO.cGUWyaNjKMKFG",
+    "traveler": true
+  },
+  {
+    "first_name": "Terry",
+    "last_name": "Webber",
+    "display_name": "terry",
+    "bio": "Code things.",
+    "email": "terryjweber@gmail.com ",
+    "password": "$2a$04$7EG9HUVFMykhzENAzqT/FuNEHfUVqjnHvPWQgPO.cGUWyaNjKMKFG",
+    "traveler": false
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "name": "ardefact_database_bridge",
+  "version": "1.0.0",
+  "description": "database access/utilities.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/jshint/bin/jshint . && node_modules/mocha/bin/mocha --recursive test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardefact/db.git"
+  },
+  "author": "Lev Alexandrovich Neiman <lev@ardefact.com>",
+  "license": "LicenseRef-LICENSE",
+  "bugs": {
+    "url": "https://github.com/ardefact/db/issues"
+  },
+  "homepage": "https://github.com/ardefact/db#readme",
+  "dependencies": {
+    "ardefact_json_schema": "git@github.com:ardefact/json_schema.git",
+    "ardefact_utils": "git@github.com:ardefact/utils.git",
+    "ardefact_config": "git@github.com:ardefact/config.git",
+    "bcrypt": "^0.8.7",
+    "bunyan": "^1.8.1",
+    "chai-as-promised": "^6.0.0",
+    "hashids": "^1.1.1",
+    "json-schema-to-mongoose": "^0.2.2",
+    "lodash": "^4.16.1",
+    "mongodb": "^2.2.10",
+    "mongoose": "^4.6.1",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-gen": "^2.1.1",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.3",
+    "mocha": "^3.1.0",
+    "chai": "^3.5.0",
+    "chai-subset": "^1.3.0",
+    "mockgoose": "^6.0.8",
+    "proxyquire": "^1.7.10"
+  }
+}

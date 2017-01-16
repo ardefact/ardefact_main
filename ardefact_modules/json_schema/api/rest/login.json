@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/rest/login",
+  "type": "object",
+  "description": "Login",
+  "properties": {
+    "args": {
+      "description": "login args",
+      "allOf": [
+        {"$ref": "/rest/input_args"},
+        {
+        "type": "object",
+        "properties": {
+          "email": {
+            "description": "User email",
+            "type": "string"
+          },
+          "password": {
+            "description": "plaintext password",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      }]
+    },
+    "returns": {
+      "allOf": [
+        {"$ref": "/rest/returns"},
+        {
+          "type": "object",
+          "properties": {
+            "auth_token": {
+              "type": "string",
+              "description": "auth_token only on success."
+            }
+          }
+        }]
+    }
+  }
+}

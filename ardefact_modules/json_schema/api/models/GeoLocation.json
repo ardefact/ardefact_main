@@ -1,0 +1,17 @@
+{
+  "id": "/models/GeoLocation",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "GEOJon coordinate: http://geojson.org/",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "coordinate": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}

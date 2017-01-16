@@ -1,0 +1,16 @@
+{
+  "id": "/models/TLocation",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Location + Time",
+  "type": "object",
+  "properties": {
+    "location": {
+      "$ref": "/models/Location"
+    },
+    "timestamp_ms": {
+      "type": "number",
+      "description": "UTC timestamp in ms"
+    }
+  },
+  "required": ["location", "timestamp_ms"]
+}

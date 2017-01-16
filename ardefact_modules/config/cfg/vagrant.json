@@ -1,0 +1,6 @@
+{
+  "ARDEFACT_WEB_PORT": 8080,
+  "ARDEFACT_MONGODB_CONNECT_URL": "mongodb://localhost:27017/test",
+  "ARDEFACT_WEB_URL_ROOT": "localhost",
+  "ARDEFACT_BCRYPT_WORK_FACTOR": 4
+}

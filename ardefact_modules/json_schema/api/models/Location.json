@@ -1,0 +1,37 @@
+{
+  "id": "/models/Location",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Location information such as GEO coordinate + Address.",
+  "type": "object",
+  "properties": {
+    "geo_location": {
+      "$ref": "/models/GeoLocation"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "building": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

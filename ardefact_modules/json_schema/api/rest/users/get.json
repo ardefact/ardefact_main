@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/rest/users/get",
+  "type": "object",
+  "description": "Look up one or more user by hids.",
+  "properties": {
+    "args": {
+      "allOf": [
+        {"$ref" : "/rest/input_args"},
+        {
+          "type": "object",
+          "properties": {
+            "hids": {
+              "type": "array",
+              "description": "user hids to look up.  If absent, will paginate through all users.",
+              "items": {
+                "$ref": "/meta/hid"
+              }
+            },
+            "pagination": {
+              "$ref": "/rest/pagination_request"
+            }
+          }
+        }
+      ]
+    },
+    "returns": {
+      "allOf": [
+        {"$ref": "/rest/returns"},
+        {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "Array of users",
+              "items": {
+                "$ref": "/models/User"
+              }
+            },
+            "pagination": {
+              "$ref": "/rest/pagination_response"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

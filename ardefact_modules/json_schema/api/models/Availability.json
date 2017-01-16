@@ -1,0 +1,12 @@
+{
+  "id": "/models/Availability",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "User's availability information",
+  "type": "object",
+  "properties": {
+    "available": {
+      "documentation": "is a user available right now?",
+      "type": "boolean"
+    }
+  }
+}

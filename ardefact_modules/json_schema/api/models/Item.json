@@ -1,0 +1,50 @@
+{
+  "id": "/models/Item",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "An item or a collection of items.",
+  "type": "object",
+  "properties": {
+    "hid": {
+      "$ref": "/meta/hid"
+    },
+    "original_poster_hid": {
+      "$ref": "/meta/hid"
+    },
+    "created_at": {
+      "$ref": "/models/TLocation"
+    },
+    "headline": {
+      "description": "Single sentence headline.",
+      "type": "string"
+    },
+    "detailed_info": {
+      "description": "A few paragraph about the item/cluster.",
+      "type": "string"
+    },
+    "prices": {
+      "description": "Reported prices.",
+      "type": "array",
+      "items": {
+        "$ref": "/models/Price"
+      }
+    },
+    "cluster_hid": {
+      "$ref": "/meta/hid"
+    },
+    "main_picture": {
+      "$ref": "/models/Image"
+    },
+    "pictures": {
+      "type": "array",
+      "items": {
+        "$ref": "/models/Image"
+      }
+    }
+  },
+  "required": ["hid",
+    "created_at",
+    "original_poster_hid",
+    "headline",
+    "detailed_info",
+    "main_picture"]
+}

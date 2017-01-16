@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/rest/search/search",
+  "type": "object",
+  "description": "General purpose search.",
+  "properties": {
+    "args": {
+      "allOf": [
+        {"$ref" : "/rest/input_args"},
+        {
+          "type": "object",
+          "properties": {
+            "filter": {
+              "type": "object",
+              "properties": {
+                "keywords": {
+                  "type": "string"
+                },
+                "location_keywords": {
+                  "type": "string"
+                },
+                "location": {
+                  "$ref": "/models/Location"
+                },
+                "kind": {
+                  "type": {
+                    "enum": ["item", "cluster", "user"]
+                  }
+                }
+              }
+            },
+            "pagination": {
+              "$ref": "/rest/pagination_request"
+            }
+          }
+        }
+      ]
+    },
+    "returns": {
+      "allOf": [
+        {"$ref": "/rest/returns"},
+        {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "Array of users",
+              "items": {
+                "$ref": "/models/User"
+              }
+            },
+            "pagination": {
+              "$ref": "/rest/pagination_response"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

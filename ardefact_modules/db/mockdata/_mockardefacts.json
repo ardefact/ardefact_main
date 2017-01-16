@@ -1,0 +1,98 @@
+[
+  {
+    "headline": "Soap",
+    "detailed_info": "Fancy soap for fancy people from fancy created_at (Australia).",
+    "created_at": {
+      "lat": -34.397,
+      "lng": 150.644
+    }
+  },
+  {
+    "headline": "Candles",
+    "detailed_info": "Candles on white background.  From Japan.",
+    "created_at": {
+      "lat": 31.385296,
+      "lng": 130.907593
+    }
+  },
+  {
+    "headline": "Bells",
+    "detailed_info": "Please Ring them.  They are from Tahim Island (Philippines).",
+    "created_at": {
+      "lat": 14.343145,
+      "lng": 121.233788
+    }
+  },
+  {
+    "headline": "Bay Rum",
+    "detailed_info": "Drink it! In Cambodia!",
+    "created_at": {
+      "lat": 10.499044,
+      "lng": 103.649772
+    }
+  },
+  {
+    "headline": "Pipe",
+    "detailed_info": "A pipe from Indonesia!",
+    "created_at": {
+      "lat": -5.691987,
+      "lng": 122.48283
+    }
+  },
+  {
+    "headline": "Buttons",
+    "detailed_info": "Colorful Indonesian buttons!",
+    "created_at": {
+      "lat": -5.158308,
+      "lng": 119.421387
+    }
+  },
+  {
+    "headline": "Towels",
+    "detailed_info": "Cambodian towels",
+    "created_at": {
+      "lat": 13.527309,
+      "lng": 105.954208
+    }
+  },
+  {
+    "headline": "Ditch that Itch Balmn",
+    "detailed_info": "Ancient Cambodian cures",
+    "created_at": {
+      "lat": 11.574279,
+      "lng": 104.912224
+    }
+  },
+  {
+    "headline": "Bowls",
+    "detailed_info": "Cambodian bowls",
+    "created_at": {
+      "lat": 11.282520,
+      "lng": 104.803905
+    }
+  },
+  {
+    "headline": "Lock and Keys",
+    "detailed_info": "Steal my heart with these Cambodian lock and keys",
+    "created_at": {
+      "lat": 10.565173,
+      "lng": 104.189014
+    }
+  },
+  {
+    "headline": "Rocks and shit",
+    "detailed_info": "From Japan!",
+    "created_at": {
+      "lat": 35.650043,
+      "lng": 139.729614
+    }
+  },
+  {
+    "headline": "Pretty feathers",
+    "detailed_info": "From some Japanese master, no doubt",
+    "created_at": {
+      "lat": 35.098282,
+      "lng": 136.889648
+    }
+  }
+]

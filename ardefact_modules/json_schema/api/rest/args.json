@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/rest/input_args",
+  "type": "object",
+  "description": "input variables",
+  "properties": {
+    "auth_token": {
+      "type":"string",
+      "description":"token to authenticate against"
+    }
+  }
+}

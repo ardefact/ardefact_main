@@ -1,0 +1,25 @@
+{
+  "name": "ardefact_config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/jshint/bin/jshint . && node_modules/mocha/bin/mocha --recursive test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardefact/config.git"
+  },
+  "author": "Lev Alexandrovich Neiman <lev@arefact.com>",
+  "license": "LicenseRef-LICENSE",
+  "bugs": {
+    "url": "https://github.com/ardefact/config/issues"
+  },
+  "homepage": "https://github.com/ardefact/config#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jshint": "^2.9.3",
+    "mocha": "^3.1.0",
+    "proxyquire": "^1.7.10"
+  }
+}

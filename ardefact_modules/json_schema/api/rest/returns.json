@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/rest/returns",
+  "type": "object",
+  "description": "Common items for returned items",
+  "properties": {
+    "error": {
+      "type": "object",
+      "description": "If not present, there was no error.",
+      "properties": {
+        "code": {
+          "type": "int",
+          "description": "Numeric error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable error message."
+        }
+      },
+      "required": ["code"]
+    },
+    "stats": {
+      "type": "object",
+      "description": "interesting statistics about the request",
+      "properties": {
+        "server_time_ms": {
+          "type": "int",
+          "description": "Amount of time server spent fulfilling this request."
+        }
+      },
+      "required": "server_time_ms"
+    }
+  },
+  "required": ["error", "stats"]
+}

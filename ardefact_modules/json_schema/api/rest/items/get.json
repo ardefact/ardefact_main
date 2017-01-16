@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/rest/items/get",
+  "type": "object",
+  "description": "Look up one or more items by hids.",
+  "properties": {
+    "args": {
+      "allOf": [
+        {"$ref" : "/rest/input_args"},
+        {
+          "type": "object",
+          "properties": {
+            "hids": {
+              "type": "array",
+              "description": "item hids to look up.  If absent, will paginate through all items.",
+              "items": {
+                "$ref": "/meta/hid"
+              }
+            },
+            "pagination": {
+              "$ref": "/rest/pagination_request"
+            }
+          }
+        }
+      ]
+    },
+    "returns": {
+      "allOf": [
+        {"$ref": "/rest/returns"},
+        {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "Array of items",
+              "items": {
+                "$ref": "/models/Item"
+              }
+            },
+            "pagination": {
+              "$ref": "/rest/pagination_response"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

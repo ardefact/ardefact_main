@@ -1,0 +1,20 @@
+{
+  "id": "/models/Cluster",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "A collection of items close in space (and time, hopefully)",
+  "type": "object",
+  "properties": {
+    "hid": {
+      "$ref": "/meta/hid"
+    },
+    "created_at": {
+      "$ref": "/models/TLocation"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "/meta/hid"
+      }
+    }
+  }
+}

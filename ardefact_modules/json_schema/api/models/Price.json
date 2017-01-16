@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/models/Price",
+  "type": "object",
+  "description": "A tuple of number and currency",
+  "properties": {
+    "amount": {
+      "type":"number",
+      "description": "Numeric value of the cash."
+    },
+    "range": {
+      "type": "number",
+      "description": "+,- range"
+    },
+    "currency": {
+      "description": "Currency used.  Must conform to http://www.iso.org/iso/home/standards/currency_codes.htm",
+      "type": "string"
+    },
+    "reported_by": {
+      "description": "hid of the traveler who reported the price.",
+      "type": "string"
+    }
+  }
+}

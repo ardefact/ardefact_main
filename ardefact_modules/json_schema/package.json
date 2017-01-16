@@ -1,0 +1,30 @@
+{
+  "name": "ardefact_json_schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/jshint/bin/jshint . && node_modules/mocha/bin/mocha --recursive test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardefact/json_schema.git"
+  },
+  "author": "Lev Alexandrovich Neiman <lev@ardefact.com>",
+  "license": "LicenseRef-LICENSE",
+  "bugs": {
+    "url": "https://github.com/ardefact/json_schema/issues"
+  },
+  "homepage": "https://github.com/ardefact/json_schema#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "commander": "^2.9.0",
+    "handlebars": "^4.0.5",
+    "jshint": "^2.9.3",
+    "json-schema-docs-generator": "git@github.com:lan17/json-schema-docs-generator.git#STUFF",
+    "jsonschema": "^1.1.0",
+    "lodash": "^4.16.1",
+    "mocha": "^3.0.2",
+    "promise_timer": "^1.0.0"
+  }
+}

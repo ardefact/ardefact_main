@@ -1,0 +1,6 @@
+{
+  "id": "/meta/hid",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Hashed id",
+  "type": "string"
+}

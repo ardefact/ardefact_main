@@ -1,0 +1,50 @@
+{
+  "id": "/models/User",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Traveler Schema.",
+  "type": "object",
+  "properties": {
+    "hid": {
+      "$ref": "/meta/hid"
+    },
+    "email": {
+      "description": "user's email address.",
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Unique user handle"
+    },
+    "title": {
+      "description": "Head line fo the user.  Such as 'Shogun'",
+      "type": "string"
+    },
+    "bio": {
+      "description": "A more detailed traveler's information",
+      "type": "string"
+    },
+    "main_picture": {
+      "$ref": "/models/Image"
+    },
+    "availability": {
+      "$ref": "/models/Availability"
+    },
+    "last_known_tlocations": {
+      "type":"array",
+      "description": "An array of last known locations",
+      "items": {
+        "$ref": "/models/TLocation"
+      }
+    }
+  },
+  "required": [
+    "hid",
+    "email"
+  ]
+}

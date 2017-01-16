@@ -1,0 +1,24 @@
+{
+  "id": "/models/Image",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Image metadata",
+  "type": "object",
+  "properties": {
+    "uris": {
+      "description": "Image suffixes.  `thumbnail` is required.",
+      "type": "object",
+      "properties": {
+        "thumbnails": {
+          "description": "x_y -> URI suffix",
+          "type": "object"
+        },
+        "full": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "full"
+  ]
+}

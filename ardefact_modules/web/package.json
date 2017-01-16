@@ -1,0 +1,27 @@
+{
+  "name": "ardefact_web",
+  "version": "1.0.0",
+  "description": "Web server/content",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/jshint/bin/jshint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardefact/web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ardefact/web/issues"
+  },
+  "dependencies": {
+    "ardefact_config": "git@github.com:ardefact/config.git",
+    "ardefact_json_schema": "git@github.com:ardefact/json_schema.git",
+    "ardefat_utils": "git@github.com:ardefact/utils.git",
+    "express": "^4.14.0",
+    "express-session": "^1.13.0",
+    "jshint": "^2.9.3"
+  },
+  "homepage": "https://github.com/ardefact/web#readme"
+}

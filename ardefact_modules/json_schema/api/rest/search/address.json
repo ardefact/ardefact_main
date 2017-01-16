@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/rest/search/address",
+  "type": "object",
+  "description": "Search for possible addresses based on keywords.",
+  "properties": {
+    "args": {
+      "allOf": [
+        {"$ref": "/rest/input_args"},
+        {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "User entered keywords"
+            }
+          }
+        }
+      ]
+    },
+    "returns": {
+      "allOf": [
+        {"$ref": "/rest/returns"},
+        {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type":"array",
+              "description": "Array of Address objects.",
+              "items": {
+                "$ref": "/models/Location"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
