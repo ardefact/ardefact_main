@@ -5,8 +5,8 @@ var Bcrypt = require('bcrypt'),
     Q = require('q'),
     _ = require('lodash');
 
-var ArdefactDatabaseBridge = require('ardefact_database_bridge'),
-    ArdefactUtils = require('ardefact_utils');
+var ArdefactDatabaseBridge = require('db'),
+    ArdefactUtils = require('utils');
 
 var RestUtils = require('./../RestUtils');
 
@@ -60,7 +60,7 @@ function verifyAuthToken(authTokenHid, db) {
     const userHid = authTokenParts[0];
     const authToken = authTokenParts[1];
 
-    const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db)
+    const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
 
     return UserModel.findByHid(userHid)
       .then(user => authToken === user.auth_token);

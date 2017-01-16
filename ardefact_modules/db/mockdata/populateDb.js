@@ -3,7 +3,7 @@
 var _             = require('lodash'),
     Q             = require('q'),
     Mongoose      = require('mongoose'),
-    ArdefactUtils = require('ardefact_utils');
+    ArdefactUtils = require('utils');
 
 var DBHelper = require('../src/MongoDbConnectionHelper');
 

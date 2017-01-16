@@ -3,7 +3,7 @@
 var Bunyan = require('bunyan'),
     _ = require('lodash');
 
-var ArdefactConfig = require('ardefact_config');
+var ArdefactConfig = require('config');
 
 function createLogger(name, options) {
   if (!options) {

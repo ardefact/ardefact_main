@@ -5,8 +5,8 @@ var MongoClient = require('mongodb').MongoClient,
     MongooseAutoIncrement = require('mongoose-auto-increment'),
     Q           = require('q');
 
-var ArdefactUtils = require('ardefact_utils'),
-    ArdefactConfig = require('ardefact_config');
+var ArdefactUtils = require('utils'),
+    ArdefactConfig = require('config');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 

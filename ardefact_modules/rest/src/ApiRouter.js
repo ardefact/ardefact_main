@@ -5,8 +5,8 @@ var Express = require('express'),
     Uuid = require('uuid'),
     Bcrypt = require('bcrypt');
 
-var ArdefactDatabaseBridge = require('ardefact_database_bridge'),
-    ArdefactUtils = require('ardefact_utils');
+var ArdefactDatabaseBridge = require('db'),
+    ArdefactUtils = require('utils');
 
 var RestUtils = require('./RestUtils');
 

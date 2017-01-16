@@ -5,7 +5,7 @@ var Hashids  = require('hashids'),
 
 Q.longStackSupport = true;
 
-var ArdefactUtils = require('ardefact_utils');
+var ArdefactUtils = require('utils');
 
 var PopulateDb = require('../mockdata/populateDb'),
     MockUsers  = require('../mockdata/mockusers.json'),

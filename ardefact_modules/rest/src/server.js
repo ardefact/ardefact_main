@@ -2,8 +2,8 @@
 
 var Express = require('express');
 
-var ArdefactUtils = require('ardefact_utils'),
-    ArdefactDatabaseBridge = require('ardefact_database_bridge');
+var ArdefactUtils = require('utils'),
+    ArdefactDatabaseBridge = require('db');
 
 var ApiRouter = require('./ApiRouter');
 

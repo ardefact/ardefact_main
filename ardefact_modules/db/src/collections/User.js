@@ -9,8 +9,8 @@ var Mongoose             = require('mongoose'),
     AutoIncrement        = require('mongoose-auto-increment'),
     createMongooseSchema = require('json-schema-to-mongoose');
 
-var ArdefactJSONSchemas = require('ardefact_json_schema'),
-    ArdefactUtils = require('ardefact_utils');
+var ArdefactJSONSchemas = require('json_schema'),
+    ArdefactUtils = require('utils');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 

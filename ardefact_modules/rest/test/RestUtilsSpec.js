@@ -2,7 +2,7 @@
 
 var Chai = require('chai');
 
-var ArdefactJsonSchema = require('ardefact_json_schema');
+var ArdefactJsonSchema = require('json_schema');
 
 var RestUtils = require('../src/RestUtils');
 
