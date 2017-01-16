@@ -33,6 +33,9 @@ function makeSchema() {
     {original_poster_hid: "hashed"},
     {background: true});
   mongooseSchema.index(
+    {"created_at.timestamp_ms": 1},
+    {backgroudn: true});
+  mongooseSchema.index(
     {cluster_hid: "hashed"},
     {background:true});
 

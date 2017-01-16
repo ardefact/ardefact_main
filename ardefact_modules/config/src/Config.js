@@ -10,6 +10,7 @@ const CONFIG_VARS = {
   ARDEFACT_DEBUG_MODE          : "ARDEFACT_DEBUG_MODE",
   ARDEFACT_MONGODB_CONNECT_URL : "ARDEFACT_MONGODB_CONNECT_URL",
   ARDEFACT_WEB_URL_ROOT        : "ARDEFACT_WEB_URL_ROOT",
+  ARDEFACT_REST_URL_ROOT       : "ARDEFACT_REST_URL_ROOT",
   ARDEFACT_BCRYPT_WORK_FACTOR  : "ARDEFACT_BCRYPT_WORK_FACTOR",
   ARDEFACT_WEB_PORT            : "ARDEFACT_WEB_PORT",
 };
@@ -17,7 +18,7 @@ const CONFIG_VARS = {
 function getMode() {
   const mode = process.env[CONFIG_VARS.ARDEFACT_RUN_MODE];
   if (!mode) {
-    return "vagrant";
+    return "dev";
   }
   return mode;
 }

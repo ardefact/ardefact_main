@@ -95,6 +95,9 @@ Vagrant.configure(2) do |config|
       ardefactlocal.vm.hostname = hostname
       # host-only network interface
       ardefactlocal.vm.network "private_network", ip: guest_ip
+
+      config.vm.network "forwarded_port", guest: 27017, host: 27017
+
   end
 
 

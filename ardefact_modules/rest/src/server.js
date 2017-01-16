@@ -35,12 +35,6 @@ function makeRestServer(args, options) {
     });
 }
 
-function makeRestRouter() {
-  return ArdefactDatabaseBridge.connect()
-    .then(db => ApiRouter.makeRouter(db));
-}
-
 module.exports = {
   makeRestServer: makeRestServer,
-  makeRestRouter: makeRestRouter,
 };

@@ -71,5 +71,6 @@ function verifyAuthToken(authTokenHid, db) {
 }
 
 module.exports = {
-  handleRequest: handleRequest
+  handleRequest: handleRequest,
+  verifyAuthToken: verifyAuthToken,
 };
