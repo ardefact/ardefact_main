@@ -1,15 +1,21 @@
 'use strict';
 
-var ArdefactDatabaseBridge = require('ardefact_database_bridge');
+var ArdefactDatabaseBridge = require('db'),
+    ArdefactUtils = require('utils'),
+    RestUtils = require('./../RestUtils');
 
-var RestUtils = require('./../RestUtils');
+const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
-function handleRequest(req, res, db) {
+function get_user(req, res, db) {
+  // TODO implement this
+  const startTimeMs = Date.now();
 
+  LOG.debug(req.path);
 
+  RestUtils.writeSuccess(res, 200, {}, startTimeMs);
 }
 
 
 module.exports = {
-  handleRequest: handleRequest
+  get_user: get_user
 };

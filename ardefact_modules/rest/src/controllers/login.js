@@ -13,7 +13,6 @@ var RestUtils = require('./../RestUtils');
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
 function handleRequest(req, res, db) {
-  const startTimeMs = Date.now();
   const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
   LOG.debug(`Looking up user by email ${req.body.email}`);
   UserModel.findByEmail(req.body.email)
@@ -25,23 +24,41 @@ function handleRequest(req, res, db) {
           .then(success => {
             if (success) {
               if (user.auth_token) {
-                RestUtils.writeSuccess(res, 200,  {auth_token : user.auth_token}, startTimeMs);
+                RestUtils.writeSuccess(
+                  res,
+                  200,
+                  {
+                    auth_token : user.auth_token,
+                    hid: user.hid,
+                  },
+                  startTimeMs
+                );
               } else {
                 user.auth_token = Uuid.v4();
                 user.save()
-                  .then(() => RestUtils.writeSuccess(res, 200, {auth_token : user.auth_token}, startTimeMs))
-                  .catch(error => RestUtils.writeError(res, 500, "Couldn't save auth token", startTimeMs));
+                  .then(() => {
+                    RestUtils.writeSuccess(
+                      res,
+                      200,
+                      {
+                        auth_token : user.auth_token,
+                        hid: user.hid,
+                      },
+                      startTimeMs
+                    );
+                  })
+                  .catch(error => RestUtils.writeError(req, res, 500, "Couldn't save auth token"));
               }
             } else {
-              RestUtils.writeError(res, 404, "invalid email or password", startTimeMs);
+              RestUtils.writeError(req, res, 404, "Invalid email or password");
             }
           });
 
       } else {
-        RestUtils.writeError(res, 404,  "invalid email or password", startTimeMs);
+        RestUtils.writeError(req, res, 404,  "invalid email or password");
       }
     })
-    .catch(error => RestUtils.writeError(res, 500, error, startTimeMs));
+    .catch(error => RestUtils.writeError(req, res, 500, error));
 }
 
 /**
@@ -70,7 +87,13 @@ function verifyAuthToken(authTokenHid, db) {
   }
 }
 
+function validateRequest_validUser(req, res, db) {
+
+
+}
+
 module.exports = {
   handleRequest: handleRequest,
   verifyAuthToken: verifyAuthToken,
+  validateRequest_validUser: validateRequest_validUser,
 };

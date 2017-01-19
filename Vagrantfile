@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get update
 
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-    sudo apt-get install -y build-essential nodejs git vim postgresql postgresql-contrib pgadmin3 default-jre zsh mongodb-org ack-grep
+    sudo apt-get install -y build-essential nodejs git vim pgadmin3 default-jre zsh mongodb-org ack-grep
     npm install -g bower
     npm install -g jshint
     npm install -g bunyan

@@ -19,14 +19,14 @@ function makeResult(errorCode, errorMessage, startTimeMs, results) {
   }, results);
 }
 
-const writeError = (res, httpCode, msg, startTimeMs) => {
+const writeError = (req, res, httpCode, msg) => {
   res.writeHead(httpCode, JSON_HEADERS);
-  res.end(JSON.stringify(makeResult(1, JSON.stringify(msg), startTimeMs)));
+  res.end(JSON.stringify(makeResult(1, JSON.stringify(msg), req.startTimeMs)));
 };
 
-const writeSuccess = (res, httpCode, results, startTimeMs) => {
+const writeSuccess = (req, res, httpCode, results) => {
   res.writeHead(httpCode, JSON_HEADERS);
-  res.end(JSON.stringify(makeResult(0, undefined, startTimeMs, results)));
+  res.end(JSON.stringify(makeResult(0, undefined, req.startTimeMs, results)));
 };
 
 module.exports = {

@@ -4,9 +4,9 @@
   "description": "Pagination request",
   "type": "object",
   "properties":{
-    "start": {
-      "type": "int",
-      "description": "Start of this page.  Where exactly start is depends on the context."
+    "after": {
+      "type": "string",
+      "description": "return items after this one."
     },
     "count": {
       "type": "int",
