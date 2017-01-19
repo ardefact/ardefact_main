@@ -3,7 +3,8 @@
 var _ = require('lodash');
 
 var ArdefactDatabaseBridge = require('db'),
-    ArdefactUtils = require('utils');
+    ArdefactUtils = require('utils'),
+    LoginController = require('./login');
 
 var RestUtils = require('./../RestUtils');
 
@@ -56,5 +57,5 @@ function get_recent(req, res, db) {
 
 module.exports = {
   get_item: get_item,
-  get_recent: get_recent,
+  get_recent: (req, res, db) => LoginController.validateRequest_validUser(req, res, db, get_recent),
 };

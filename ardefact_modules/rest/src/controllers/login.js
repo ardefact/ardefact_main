@@ -17,37 +17,43 @@ function handleRequest(req, res, db) {
   LOG.debug(`Looking up user by email ${req.body.email}`);
   UserModel.findByEmail(req.body.email)
     .then(user => {
+      LOG.debug(`Found user ${user}`);
       if (user) {
         const givenPassword = req.body.password;
 
         user.checkPassword(givenPassword)
           .then(success => {
             if (success) {
+              LOG.debug(`user ${user} provided right password`);
               if (user.auth_token) {
                 RestUtils.writeSuccess(
+                  req,
                   res,
                   200,
                   {
                     auth_token : user.auth_token,
                     hid: user.hid,
-                  },
-                  startTimeMs
+                  }
                 );
               } else {
+                LOG.debug("saving auth token");
                 user.auth_token = Uuid.v4();
                 user.save()
                   .then(() => {
                     RestUtils.writeSuccess(
+                      req,
                       res,
                       200,
                       {
                         auth_token : user.auth_token,
                         hid: user.hid,
-                      },
-                      startTimeMs
+                      }
                     );
                   })
-                  .catch(error => RestUtils.writeError(req, res, 500, "Couldn't save auth token"));
+                  .catch(error => {
+                    LOG.error(error);
+                    RestUtils.writeError(req, res, 500, "Couldn't save auth token");
+                  });
               }
             } else {
               RestUtils.writeError(req, res, 404, "Invalid email or password");
@@ -87,9 +93,16 @@ function verifyAuthToken(authTokenHid, db) {
   }
 }
 
-function validateRequest_validUser(req, res, db) {
-
-
+function validateRequest_validUser(req, res, db, next) {
+  verifyAuthToken(req.body.auth_token, db)
+    .then(valid => {
+      if (valid) {
+        next(req, res, db);
+      } else {
+        RestUtils.writeError(req, res, 403, "Bad auth token");
+      }
+    })
+    .catch(error => RestUtils.writeError(req, res, 403, error));
 }
 
 module.exports = {
