@@ -3,7 +3,8 @@
 var Express = require('express');
 
 var ArdefactUtils = require('utils'),
-    ArdefactDatabaseBridge = require('db');
+    ArdefactDatabaseBridge = require('db'),
+    ArdefactConfig = require('config');
 
 var ApiRouter = require('./ApiRouter');
 
@@ -24,6 +25,10 @@ function makeRestServer(args, options) {
 
       const app = Express();
       app.use(require('body-parser').json());
+      // use ur encoded parameters in debug mode because we run rest and web server on different ports
+      if (ArdefactConfig.isDebugMode()) {
+        app.use(require('body-parser').urlencoded());
+      }
       app.use(ApiRouter.makeRouter(db));
 
       const server = app.listen(cliArgs.port, () => {
