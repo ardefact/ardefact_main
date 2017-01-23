@@ -5,7 +5,7 @@ var ApiRouter = require('./src/ApiRouter');
 
 module.exports = {
   start : () => Server.makeRestServer(process.argv),
-  makeRestRouter: ApiRouter.makeRouter
+  makeRestRouter: ApiRouter.makeRouter,
 };
 
 if (!module.parent) {

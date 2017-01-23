@@ -8,15 +8,16 @@ function makeResult(errorCode, errorMessage, startTimeMs, results) {
   if (!results) {
     results = {};
   }
-  return _.extend({
+  return {
     error: {
       code: errorCode,
       message: errorMessage
     },
     stats: {
       server_time_ms: Date.now() - startTimeMs
-    }
-  }, results);
+    },
+    results: results
+  };
 }
 
 const writeError = (req, res, httpCode, msg) => {

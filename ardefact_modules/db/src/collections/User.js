@@ -40,9 +40,6 @@ function makeSchema() {
     {email : 1},
     {unique : true, background : true});
   mongooseSchema.index(
-    {auth_token: "hashed"},
-    {unique: true, background: true});
-  mongooseSchema.index(
     {display_name: 1},
     {unique: true, background:true}
   );
@@ -74,7 +71,6 @@ function makeSchema() {
     return deferred.promise;
   };
 
-
   // statics
   mongooseSchema.statics.findByHid = function(hid) {
     const id = hashids.decode(hid)[0];
@@ -87,14 +83,6 @@ function makeSchema() {
 
   mongooseSchema.statics.findByDisplayName = function(displayName) {
     return this.findOne({display_name:displayName}).exec();
-  };
-
-  mongooseSchema.statics.findByAuthToken = function(authToken, cb) {
-    return this.find({auth_token: authToken})
-      .exec((err, user) => {
-        if (err) cb(err);
-        else cb(undefined, user);
-      });
   };
 
   return mongooseSchema;

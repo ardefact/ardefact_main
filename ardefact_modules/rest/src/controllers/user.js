@@ -1,19 +1,35 @@
 'use strict';
 
+var Q = require('q');
+
 var ArdefactDatabaseBridge = require('db'),
     ArdefactUtils = require('utils'),
-    RestUtils = require('./../RestUtils');
+    RestUtils = require('./../RestUtils'),
+    Validators = require('./../validators/validators');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
 function get_user(req, res, db) {
-  // TODO implement this
-  const startTimeMs = Date.now();
-
-  LOG.debug(req.path);
-
-  RestUtils.writeSuccess(res, 200, {}, startTimeMs);
+  const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
+  if (!req.body.hid) {
+    RestUtils.writeError(req, res, 400, 'no hid given');
+    return Q.resolve();
+  }  else {
+    return UserModel.findByHid(req.body.hid)
+      .then(user => {
+        if (user) {
+          RestUtils.writeSuccess(req, res, 200, user);
+        } else {
+          RestUtils.writeError(req, res, 404, "Couldn't find user");
+        }
+      });
+  }
 }
+
+get_user = Validators.wrapEndpointWithValidators(
+  get_user,
+  [Validators.validUser]
+);
 
 
 module.exports = {

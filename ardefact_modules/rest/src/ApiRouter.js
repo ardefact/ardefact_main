@@ -25,8 +25,9 @@ function makeExpressRouter(db) {
   const curryHandler = handler => (req, res) => handler(req, res, db);
 
   // record start time
-  restRouter.all((req, res, next) => {
+  restRouter.use((req, res, next) => {
     req.startTimeMs = Date.now();
+    next();
   });
 
   restRouter.post('/login', makeEndPointRouter('./controllers/login'));

@@ -1,7 +1,6 @@
 'use strict';
 
-var Bcrypt = require('bcrypt'),
-    Uuid = require('uuid'),
+var Uuid = require('uuid'),
     Q = require('q'),
     _ = require('lodash');
 
@@ -17,14 +16,12 @@ function handleRequest(req, res, db) {
   LOG.debug(`Looking up user by email ${req.body.email}`);
   UserModel.findByEmail(req.body.email)
     .then(user => {
-      LOG.debug(`Found user ${user}`);
       if (user) {
         const givenPassword = req.body.password;
 
         user.checkPassword(givenPassword)
           .then(success => {
             if (success) {
-              LOG.debug(`user ${user} provided right password`);
               if (user.auth_token) {
                 RestUtils.writeSuccess(
                   req,
@@ -64,7 +61,7 @@ function handleRequest(req, res, db) {
         RestUtils.writeError(req, res, 404,  "invalid email or password");
       }
     })
-    .catch(error => RestUtils.writeError(req, res, 500, error));
+    .catch(error => RestUtils.writeError(req, res, 500, JSON.stringify(error)));
 }
 
 /**
@@ -86,27 +83,21 @@ function verifyAuthToken(authTokenHid, db) {
     const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
 
     return UserModel.findByHid(userHid)
-      .then(user => authToken === user.auth_token);
+      .then(user => {
+        if (user) {
+          return authToken === user.auth_token
+        } else {
+          return Q.reject("wrong hid");
+        }
+      });
 
   } else {
     return Q.reject("no token given");
   }
 }
 
-function validateRequest_validUser(req, res, db, next) {
-  verifyAuthToken(req.body.auth_token, db)
-    .then(valid => {
-      if (valid) {
-        next(req, res, db);
-      } else {
-        RestUtils.writeError(req, res, 403, "Bad auth token");
-      }
-    })
-    .catch(error => RestUtils.writeError(req, res, 403, error));
-}
 
 module.exports = {
   handleRequest: handleRequest,
   verifyAuthToken: verifyAuthToken,
-  validateRequest_validUser: validateRequest_validUser,
 };
