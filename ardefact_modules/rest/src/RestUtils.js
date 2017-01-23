@@ -2,7 +2,16 @@
 
 var _ = require('lodash');
 
-const JSON_HEADERS = {'Content-Type': 'application/json'};
+var ArdefactConfig = require('config');
+
+var JSON_HEADERS =
+      {
+        'Content-Type': 'application/json',
+      };
+
+if (ArdefactConfig.isDebugMode()) {
+  JSON_HEADERS['Access-Control-Allow-Origin'] = '*';
+}
 
 function makeResult(errorCode, errorMessage, startTimeMs, results) {
   if (!results) {
