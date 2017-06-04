@@ -15,11 +15,11 @@ function wrapEndpointWithValidators(endpoint, validators) {
         LOG.error(error);
       })
       .done();
-  }
+  };
 }
 
 function validUser(args) {
-  return require('./../controllers/login').verifyAuthToken(args.req.body.auth_token, args.db)
+  return require('db').User.verifyAuthToken(args.req.body.auth_token, args.db)
     .then(valid => {
       if (valid) {
         return args;

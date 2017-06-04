@@ -35,14 +35,14 @@ describe('Config tests.', function(){
     done();
   });
 
-  it('mode always defaulst to vagrant.', function(done) {
+  it('mode always defaults to dev.', function(done) {
     process.env[Config.CONFIG_VARS.ARDEFACT_RUN_MODE] = 'foo';
 
     Chai.expect(Config._test.getMode()).to.equal('foo');
 
     delete process.env[Config.CONFIG_VARS.ARDEFACT_RUN_MODE];
 
-    Chai.expect(Config._test.getMode()).to.equal('vagrant');
+    Chai.expect(Config._test.getMode()).to.equal('dev');
 
     done();
   });

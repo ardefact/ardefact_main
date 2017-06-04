@@ -17,10 +17,10 @@ function adaptItemForRest(mongooseItem) {
     detailed_info: mongooseItem.detailed_info,
     pictures: mongooseItem.pictures,
     created_at: mongooseItem.created_at,
-  }
+  };
 }
 
-function get_item(req, res, db) {
+function _get_item(req, res, db) {
   const ItemModel = ArdefactDatabaseBridge.collections.Item.getModel(db);
   LOG.debug(`Looking up item by hid ${req.body}`);
   if (!req.body.hid) {
@@ -40,13 +40,13 @@ function get_item(req, res, db) {
   }
 }
 
-get_item = Validators.wrapEndpointWithValidators(
-  get_item,
+const get_item = Validators.wrapEndpointWithValidators(
+  _get_item,
   [Validators.validUser]
 );
 
 
-function get_recent(req, res, db) {
+function _get_recent(req, res, db) {
   const ItemModel = ArdefactDatabaseBridge.collections.Item.getModel(db);
 
   var condition = {};
@@ -74,8 +74,8 @@ function get_recent(req, res, db) {
     .catch(error => RestUtils.writeError(req, res, 500, error));
 }
 
-get_recent = Validators.wrapEndpointWithValidators(
-  get_recent,
+const get_recent = Validators.wrapEndpointWithValidators(
+  _get_recent,
   [Validators.validUser]
 );
 

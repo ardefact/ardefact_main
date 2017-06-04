@@ -25,7 +25,7 @@ function makeRestServer(args, options) {
 
       const app = Express();
       app.use(require('body-parser').json());
-      // use ur encoded parameters in debug mode because we run rest and web server on different ports
+      // use url encoded parameters in debug mode because we run rest and web server on different ports
       if (ArdefactConfig.isDebugMode()) {
         app.use(require('body-parser').urlencoded());
       }

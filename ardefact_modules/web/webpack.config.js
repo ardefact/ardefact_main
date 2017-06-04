@@ -4,8 +4,12 @@ const path = require('path');
 module.exports = {
   entry: "./entry.js",
   output: {
-    path: '.',
-    filename: "bundle.js"
+    path: `${__dirname}/www2`,
+    filename: "bundle.js",
+    // export itself to a global var
+    libraryTarget: "var",
+    // name of the global var: "Foo"
+    library: "JSFuncs"
   },
   module: {
     loaders: [

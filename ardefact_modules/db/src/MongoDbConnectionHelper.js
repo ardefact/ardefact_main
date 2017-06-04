@@ -55,10 +55,15 @@ function getMongooseConnection(uri, options) {
   }
   const mongoose = options.mongooseInstance ?
     options.mongooseInstance : new Mongoose.Mongoose();
-  mongoose.connect(uri, options);
 
   // plugin q as promise library
   mongoose.Promise = Q.Promise;
+
+  mongoose.connect(uri, options, error => {
+    if(error) {
+      LOG.error(error);
+    }
+  });
 
   const db = mongoose.connection;
 

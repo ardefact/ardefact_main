@@ -9,7 +9,7 @@ var ArdefactDatabaseBridge = require('db'),
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
-function get_user(req, res, db) {
+function _get_user(req, res, db) {
   const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
   if (!req.body.hid) {
     RestUtils.writeError(req, res, 400, 'no hid given');
@@ -26,8 +26,8 @@ function get_user(req, res, db) {
   }
 }
 
-get_user = Validators.wrapEndpointWithValidators(
-  get_user,
+const get_user = Validators.wrapEndpointWithValidators(
+  _get_user,
   [Validators.validUser]
 );
 

@@ -24,6 +24,9 @@ function makeExpressRouter(db) {
 
   const curryHandler = handler => (req, res) => handler(req, res, db);
 
+
+
+
   // record start time
   restRouter.use((req, res, next) => {
     req.startTimeMs = Date.now();

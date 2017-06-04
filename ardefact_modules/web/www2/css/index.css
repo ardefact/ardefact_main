@@ -1,0 +1,1946 @@
+
+
+/******** Basic Elements ********/
+
+body {
+    width: 100% ;
+    height: 100% ;
+    background-color: #FBF9F2 ;
+    position: relative ;
+    font-family: "helvetica" ;
+    z-index: 0 ;
+}
+
+a {
+    outline: none ;
+    text-decoration: none ;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: #173876 ;
+}
+
+.linkUnderline:hover {
+    text-decoration: underline !important;
+}
+
+.linkTag {
+    display: block ;
+    float: left ;
+    margin-right: 6px ;
+}
+
+/******** ClearFix ********/
+
+.clearFix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearFix {
+    display: inline-block;
+}
+
+html[xmlns] .clearFix {
+    display: block;
+}
+
+* html .clearFix {
+    height: 1%;
+}
+
+
+/******** Universal Text Field ********/
+
+.universalTextFieldSettings {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    display: inline ;
+    background-position: 8px 2px;
+    background-repeat: no-repeat ;
+    background-color: transparent ;
+    padding-right: 6px ;
+    padding-bottom: 4px ;
+    padding-left: 32px ;
+    margin-top: 0px ;
+    margin-right: 2px ;
+    margin-bottom: 4px ;
+    margin-left: 2px ;
+    border-top: 0 ;
+    border-right: 0 ;
+    border-left: 0 ;
+    border-bottom: 2px dotted #ccc ;
+    overflow: visible ;
+    -webkit-transition-duration: 0.25s ;
+    transition-duration: 0.25s ;
+    width: 10% ;
+    color: #006cff ;
+    cursor: text;
+    font-size: 18px ;
+}
+
+.universalTextFieldSettings:focus {
+    border-bottom: 2px dotted #999 ;
+}
+
+/********/
+
+@media screen and (max-width: 800px) {
+    .universalTextFieldSettings {
+        font-size: 16px !important ;
+        padding-top: 8px !important ;
+        background-position: 8px 8px !important ;
+        margin-bottom: 0px !important ;
+        margin-top: 0px !important ;
+    }
+}
+
+
+/******** Navigation Bar ********/
+
+.navBar {
+    height: 64px ;
+    width: 100% ;
+    background-color: #FBF9F2 ;
+    position: fixed ;
+    z-index: 400 ;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1) ;
+}
+
+.navBar_links_left {
+    float: left;
+    margin-left: 10% ;
+}
+
+.navBar_links_right {
+    float: right;
+    margin-right: 10% ;
+}
+
+.navBar_links_left_textArea {
+    width: 108px ;
+    float: left ;
+}
+
+.navBar_links_right_textArea {
+    padding-left: 16px ;
+    float: right ;
+}
+
+.navBar_links_logo {
+    float: left ;
+    margin-top: 16px ;
+    margin-right: 16px ;
+    outline: 0 ;
+}
+
+.navBar_links_text {
+    font-size: 18px ;
+    text-align: center ;
+    color: #333 ;
+    padding-top: 24px ;
+}
+
+.navBar_links_text a {
+    border-bottom: 2px solid transparent ;
+    padding-bottom: 4px ;
+    text-decoration: none;
+    -webkit-transition: border-bottom 0.5s ease-in-out;
+    -moz-transition: border-bottom 0.5s ease-in-out;
+    -ms-transition: border-bottom 0.5s ease-in-out;
+    -o-transition: border-bottom 0.5s ease-in-out;
+    transition: border-bottom 0.5s ease-in-out;
+}
+
+.navBar_links_text a:hover {
+    border-bottom: 2px solid #ccc ;
+    padding-bottom: 4px ;
+    -webkit-transition: border-bottom 0.25s ease-in-out;
+    -moz-transition: border-bottom 0.25s ease-in-out;
+    -ms-transition: border-bottom 0.25s ease-in-out;
+    -o-transition: border-bottom 0.25s ease-in-out;
+    transition: border-bottom 0.25s ease-in-out;
+}
+
+.currentPage a:link, .currentPage a:visited, .currentPage a:active{
+    border-bottom: 2px solid #173876 ;
+    padding-bottom: 4px ;
+}
+
+/********/
+
+@media screen and (max-width: 800px) {
+    .navBar {
+        height: 56px !important ;
+    }
+    .navBar_links_logo {
+        margin-top: 12px !important;
+        margin-right: 16px !important;
+    }
+    .navBar_links_logo img {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    .navBar_links_text {
+        font-size: 16px !important;
+        padding-top: 18px !important;
+    }
+    .navBar_links_left_textArea {
+        width: 88px !important;
+    }
+}
+
+
+/******** Found Button ********/
+
+#foundButtonArea {
+    margin-top: 12px ;
+    display: block ;
+    clear: both ;
+    position: relative ;
+    box-shadow:
+            0px 2px 0px 0px rgba(0,0,0,0.2) ;
+}
+
+button#foundButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: #006cff;
+    border: none ;
+    padding: 10px 14px;
+    color: white ;
+    text-align: center;
+    width: 100% ;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+button#foundButton:hover {
+    background-color: #ffae7d;
+}
+
+/*
+button#foundButton:hover {
+    animation: 3s multicolor linear ;
+    animation-iteration-count: infinite;
+}
+
+@keyframes multicolor {
+    0% {
+        background-color: #006cff ;
+    }
+    13% {
+        background-color: #6b3c86 ;
+    }
+    25% {
+        background-color: #d14274 ;
+    }
+    38% {
+        background-color: #e96161 ;
+    }
+    50% {
+        background-color: #ffae7d ;
+    }
+    63% {
+        background-color: #e96161 ;
+    }
+    75% {
+        background-color: #d14274 ;
+    }
+    88% {
+        background-color: #6b3c86 ;
+    }
+    100% {
+        background-color: #006cff ;
+    }
+}
+*/
+
+#addToMyMapButtonArea {
+    margin-top: 12px ;
+    position: absolute ;
+    top: 0 ;
+    left: 10% ;
+    z-index: 200 ;
+    box-shadow:
+            0px 2px 0px 0px rgba(0,0,0,0.2) ;
+}
+
+button#addToMyMapButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: #006cff;
+    border: none ;
+    padding: 10px 14px;
+    color: white ;
+    text-align: center;
+    width: 100% ;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+/********/
+
+@media screen and (max-width: 800px) {
+    #foundButtonArea {
+        margin-top: 12px ;
+    }
+    button#foundButton {
+        padding: 6px 8px !important;
+        font-size: 16px !important;
+    }
+}
+
+
+/******** Map ********/
+
+.halfSecondTransition {
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+.aboveMapPadding {
+    padding-top: 64px ;
+}
+
+.worldMap, #worldMap, .itemMap, #itemMap, .clusterMap, #clusterMap  {
+    height: 240px ;
+}
+
+/*
+.worldMap:hover, #worldMap:hover {
+	height: 320px ;
+}
+*/
+
+.map {
+    background-color: #e7e5df ;
+    position: relative ;
+    z-index: 100 ;
+    width: 100% ;
+}
+
+#map {
+    width: 100% ;
+    position: relative ;
+    z-index: 100 ;
+}
+
+/*
+.itemMap:hover, #itemMap:hover, .clusterMap:hover, #clusterMap:hover {
+	height: 240px ;
+}
+*/
+
+.travelerMap, #travelerMap {
+    height: 560px ;
+}
+
+
+/********/
+
+@media screen and (max-width: 800px) {
+    .aboveMapPadding {
+        padding-top: 56px !important ;
+    }
+    .worldMap {
+        height: 160px !important ;
+    }
+    #worldMap {
+        height: 160px !important ;
+    }
+}
+
+
+/******** Search Bar ********/
+
+#searchBar {
+    background-color: #FBF9F2 ;
+    position: relative ;
+    z-index: 300 ;
+    width: 100% ;
+    box-shadow:
+            0px -2px 0px 0px rgba(0,0,0,0.1),
+            0px 2px 0px 0px rgba(0,0,0,0.1) ;
+}
+
+#searchBar.sticky {
+    position: fixed ;
+    top: 64px ;
+}
+
+
+/******** Search Input Row ********/
+
+.searchBarInputRow {
+    text-align: center ;
+    padding-top: 16px ;
+    padding-right: 16px ;
+    padding-bottom: 12px ;
+    padding-left: 16px ;
+    font-size: 18px ;
+    line-height: 32px ;
+}
+
+.searchBarInputRow form {
+    display: inline ;
+    height: 100% ;
+}
+
+.searchNarrativeText {
+    color: #333 ;
+    display: inline ;
+    text-align: center ;
+}
+
+#searchInputItem {
+    background-image: url('../images/icons/something_icon.png') ;
+}
+
+#searchInputLocation {
+    background-image: url('../images/icons/place_icon.png') ;
+}
+
+/********/
+
+@media screen and (max-width: 800px) {
+    .searchBarInputRow {
+        padding-bottom: 16px !important;
+        padding-top: 8px !important;
+        font-size: 16px !important ;
+        line-height: 24px !important ;
+    }
+}
+
+/********
+    .searchNarrativeIntro {
+        line-height: 24px !important ;
+        font-size: 16px !important ;
+    }
+    .searchNarrativeBetween {
+        line-height: 24px !important ;
+        font-size: 16px !important ;
+    }
+********/
+
+
+/******** Input Placeholder Text (universal) ********/
+
+input::-webkit-input-placeholder {
+    color: #999999 ;
+    font-style: normal ;
+    font-weight: 300 ;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+input:-moz-placeholder {
+    color: #999999 ;
+    font-style: normal ;
+    font-weight: 300 ;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+input::-moz-placeholder {
+    color: #999999 ;
+    font-weight: 300 ;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+input:-ms-input-placeholder {
+    color: #999999 ;
+    font-weight: 300 ;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+input:hover::-webkit-input-placeholder {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+input:hover:-moz-placeholder {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+input:hover::-moz-placeholder {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+input:hover:-ms-input-placeholder {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+input:focus::-webkit-input-placeholder {
+    color:transparent ;
+}
+
+input:focus:-moz-placeholder {
+    color:transparent ;
+}
+
+input:focus::-moz-placeholder {
+    color:transparent ;
+}
+
+input:focus:-ms-input-placeholder {
+    color:transparent ;
+}
+
+
+/******** Search Filter Row ********/
+
+.searchBarFilterRow {
+    margin: 0 auto ;
+    text-align: center ;
+    padding-bottom: 24px ;
+    padding-right: 16px ;
+    padding-left: 16px ;
+    font-size: 18px ;
+    line-height: 32px ;
+}
+
+.searchBarFilterRow form {
+    display: inline-block ;
+    height: 100% ;
+}
+
+.filterNarrativeText {
+    color: #333 ;
+    line-height: 32px ;
+    display: inline ;
+    text-align: center ;
+    margin-right: 0px ;
+}
+
+#searchFilterItems {
+    display: none ;
+}
+
+#searchFilterClusters {
+    display: none ;
+}
+
+#searchFilterTravelers {
+    display: none ;
+}
+
+input.searchFilterCheckbox[type="checkbox"] + label {
+    cursor: pointer ;
+    background: transparent ;
+    color: #999 ;
+    line-height: 32px ;
+    text-align: center ;
+    border: 1px solid #999 ;
+    padding-top: 6px ;
+    padding-right: 12px ;
+    padding-bottom: 8px ;
+    padding-left: 40px ;
+    position: relative ;
+    margin-left: 4px ;
+    margin-right: 4px ;
+    -webkit-transition: border-color 0.5s ease-in-out;
+    -moz-transition: border-color 0.5s ease-in-out;
+    -ms-transition: border-color 0.5s ease-in-out;
+    -o-transition: border-color 0.5s ease-in-out;
+    transition: border-color 0.5s ease-in-out;
+}
+
+input#searchFilterItems[type="checkbox"] + label, input#searchFilterItems[type="radio"] + label {
+    background: url("../images/icons/item_icon_inactive_18px.png") ;
+    background-repeat: no-repeat ;
+    background-position: 12px 50% ;
+}
+
+input#searchFilterClusters[type="checkbox"] + label, input#searchFilterClusters[type="radio"] + label {
+    background: url("../images/icons/cluster_icon_inactive_18px.png") ;
+    background-repeat: no-repeat ;
+    background-position: 12px 50% ;
+}
+
+input#searchFilterTravelers[type="checkbox"] + label, input#searchFilterTravelers[type="radio"] + label {
+    background: url("../images/icons/traveler_icon_inactive_18px.png") ;
+    background-repeat: no-repeat ;
+    background-position: 12px 45% ;
+}
+
+input#searchFilterItems[type="checkbox"] + label:hover,
+input#searchFilterClusters[type="checkbox"] + label:hover,
+input#searchFilterTravelers[type="checkbox"] + label:hover,
+input#searchFilterItems[type="radio"] + label:hover,
+input#searchFilterClusters[type="radio"] + label:hover,
+input#searchFilterTravelers[type="radio"] + label:hover {
+    border: 1px solid #006cff ;
+    -webkit-transition: border-color 0.25s ease-in-out;
+    -moz-transition: border-color 0.25s ease-in-out;
+    -ms-transition: border-color 0.25s ease-in-out;
+    -o-transition: border-color 0.25s ease-in-out;
+    transition: border-color 0.25s ease-in-out;
+}
+
+input#searchFilterItems[type="checkbox"]:checked + label, input#searchFilterItems[type="radio"]:checked + label {
+    color: #006cff ;
+    font-weight: 400 ;
+    border: 2px solid #006cff ;
+    background: url("../images/icons/item_icon_default_18px.png") ;
+    background-repeat: no-repeat ;
+    background-position: 12px 45%;
+}
+
+input#searchFilterClusters[type="checkbox"]:checked + label, input#searchFilterClusters[type="radio"]:checked + label {
+    color: #006cff ;
+    font-weight: 400 ;
+    border: 2px solid #006cff ;
+    background: url("../images/icons/cluster_icon_default_18px.png") ;
+    background-repeat: no-repeat ;
+    background-position: 12px 45% ;
+}
+
+input#searchFilterTravelers[type="checkbox"]:checked + label, input#searchFilterTravelers[type="radio"]:checked + label {
+    color: #006cff ;
+    font-weight: 400 ;
+    border: 2px solid #006cff ;
+    background: url("../images/icons/traveler_icon_selected_18px.png") ;
+    background-repeat: no-repeat ;
+    background-position: 12px 45% ;
+}
+
+/********/
+
+@media screen and (max-width: 800px) {
+    .searchBarFilterRow {
+        padding-bottom: 0px !important ;
+        font-size: 16px !important;
+        line-height: 24px !important ;
+    }
+    .searchBarFilterRow form {
+        margin-bottom: 16px !important ;
+    }
+}
+
+/********
+    .filterNarrativeIntro {
+        line-height: 24px !important ;
+    }
+********/
+
+/******** horizontal border ********/
+
+.horizontalBorder {
+    position: relative ;
+    top: 0 ;
+    margin-left: 10% ;
+    margin-right: 10% ;
+    border-bottom: solid 2px #999 ;
+}
+
+
+/******** Search Results ********/
+
+#searchResultsInnerArea {
+    background-color: #FBF9F2 ;
+    position: relative ;
+    margin-top: 32px ;
+    margin-left: 10% ;
+    margin-right: 10% ;
+
+    z-index: 200 ;
+}
+
+#searchResultsOuterArea {
+    background-color: #FBF9F2 ;
+    position: relative ;
+    z-index: 300 ;
+    width: 100% ;
+    box-shadow:
+            0px -2px 0px 0px rgba(0,0,0,0.1),
+
+}
+
+.searchResult {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding: 8px ;
+    width: 33.33% ;
+    float: left;
+}
+
+.searchResultImage {
+    border: 1px solid #ddd;
+}
+
+.searchResultImage img {
+    max-width: 100% ;
+    height: auto ;
+    display: block ;
+    margin: 0 ;
+    padding: 0 ;
+}
+
+.searchResultDetails {
+    background-color: #fff ;
+    color: #333 ;
+    padding: 12px ;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+
+.searchResultItemName {
+    border-bottom: 1px solid #ddd ;
+    margin-bottom: 12px ;
+    padding-bottom: 12px ;
+    padding-top: 2px ;
+    font-size: 16px ;
+    background-repeat: no-repeat ;
+    padding-left: 24px ;
+    display: block ;
+    text-overflow: ellpsis ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultClusterName {
+    border-bottom: 1px solid #ddd ;
+    margin-bottom: 12px ;
+    padding-bottom: 12px ;
+    padding-top: 2px ;
+    font-size: 16px ;
+    background-repeat: no-repeat ;
+    padding-left: 24px ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultTravelerName {
+    border-bottom: 1px solid #ddd ;
+    margin-bottom: 12px ;
+    padding-bottom: 12px ;
+    padding-top: 2px ;
+    font-size: 16px ;
+    background-repeat: no-repeat ;
+    background-image: url(../images/icons/traveler_icon_default_16px.png);
+    padding-left: 24px ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultLocation {
+    border-bottom: 1px solid #ddd ;
+    margin-bottom: 12px ;
+    padding-bottom: 12px ;
+    font-size: 16px ;
+    background-image: url(../images/icons/flags/Japan_Flag_h16px.png);
+    background-repeat: no-repeat ;
+    padding-left: 32px ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultTravelerReturn {
+    font-size: 16px ;
+    background-image: url(../images/icons/flags/USA_Flag_h16px.png);
+    background-repeat: no-repeat ;
+    padding-left: 32px ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultTravelerGoing {
+    font-size: 16px ;
+    background-image: url(../images/icons/flags/S-Korea_Flag_h16px.png);
+    background-repeat: no-repeat ;
+    padding-left: 32px ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultItemPrice {
+    font-size: 16px ;
+    background-image: url(../images/icons/note_icon.png);
+    background-size: contain ;
+    background-repeat: no-repeat ;
+    padding-left: 24px ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultClusterTags {
+    font-size: 16px ;
+    height: 16px ;
+    background-image: url(../images/icons/note_icon.png);
+    background-size: contain;
+    background-repeat: no-repeat ;
+    padding-left: 24px ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+.searchResultFormatting {
+    font-size: 16px ;
+    height: 16px ;
+    background-size: contain;
+    background-repeat: no-repeat ;
+    overflow: hidden ;
+    white-space: nowrap ;
+    text-overflow: ellipsis ;
+}
+
+/********/
+
+@media screen and (max-width: 800px) {
+    .searchResult {
+        display: block !important;
+        padding: 0px 0px 16px 0px !important;
+        width: 100% !important;
+    }
+}
+
+
+/******** 'Show More Items' Button ********/
+
+.searchMoreButtonArea {
+    display: block ;
+    clear: both ;
+    position: relative ;
+    margin-left: 10% ;
+    margin-right: 10% ;
+}
+
+button#moreButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: #006cff;
+    border: 0 ;
+    padding: 24px 24px;
+    color: #ffffff;
+    text-align: center;
+    width: 100% ;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+    box-shadow:
+            0px 2px 0px 0px rgba(0,0,0,0.2) ;
+}
+
+button#moreButton:hover {
+    background-color: #ffae7d;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+}
+
+
+/******** Item Page Stuff ********/
+
+#itemInnerArea, #clusterInnerArea {
+    background-color: #FBF9F2 ;
+    position: relative ;
+    z-index: 300 ;
+    padding-top: 32px ;
+    padding-left: 10% ;
+    padding-right: 10% ;
+    z-index: 200 ;
+}
+
+#itemOuterArea, #clusterOuterArea {
+    box-shadow: 0px -2px 0px 0px rgba(0,0,0,0.1), 0px 2px 0px 0px rgba(0,0,0,0.1);
+}
+
+#itemPhotoColumn, #clusterPhotoColumn {
+    width: 50% ;
+    float: left ;
+}
+
+#itemInfoColumn, #clusterInfoColumn {
+    width: 50% ;
+    float: left ;
+    box-sizing: border-box ;
+    padding-left: 16px ;
+}
+
+#itemTitle, #clusterTitle {
+    font-size: 24px ;
+    margin-bottom: 16px ;
+    background-repeat: no-repeat ;
+    padding-left: 36px ;
+    border-bottom: 1px solid #ccc ;
+}
+
+#itemPhotoFeatured, #clusterPhotoFeatured {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding-bottom: 8px ;
+    padding-right: 8px ;
+    width: 100% ;
+    float: left;
+}
+
+.itemPhoto, .clusterPhoto {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding-bottom: 8px ;
+    padding-right: 8px ;
+    width: 25% ;
+    float: left;
+}
+
+#itemPhotoFeatured img, .itemPhoto img, #clusterPhotoFeatured img, .clusterPhoto img {
+    max-width: 100% ;
+    height: auto ;
+    display: block ;
+    margin: 0 ;
+    padding: 0 ;
+    border: 1px solid #ccc ;
+}
+
+#itemLocation, #clusterLocation {
+    font-size: 18px ;
+    background-image: url(../images/icons/flags/Japan_Flag_h18px.png);
+    background-repeat: no-repeat ;
+    padding-left: 36px ;
+    border-bottom: 1px solid #ccc ;
+    margin-bottom: 12px ;
+    padding-bottom: 12px ;
+}
+
+#itemDetailsArea, #clusterDetailsArea {
+    border: 2px solid #ccc ;
+    padding: 16px;
+    margin-bottom: 24px ;
+    background: white ;
+    line-height: 20px ;
+    position: relative ;
+    font-size: 16px ;
+}
+
+#itemCost, #clusterCost {
+    background-repeat: no-repeat ;
+    background-position: 4px 0 ;
+    padding-left: 36px ;
+    padding-bottom: 16px ;
+    font-size: 18px ;
+}
+
+#itemRarity, #clusterRarity {
+    font-size: 14px ;
+    margin-top: 8px ;
+    padding-top: 8px ;
+    padding-bottom: 16px ;
+    border-top: 1px dashed #ccc ;
+}
+
+#itemRarityTitle, #clusterRarityTitle {
+    font-weight: bold ;
+}
+
+#itemRarityDefinition, #clusterRarityDefinition {
+    font-style: italic ;
+    color: #666 ;
+}
+
+#itemSummary, #clusterSummary {
+    padding-bottom: 16px ;
+    border-bottom: 2px dashed #ccc ;
+}
+
+#itemSummaryTags, #clusterSummaryTags {
+    margin-top: 8px ;
+    font-size: 14px ;
+    padding-bottom: 16px;
+}
+
+
+/********/
+
+@media screen and (max-width: 800px) {
+    #itemPhotoColumn {
+        width: 100% !important ;
+    }
+    #itemInfoColumn {
+        width: 100% !important ;
+        padding: 0 !important ;
+    }
+    #itemTitle {
+        margin-top: 16px ;
+    }
+}
+
+
+/******** User Signature ********/
+
+#userSignature {
+    height: 32px ;
+    padding-top: 16px ;
+    display: inline-block ;
+}
+
+#userSignaturePhoto {
+    height: 32px ;
+    width: 32px ;
+    display: inline-block ;
+    float: left ;
+    border: 1px solid #ccc ;
+}
+
+#userSignatureNameTitle {
+    display: inline-block ;
+}
+
+#userSignatureName {
+    line-height: 18px ;
+    font-size: 18px ;
+    padding-left: 8px ;
+}
+
+#userSignatureTitle {
+    line-height: 18px ;
+    font-size: 14px ;
+    padding-left: 18px ;
+    font-style: italic ;
+}
+
+
+/******** Cluster Stuff ********/
+
+
+/********/
+
+@media screen and (max-width: 800px) {
+    #clusterPhotoColumn {
+        width: 100% !important ;
+    }
+    #clusterInfoColumn {
+        width: 100% !important ;
+        padding: 0 !important ;
+    }
+    #clusterTitle {
+        margin-top: 16px ;
+    }
+}
+
+
+/******** List of Nearby Travelers on Items & Clusters ********/
+
+#travelerList {
+    border: 1px solid #ccc ;
+    padding: 16px ;
+    margin-top: 24px ;
+}
+
+#travelerListTitle {
+    font-size: 18px ;
+    background-image: url(../images/icons/traveler_icon_default_18px.png);
+    background-repeat: no-repeat ;
+    padding-left: 26px ;
+}
+
+#travelerListSection {
+    border-top: 2px dashed #ccc ;
+    margin-top: 12px ;
+    padding-top: 12px ;
+    position: relative ;
+    font-size: 16px ;
+}
+
+#travelerListSectionPhoto {
+    height: 32px ;
+    width: 32px ;
+    display: inline-block ;
+    float: left ;
+    border: 1px solid #ccc ;
+}
+
+#travelerListSectionText {
+    display: inline-block ;
+}
+
+#travelerListSectionTextName {
+    font-size: 16px ;
+    padding-top: 2px ;
+    padding-left: 8px ;
+}
+
+#travelerListSectionTextNameTitle {
+    font-size: 14px ;
+    font-style: italic ;
+    padding-top: 2px ;
+    padding-left: 8px ;
+}
+
+#travelerListSectionButtonArea {
+    margin-top: 12px ;
+    display: inline-block ;
+    float: right ;
+}
+
+button#travelerListSectionButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: #006cff;
+    border: none ;
+    padding: 8px 12px ;
+    color: white ;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+    box-shadow:
+            0px 2px 0px 0px rgba(0,0,0,0.2) ;
+}
+
+
+/******** Request Button ********/
+
+#requestButtonArea {
+    display: block ;
+    clear: both ;
+    position: relative ;
+}
+
+button#requestButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: #006cff;
+    border: none ;
+    padding: 18px 18px;
+    color: white ;
+    text-align: center;
+    width: 100% ;
+    cursor: pointer;
+    font-size: 24px;
+    -webkit-transition-duration: 0.5s ;
+    -moz-transition-duration: 0.5s ;
+    -ms-transition-duration: 0.5s ;
+    -o-transition-duration: 0.5s ;
+    transition-duration: 0.5s ;
+    box-shadow:
+            0px 2px 0px 0px rgba(0,0,0,0.2) ;
+}
+
+.uniqueRequestButton:hover {
+    background-color: #ffae7d !important;
+}
+
+.rareRequestButton:hover {
+    background-color: #e96161 !important;
+}
+
+.uncommonRequestButton:hover {
+    background-color: #d14274 !important;
+}
+
+.regionalRequestButton:hover {
+    background-color: #6b3c86 !important;
+}
+
+
+/******** My Map stuff ********/
+
+.defaultTravelerIcon28px {
+    background-image: url(../images/icons/traveler_icon_default_28px.png);
+}
+
+.defaultTravelerIcon24px {
+    background-image: url(../images/icons/traveler_icon_default_24px.png);
+}
+
+#myMapUser {
+    background-color: #FBF9F2 ;
+    position: relative ;
+    z-index: 300 ;
+    padding-top: 24px ;
+    padding-bottom: 24px ;
+    padding-left: 10% ;
+    padding-right: 10% ;
+    box-shadow:
+            0px -2px 0px 0px rgba(0,0,0,0.1),
+            0px 2px 0px 0px rgba(0,0,0,0.1) ;
+}
+
+#myMapUserPhoto {
+    width: 25% ;
+    float: left ;
+}
+
+#myMapUserPublicInfoArea {
+    float: left ;
+    width: 75% ;
+    box-sizing: border-box ;
+}
+
+#myMapUserPhotoFeatured {
+    box-sizing: border-box ;
+    display: inline-block ;
+    padding-right: 16px ;
+    width: 100% ;
+    float: left;
+}
+
+#myMapUserPhotoFeatured img {
+    max-width: 100% ;
+    height: auto ;
+    display: block ;
+    margin: 0 ;
+    padding: 0 ;
+    border: 1px solid #ccc ;
+}
+
+#myMapUserName {
+    font-size: 24px ;
+    margin-bottom: 8px ;
+    background-repeat: no-repeat ;
+    padding-left: 36px ;
+    padding-bottom: 8px ;
+    border-bottom:  1px solid #ccc ;
+}
+
+#myMapUserLocation {
+    font-size: 18px ;
+    background-image: url(../images/icons/flags/Japan_Flag_h18px.png);
+    background-repeat: no-repeat ;
+    padding-left: 36px ;
+}
+
+#myMapUserRequestReasonArea {
+    border: 1px solid #ccc ;
+    padding: 16px ;
+    margin-top: 16px ;
+}
+
+#myMapUserRequestReasonTitle {
+    font-size: 18px ;
+    border-bottom: 1px solid #ccc ;
+    padding-bottom: 8px ;
+    margin-bottom: 8px ;
+}
+
+#myMapUserRequestReason {
+    font-size: 18px ;
+    margin-bottom: 8px ;
+    padding-top: 8px ;
+    padding-bottom: 8px ;
+    margin-top: 8px ;
+    border-top:  1px solid #ccc ;
+}
+
+#myMapInputLocationNow, #myMapInputLocationTime, #myMapInputLocationSoon {
+    background-image: url('../images/icons/place_icon.png') ;
+}
+
+#myMapInputTime {
+    background-image: url('../images/icons/time_icon.png') ;
+}
+
+#myMapInputPassword {
+    background-image: url('../images/icons/password_icon.png') ;
+}
+
+#myMapInputEmail {
+    background-image: url('../images/icons/email_icon.png') ;
+}
+
+#myMapCatalogArea {
+    background-color: #FBF9F2 ;
+    position: relative ;
+    padding-top: 24px ;
+    padding-left: 10% ;
+    padding-right: 10% ;
+    margin-bottom: 16px ;
+    z-index: 200 ;
+    box-shadow:
+            0px -2px 0px 0px rgba(0,0,0,0.1) ;
+}
+
+#myMapTravelingCheckbox {
+    display: none ;
+}
+
+input.normalCheckbox[type="checkbox"] + label, input.normalCheckbox[type="radio"] + label  {
+    cursor: pointer ;
+    background: transparent ;
+    color: #666 ;
+    line-height: 32px ;
+    text-align: center ;
+    padding-bottom: 8px ;
+    padding-left: 26px ;
+    position: relative ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#myMapTravelingCheckbox[type="checkbox"] + label {
+    background: url("../images/icons/checkbox_icon_unchecked_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#myMapTravelingCheckbox[type="checkbox"] + label:hover {
+    background: url("../images/icons/checkbox_icon_hover_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#myMapTravelingCheckbox[type="checkbox"]:checked + label {
+    color: #006cff ;
+    background: url("../images/icons/checkbox_icon_checked_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+#myMapUserPrivateInfoArea {
+    border-top: 2px solid #ccc ;
+    background-color: #E7E5DF ;
+    box-sizing: border-box ;
+    padding: 16px ;
+    margin-top: 16px ;
+    float: left ;
+    width: 100% ;
+
+}
+
+/*
+@media screen and (max-width: 800px) {
+    #myMapUserPrivateInfoArea {
+        border-top: 2px solid #ccc ;
+        background-color: #E7E5DF ;
+        box-sizing: border-box ;
+        padding: 16px ;
+        margin-top: 16px ;
+        margin-left: 0 ;
+        width: 100% ;
+    }
+}
+*/
+
+#myMapUserPrivateInfoTitle {
+    font-size: 18px ;
+    border-bottom: 1px solid #ccc ;
+    padding-bottom: 8px ;
+    margin-bottom: 8px ;
+}
+
+#myMapUserEmail {
+    padding-bottom: 8px ;
+}
+
+#myMapUserPasswordArea {
+    margin-bottom: 8px ;\
+}
+
+#myMapUserPasswordCheckboxArea {
+    margin-bottom: 8px ;
+    margin-top: 8px ;
+}
+
+input.smallCheckbox[type="checkbox"] + label {
+    cursor: pointer ;
+    background: transparent ;
+    color: #666 ;
+    font-size: 14px ;
+    text-align: center ;
+    margin-bottom: 8px ;
+    padding-left: 22px ;
+    position: relative ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+#myMapUserPasswordCheckbox {
+    display: none ;
+}
+
+input#myMapUserPasswordCheckbox[type="checkbox"] + label {
+    background: url("../images/icons/checkbox_icon_unchecked_14px.png") ;
+    background-repeat: no-repeat ;
+}
+
+input#myMapUserPasswordCheckbox[type="checkbox"] + label:hover {
+    background: url("../images/icons/checkbox_icon_hover_14px.png") ;
+    background-repeat: no-repeat ;
+}
+
+input#myMapUserPasswordCheckbox[type="checkbox"]:checked + label {
+    color: #006cff ;
+    background: url("../images/icons/checkbox_icon_checked_14px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+
+/******** Traveler stuff ********/
+
+#travelerInfo {
+    background-color: #FBF9F2 ;
+    position: absolute ;
+    top: 16px ;
+    left: 10% ;
+    z-index: 300 ;
+    padding: 16px ;
+    width: 20% ;
+    border: 1px solid #ccc ;
+    box-shadow:
+            0px 2px 0px 0px rgba(0,0,0,0.1) ;
+}
+
+#travelerInfoPhoto img {
+    width: 100% ;
+    margin-bottom: 12px ;
+    border-bottom:  1px solid #ccc ;
+}
+
+#travelerInfoText {
+    float: left ;
+}
+
+#travelerInfoTextName {
+    font-size: 24px ;
+    background-repeat: no-repeat ;
+    padding-left: 36px ;
+    margin-bottom: 4px ;
+}
+
+#travelerInfoTextNameTitle {
+    font-size: 16px ;
+    font-style: italic ;
+    padding-left: 36px ;
+    padding-bottom: 12px ;
+    margin-bottom: 12px ;
+    border-bottom:  1px solid #ccc ;
+}
+
+#travelerInfoTextLocation {
+    font-size: 18px ;
+    background-image: url(../images/icons/flags/Japan_Flag_h18px.png);
+    background-repeat: no-repeat ;
+    padding-left: 36px ;
+    margin-bottom: 12px ;
+}
+
+#travelerInfoTextRequestReason {
+    font-size: 16px ;
+    padding: 16px ;
+    background-color: white ;
+    border:  1px solid #ccc ;
+}
+
+
+/******** Item Form ********/
+
+#itemFormOuterArea {
+    margin-left: 10% ;
+    margin-right: 10% ;
+    margin-top: 128px ;
+    min-width: 600px;
+}
+
+#itemFormInnerArea {
+    margin-left: 16px ;
+    border-left: 2px solid #999 ;
+    padding-left: 48px ;
+}
+
+#itemFormTitle {
+    font-size: 24px ;
+    margin-bottom: 24px ;
+    padding-bottom: 8px ;
+    border-bottom:  1px solid #ccc ;
+}
+
+.itemFormRow {
+    margin-top: 16px;
+    font-size: 18px ;
+}
+
+.itemFormRow:first-child {
+    margin-top: 0px;
+}
+
+#itemFormInputLocation {
+    background-image: url('../images/icons/place_icon.png') ;
+    min-width: 256px;
+
+}
+
+#itemFormInputName {
+    background-image: url('../images/icons/something_icon.png') ;
+    min-width: 256px;
+}
+
+#itemFormInputCost {
+    background-image: url('../images/icons/cost_icon.png') ;
+    min-width: 256px;
+}
+
+#itemFormInputURL {
+    background-image: url('../images/icons/url_icon.png') ;
+    min-width: 256px;
+}
+
+#itemFormRarityArea {
+    border: 1px solid #ccc ;
+    padding: 16px ;
+    margin-top: 16px ;
+    margin-bottom: 24px ;
+}
+
+#itemFormRarityAreaTitle {
+    font-size: 18px ;
+    border-bottom: 1px solid #ccc ;
+    padding-bottom: 8px ;
+    margin-bottom: 8px ;
+}
+
+.hideInput {
+    display: none ;
+}
+
+.itemFormCheckbox  {
+    cursor: pointer ;
+    background: transparent ;
+    color: #666 ;
+    line-height: 32px ;
+    text-align: center ;
+    padding-bottom: 8px ;
+    padding-left: 26px ;
+    position: relative ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#itemFormInputRarityRegional[type="radio"] + label, input#itemFormInputRarityUncommon[type="radio"] + label, input#itemFormInputRarityRare[type="radio"] + label, input#itemFormInputRarityUnique[type="radio"] + label {
+    background: url("../images/icons/checkbox_icon_unchecked_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#itemFormInputRarityRegional[type="radio"] + label:hover, input#itemFormInputRarityUncommon[type="radio"] + label:hover, input#itemFormInputRarityRare[type="radio"] + label:hover, input#itemFormInputRarityUnique[type="radio"] + label:hover {
+    background: url("../images/icons/checkbox_icon_hover_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#itemFormInputRarityRegional[type="radio"]:checked + label {
+    color: #6b3c86 ;
+    background: url("../images/icons/checkbox_icon_checked_regional_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#itemFormInputRarityUncommon[type="radio"]:checked + label {
+    color: #d14274 ;
+    background: url("../images/icons/checkbox_icon_checked_uncommon_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#itemFormInputRarityRare[type="radio"]:checked + label {
+    color: #e96161 ;
+    background: url("../images/icons/checkbox_icon_checked_rare_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+input#itemFormInputRarityUnique[type="radio"]:checked + label {
+    color: #ffae7d ;
+    background: url("../images/icons/checkbox_icon_checked_unique_18px.png") ;
+    background-repeat: no-repeat ;
+    -webkit-transition: color 0.25s ease-in-out;
+    -moz-transition: color 0.25s ease-in-out;
+    -ms-transition: color 0.25s ease-in-out;
+    -o-transition: color 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+}
+
+
+.itemFormRadioButton {
+    cursor: pointer ;
+    background: transparent ;
+    color: #999 ;
+    line-height: 32px ;
+    text-align: center ;
+    border: 1px solid #999 ;
+    padding-top: 6px ;
+    padding-right: 12px ;
+    padding-bottom: 8px ;
+    padding-left: 40px ;
+    position: relative ;
+    margin-left: 4px ;
+    margin-right: 4px ;
+    -webkit-transition: border-color 0.5s ease-in-out;
+    -moz-transition: border-color 0.5s ease-in-out;
+    -ms-transition: border-color 0.5s ease-in-out;
+    -o-transition: border-color 0.5s ease-in-out;
+    transition: border-color 0.5s ease-in-out;
+}
+
+
+/******** Color-Coded Borders ********/
+
+.regionalBorderColor:hover {
+    border-color: #6B3C86 !important ;
+}
+
+.uncommonBorderColor:hover {
+    border-color: #D14274 !important;
+}
+
+.rareBorderColor:hover {
+    border-color: #E96161 !important;
+}
+
+.uniqueBorderColor:hover {
+    border-color: #FFAE7D !important;
+}
+
+.defaultBorderColor:hover {
+    border-color: #006cff !important;
+}
+
+
+/******** Color-Coded Backgrounds ********/
+
+.regionalBackgroundColor {
+    background-color: #6B3C86 ;
+}
+
+.uncommonBackgroundColor {
+    background-color: #D14274 ;
+}
+
+.rareBackgroundColor {
+    background-color: #E96161 ;
+}
+
+.uniqueBackgroundColor {
+    background-color: #FFAE7D ;
+}
+
+.defaultBackgroundColor {
+    background-color: #006cff ;
+}
+
+/********/
+
+.regionalBackgroundColorHover:hover {
+    background-color: #6B3C86 !important ;
+}
+
+.uncommonBackgroundColorHover:hover {
+    background-color: #D14274 !important ;
+}
+
+.rareBackgroundColorHover:hover {
+    background-color: #E96161 !important ;
+}
+
+.uniqueBackgroundColorHover:hover {
+    background-color: #FFAE7D !important ;
+}
+
+.defaultBackgroundColorHover:hover {
+    background-color: #006cff !important ;
+}
+
+
+/******** Color-Coded Item Icons ********/
+
+.regionalItemIcon16px {
+    background-image: url(../images/icons/item_icon_regional_16px.png);
+}
+
+.uncommonItemIcon16px {
+    background-image: url(../images/icons/item_icon_uncommon_16px.png);
+}
+
+.rareItemIcon16px {
+    background-image: url(../images/icons/item_icon_rare_16px.png);
+}
+
+.uniqueItemIcon16px {
+    background-image: url(../images/icons/item_icon_unique_16px.png);
+}
+
+/********/
+
+.regionalItemIcon24px {
+    background-image: url(../images/icons/item_icon_regional_24px.png);
+}
+
+.uncommonItemIcon24px {
+    background-image: url(../images/icons/item_icon_uncommon_24px.png);
+}
+
+.rareItemIcon24px {
+    background-image: url(../images/icons/item_icon_rare_24px.png);
+}
+
+.uniqueItemIcon24px {
+    background-image: url(../images/icons/item_icon_unique_24px.png);
+}
+
+/********/
+
+.regionalItemIcon28px {
+    background-image: url(../images/icons/item_icon_regional_28px.png);
+}
+
+.uncommonItemIcon28px {
+    background-image: url(../images/icons/item_icon_uncommon_28px.png);
+}
+
+.rareItemIcon28px {
+    background-image: url(../images/icons/item_icon_rare_28px.png);
+}
+
+.uniqueItemIcon28px {
+    background-image: url(../images/icons/item_icon_unique_28px.png);
+}
+
+
+/******** Color-Coded cluster Icons ********/
+
+.regionalClusterIcon16px {
+    background-image: url(../images/icons/cluster_icon_regional_16px.png);
+}
+
+.uncommonClusterIcon16px {
+    background-image: url(../images/icons/cluster_icon_uncommon_16px.png);
+}
+
+.rareClusterIcon16px {
+    background-image: url(../images/icons/cluster_icon_rare_16px.png);
+}
+
+.uniqueClusterIcon16px {
+    background-image: url(../images/icons/cluster_icon_unique_16px.png);
+}
+
+/********/
+
+.regionalClusterIcon24px {
+    background-image: url(../images/icons/cluster_icon_regional_24px.png);
+}
+
+.uncommonClusterIcon24px {
+    background-image: url(../images/icons/cluster_icon_uncommon_24px.png);
+}
+
+.rareClusterIcon24px {
+    background-image: url(../images/icons/cluster_icon_rare_24px.png);
+}
+
+.uniqueClusterIcon24px {
+    background-image: url(../images/icons/cluster_icon_unique_24px.png);
+}
+
+/********/
+
+.regionalClusterIcon28px {
+    background-image: url(../images/icons/cluster_icon_regional_28px.png);
+}
+
+.uncommonClusterIcon28px {
+    background-image: url(../images/icons/cluster_icon_uncommon_28px.png);
+}
+
+.rareClusterIcon28px {
+    background-image: url(../images/icons/cluster_icon_rare_28px.png);
+}
+
+.uniqueClusterIcon28px {
+    background-image: url(../images/icons/cluster_icon_unique_28px.png);
+}
+
+
+/******** Color-Coded Cost Icon ********/
+
+.regionalCostIcon18px {
+    background-image: url(../images/icons/cost_icon_regional_18px.png);
+}
+
+.uncommonCostIcon18px {
+    background-image: url(../images/icons/cost_icon_uncommon_18px.png);
+}
+
+.rareCostIcon18px {
+    background-image: url(../images/icons/cost_icon_rare_18px.png);
+}
+
+.uniqueCostIcon18px {
+    background-image: url(../images/icons/cost_icon_unique_18px.png);
+}
+
+
+
+/******** Color-Coded Text ********/
+
+.regionalTextColor {
+    color: #6B3C86 ;
+}
+
+.uncommonTextColor {
+    color: #D14274 ;
+}
+
+.rareTextColor {
+    color: #E96161 ;
+}
+
+.uniqueTextColor {
+    color: #FFAE7D ;
+}
+
+.defaultTextColor {
+    color: #006cff ;
+}
+
+
+/******** Footer ********/
+
+.footerArea {
+    position: relative ;
+    margin-top: 64px ;
+    padding-top: 32px ;
+    padding-bottom: 32px ;
+    box-shadow:
+            0px -2px 0px 0px rgba(0,0,0,0.1),
+            0px 2px 0px 0px rgba(0,0,0,0.1) ;
+}
+
+.footerContent {
+    margin-left: 10% ;
+    margin-right: 10% ;
+    margin-top: 32px ;
+    margin-bottom: 32px ;
+}
+
+.footerCopyright {
+    color: #666 ;
+}
+
