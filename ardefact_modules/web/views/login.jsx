@@ -41,6 +41,7 @@ class LoginForm extends React.Component {
              },
              error: function(r,ts) {
                alert("Please try again");
+               location.reload();
              }
            });
   }
@@ -48,6 +49,7 @@ class LoginForm extends React.Component {
   render() {
     console.log("Rendering login page...");
     return (
+      /*
       <center>
       <div className="wrapper">
         <div className="container">
@@ -62,6 +64,31 @@ class LoginForm extends React.Component {
 
       </div>
       </center>
+      */
+
+      <div id="signinPageOuterArea" className="clearFix">
+
+        <div id="signinPageInnerArea">
+
+          <div id="signinPageTitle">
+            The journey begins.
+          </div>
+
+          <div className="signinFieldRow">
+            <input id="email" name="signinPageInputEmail" className="universalTextFieldSettings textFieldEmailIcon" type="text" placeholder="Email" onChange={this.handleChange}/>
+          </div>
+
+          <div className="signinFieldRow">
+            <input id="password" name="signinPageInputPassword" className="universalTextFieldSettings textFieldPasswordIcon" type="password" placeholder="Password" autoComplete="off" onChange={this.handleChange} />
+          </div>
+
+          <button type="button" id="signinButton" name="signinPageButton" onClick={this.handleSubmit}>
+            Sign In
+          </button>
+
+        </div>
+
+      </div>
     );
   }
 }

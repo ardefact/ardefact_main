@@ -70,6 +70,7 @@ function makeExpressRouter(db) {
             LOG.error(err);
             res.status(500).end("Couldn't save");
           } else {
+            res.set('Content-Type', 'text/html');
             res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
           }
         });

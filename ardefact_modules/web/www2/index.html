@@ -1,11 +1,48 @@
 <html>
 <head>
     <title>Ardefact</title>
-    <link rel="stylesheet" href="css/style.css" />
+<!--    <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css?v=3">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+    <meta name="apple-mobile-web-app-title" content="Ardefact">
+    <meta name="application-name" content="Ardefact">
+    <meta name="msapplication-TileColor" content="#fbf9f2">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#fbf9f2">
 </head>
 <body>
 
+
+<div class="navBar">
+
+    <div class="navBar_links_left">
+        <div class="navBar_links_logo">
+            <a href="https://ardefact.com/">
+                <img src="images/logo/ardefact_logo_32px.png">
+            </a>
+        </div>
+    </div>
+
+</div>
+
 <div id="ardefact_body"></div>
+
+<div class="footerArea">
+    <div class="footerContent">
+        <div class="footerCopyright">
+            &copy; 2015
+            <script>
+              new Date().getFullYear()>2015&&document.write("- "+new Date().getFullYear());
+            </script>, Ardefact LLC.
+        </div>
+    </div>
+</div>
 
 <script src="bundle.js"></script>
 <script>window.ardefact.start();</script>

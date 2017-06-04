@@ -29,6 +29,8 @@ ArdefactDatabaseBridge.connect()
 
     const app = Express();
 
+    app.set('trust proxy', 1);
+
     // use body parser
     app.use(require('body-parser').urlencoded({extended : true}));
 
