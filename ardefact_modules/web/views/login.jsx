@@ -67,9 +67,7 @@ class LoginForm extends React.Component {
       */
 
       <div id="signinPageOuterArea" className="clearFix">
-
         <div id="signinPageInnerArea">
-
           <div id="signinPageTitle">
             The journey begins.
           </div>
@@ -81,7 +79,6 @@ class LoginForm extends React.Component {
           <div className="signinFieldRow">
             <input id="password" name="signinPageInputPassword" className="universalTextFieldSettings textFieldPasswordIcon" type="password" placeholder="Password" autoComplete="off" onChange={this.handleChange} />
           </div>
-
           <button type="button" id="signinButton" name="signinPageButton" onClick={this.handleSubmit}>
             Sign In
           </button>

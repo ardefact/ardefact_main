@@ -43,10 +43,6 @@ ArdefactDatabaseBridge.connect()
       }
     ));
 
-    app.use('/', (req, res, next) => {
-      next();
-    });
-
     app.use("/a", restRouter);
     app.use("/", webRouter);
 
