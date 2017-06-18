@@ -4,7 +4,7 @@ process.env.NODE_PATH = `${__dirname}/ardefact_modules`;
 require("module").Module._initPaths();
 
 var FS = require('fs'),
-    _ = require('lodash');
+    _  = require('lodash');
 
 var Bluebird = require('bluebird');
 
