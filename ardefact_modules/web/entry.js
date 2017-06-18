@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
 import $ from 'jquery';
 import Cookies from './lib/js.cookie-2.1.4.min';
 
@@ -9,7 +10,9 @@ import ItemListForm from './views/item_list.jsx';
 
 function start() {
   ReactDOM.render(
-    <App />,
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
     document.getElementById("ardefactBody")
   );
 
@@ -20,6 +23,7 @@ function isUserLoggedIn() {
 }
 
 function clearAllCookies() {
+  Cookies.remove('is_admin', {path : ''});
   Cookies.remove('auth_token', {path : ''});
   Cookies.remove('connect.sid', {path : ''});
   Cookies.remove('csrf_token', {path : ''});

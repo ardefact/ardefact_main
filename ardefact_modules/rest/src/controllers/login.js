@@ -39,6 +39,7 @@ function handleRequest(req, res, db) {
                     {
                       auth_token : user.auth_token,
                       hid        : user.hid,
+                      admin      : user.admin ? 'true' : 'false',
                     }
                   );
                 } else {
@@ -53,6 +54,7 @@ function handleRequest(req, res, db) {
                         {
                           auth_token : user.auth_token,
                           hid        : user.hid,
+                          admin      : user.admin ? 'true' : 'false',
                         }
                       );
                     })

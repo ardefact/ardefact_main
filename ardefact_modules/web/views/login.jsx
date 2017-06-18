@@ -1,4 +1,6 @@
 var React = require('react');
+import { withRouter } from 'react-router';
+
 import $ from 'jquery';
 import Cookies from '../lib/js.cookie-2.1.4.min';
 
@@ -32,12 +34,14 @@ class LoginForm extends React.Component {
              data    : {
                email      : email,
                password   : password,
-               csrf_token : Cookies.get("csrf_token"),
+               csrf_token : Cookies.get('csrf_token'),
              },
              success : function (data, textStatus, response) {
                const res = JSON.parse(response.responseText);
-               Cookies.set("auth_token", res['results']['hid'] + ',' + res['results']['auth_token']);
-               window.location = "/";
+               Cookies.set('auth_token', res['results']['hid'] + ',' + res['results']['auth_token']);
+               Cookies.set('is_admin', res['results']['admin']);
+               //window.location = "/";
+               self.props.history.push('/');
              },
              error   : function (r, ts) {
                alert("Please try again");
@@ -94,4 +98,4 @@ class LoginForm extends React.Component {
 }
 
 //module.exports = LoginForm;
-export default LoginForm;
+export default withRouter(LoginForm);

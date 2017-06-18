@@ -32,6 +32,7 @@ function makeSchema() {
   _.extend(convertedSchema.display_name, {required : true});
   convertedSchema.password        = {type : String, required : true};
   convertedSchema.traveler        = {type : Boolean};
+  convertedSchema.admin           = {type : Boolean};
   convertedSchema.approved_seller = {type : Boolean};
   convertedSchema.auth_token      = {type : String};
 
@@ -54,8 +55,8 @@ function makeSchema() {
   hidVirtual.get(function () {
     return hashids.encode(this._id);
   });
-
   // instance methods
+
   mongooseSchema.methods.checkPassword = function (password) {
     const deferred = Q.defer();
     Bcrypt.compare(password, this.password, (err, matched) => {

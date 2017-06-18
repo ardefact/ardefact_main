@@ -83,6 +83,11 @@ function makeExpressRouter(db) {
 
   webRouter.use('/', Express.static(WEB_PATH));
 
+  // Always return the main index.html, so react-router render the route in the client
+  webRouter.get('*', (req, res) => {
+    res.sendFile(Path.resolve(WEB_PATH, 'index.html'));
+  });
+
   return webRouter;
 }
 
