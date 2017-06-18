@@ -1,6 +1,6 @@
 {
   "ARDEFACT_WEB_PORT": 8080,
-  "ARDEFACT_MONGODB_CONNECT_URL": "mongodb://127.0.0.1:27017/test",
+  "ARDEFACT_MONGODB_CONNECT_URL": "mongodb://admin:JrsGI8IvCXKs@cluster0-shard-00-00-vnbed.mongodb.net:27017,cluster0-shard-00-01-vnbed.mongodb.net:27017,cluster0-shard-00-02-vnbed.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin",
   "ARDEFACT_WEB_URL_ROOT": "localhost",
   "ARDEFACT_BCRYPT_WORK_FACTOR": 4,
   "ARDEFACT_DEBUG_MODE": "true"

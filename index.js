@@ -1,5 +1,8 @@
 "use strict";
 
+process.env.NODE_PATH = `${__dirname}/ardefact_modules`;
+require("module").Module._initPaths();
+
 var Express        = require('express'),
     ExpressSession = require('express-session'),
     MongoStore     = require('connect-mongo')(ExpressSession);
