@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./static_analysis.sh && ./test.sh",
-    "build_webpack": "node run_webpack.js",
-    "start_web": "npm run-script build_webpack; node index.js | bunyan"
+    "start_web": "node run_webpack.js && node index.js | bunyan"
   },
   "repository": {
     "type": "git",
