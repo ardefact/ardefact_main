@@ -1,7 +1,7 @@
 'use strict';
 
-var Hashids  = require('hashids'),
-    Q        = require('q');
+var Hashids = require('hashids'),
+    Q       = require('q');
 
 Q.longStackSupport = true;
 
@@ -26,7 +26,7 @@ const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
 describe("User model tests.", function () {
   var UserModel = false;
-  var hashids = new Hashids(User.COLLECTION_NAME);
+  var hashids   = new Hashids(User.COLLECTION_NAME);
 
   function setupDB(done) {
     TestUtils.getInMemoryMongoose()
@@ -96,7 +96,7 @@ describe("User model tests.", function () {
 
     it("Test findByDisplayName.", function () {
       return UserModel.findByDisplayName("entheogen")
-        .then(user=> {
+        .then(user => {
           Chai.expect(user).to.containSubset(MockUsers[1]);
           //done();
         });
@@ -112,7 +112,7 @@ describe("User model tests.", function () {
 
     it("Test findByHid.", function () {
       const user_num = 1;
-      const hid = hashids.encode(user_num);
+      const hid      = hashids.encode(user_num);
       return UserModel.findByHid(hid)
         .then(user => {
           Chai.expect(user).to.containSubset(MockUsers[user_num]);
@@ -159,21 +159,21 @@ describe("User model tests.", function () {
 
     it("Test auto increment of _id", function () {
       const newUser =
-            {
-              "first_name"   : "foo",
-              "last_name"    : "bar",
-              "display_name" : "foobar",
-              "bio"          : "some text",
-              "email"        : "robot@ardefact.com",
-              "password"     : "$2a$04$7EG9HUVFMykhzENAzqT/FuNEHfUVqjnHvPWQgPO.cGUWyaNjKMKFG",
-              "traveler"     : true
-            };
+              {
+                "first_name"   : "foo",
+                "last_name"    : "bar",
+                "display_name" : "foobar",
+                "bio"          : "some text",
+                "email"        : "robot@ardefact.com",
+                "password"     : "$2a$04$7EG9HUVFMykhzENAzqT/FuNEHfUVqjnHvPWQgPO.cGUWyaNjKMKFG",
+                "traveler"     : true
+              };
 
       return new UserModel(newUser).save()
         .then(() => {
           return UserModel.findByEmail("robot@ardefact.com")
             .then(user => {
-              Chai.expect(user._id).to.equal(MockUsers.length+1);
+              Chai.expect(user._id).to.equal(MockUsers.length + 1);
             });
         });
 

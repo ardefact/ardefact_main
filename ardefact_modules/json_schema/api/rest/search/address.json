@@ -6,7 +6,9 @@
   "properties": {
     "args": {
       "allOf": [
-        {"$ref": "/rest/input_args"},
+        {
+          "$ref": "/rest/input_args"
+        },
         {
           "type": "object",
           "properties": {
@@ -20,12 +22,14 @@
     },
     "returns": {
       "allOf": [
-        {"$ref": "/rest/returns"},
+        {
+          "$ref": "/rest/returns"
+        },
         {
           "type": "object",
           "properties": {
             "results": {
-              "type":"array",
+              "type": "array",
               "description": "Array of Address objects.",
               "items": {
                 "$ref": "/models/Location"

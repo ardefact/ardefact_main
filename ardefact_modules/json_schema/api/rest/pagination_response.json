@@ -4,7 +4,9 @@
   "description": "Pagination response",
   "type": "object",
   "allOf": [
-    {"$ref": "/rest/pagination_request"},
+    {
+      "$ref": "/rest/pagination_request"
+    },
     {
       "type": "object",
       "properties": {

@@ -3,9 +3,9 @@
 var Q = require('q');
 
 var ArdefactDatabaseBridge = require('db'),
-    ArdefactUtils = require('utils'),
-    RestUtils = require('./../RestUtils'),
-    Validators = require('./../validators/validators');
+    ArdefactUtils          = require('utils'),
+    RestUtils              = require('./../RestUtils'),
+    Validators             = require('./../validators/validators');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
@@ -14,7 +14,7 @@ function _get_user(req, res, db) {
   if (!req.body.hid) {
     RestUtils.writeError(req, res, 400, 'no hid given');
     return Q.resolve();
-  }  else {
+  } else {
     return UserModel.findByHid(req.body.hid)
       .then(user => {
         if (user) {
@@ -33,5 +33,5 @@ const get_user = Validators.wrapEndpointWithValidators(
 
 
 module.exports = {
-  get_user: get_user
+  get_user : get_user
 };

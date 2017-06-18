@@ -5,7 +5,7 @@
   "description": "A tuple of number and currency",
   "properties": {
     "amount": {
-      "type":"number",
+      "type": "number",
       "description": "Numeric value of the cash."
     },
     "range": {

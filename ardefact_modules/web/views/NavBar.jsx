@@ -10,17 +10,17 @@ class NavBar extends React.Component {
 
     var menuItems = <div></div>;
     if (window.ardefact.isUserLoggedIn()) {
-      menuItems = 
-            (<div className="navBar_links_right">            
-                <div className="navBar_links_right_textArea">
-					<div className="navBar_links_text">
-						<a href="javascript:void(0);" onClick={window.ardefact.logout}>
-							Log Out
-						</a>
-					</div>
-				</div>   
-            </div>) 	  
-	  ;
+      menuItems =
+        (<div className="navBar_links_right">
+          <div className="navBar_links_right_textArea">
+            <div className="navBar_links_text">
+              <a href="javascript:void(0);" onClick={window.ardefact.logout}>
+                Log Out
+              </a>
+            </div>
+          </div>
+        </div>)
+      ;
     }
 
     return (
@@ -32,7 +32,7 @@ class NavBar extends React.Component {
             </a>
           </div>
         </div>
-		{menuItems}		
+        {menuItems}
       </div>
     );
   }

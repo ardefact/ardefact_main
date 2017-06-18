@@ -7,28 +7,33 @@
     "args": {
       "description": "login args",
       "allOf": [
-        {"$ref": "/rest/input_args"},
         {
-        "type": "object",
-        "properties": {
-          "email": {
-            "description": "User email",
-            "type": "string"
-          },
-          "password": {
-            "description": "plaintext password",
-            "type": "string"
-          }
+          "$ref": "/rest/input_args"
         },
-        "required": [
-          "email",
-          "password"
-        ]
-      }]
+        {
+          "type": "object",
+          "properties": {
+            "email": {
+              "description": "User email",
+              "type": "string"
+            },
+            "password": {
+              "description": "plaintext password",
+              "type": "string"
+            }
+          },
+          "required": [
+            "email",
+            "password"
+          ]
+        }
+      ]
     },
     "returns": {
       "allOf": [
-        {"$ref": "/rest/returns"},
+        {
+          "$ref": "/rest/returns"
+        },
         {
           "type": "object",
           "properties": {
@@ -37,7 +42,8 @@
               "description": "auth_token only on success."
             }
           }
-        }]
+        }
+      ]
     }
   }
 }

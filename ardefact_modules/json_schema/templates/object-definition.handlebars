@@ -1,52 +1,53 @@
 <div class="overflow-scroll object-definition-table">
-	<table class="table table-striped">
-		<thead>
-			<th>Name</th>
-			<th>Description</th>
-            <!--<th>Required</th>-->
-		</thead>
-		<tbody>
-		{{#each this}}
-			<tr>
-				<td class="param-name">
-					<strong>{{@key}}</strong><br />
+    <table class="table table-striped">
+        <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <!--<th>Required</th>-->
+        </thead>
+        <tbody>
+        {{#each this}}
+            <tr>
+                <td class="param-name">
+                    <strong>{{@key}}</strong><br/>
                     <small><em>
-                    {{#if id}}
-                        {{id}}
-                    {{else}}
-					    {{type}}
-                    {{/if}}
-                </em></small>
+                        {{#if id}}
+                            {{id}}
+                        {{else}}
+                            {{type}}
+                        {{/if}}
+                    </em></small>
 
-				</td>
-				<td class="param-description object-definition-param-description">
+                </td>
+                <td class="param-description object-definition-param-description">
                     {{#if referrer_description}}{{referrer_description}}
                     {{else}}
-                    {{#if description}}{{description}}{{/if}}
+                        {{#if description}}{{description}}{{/if}}
                     {{/if}}
 
 
-                        {{#each anyOf}}
-                            <h6>{{description}}</h6>
-                            <a href="#" class="sub-object-definition-toggle"><span class="verb">Show</span> definition &raquo;</a>
-                            {{#with allProps}}
-                                {{> object-definition}}
-                            {{/with}}
-                        {{/each}}
+                    {{#each anyOf}}
+                        <h6>{{description}}</h6>
+                        <a href="#" class="sub-object-definition-toggle"><span class="verb">Show</span> definition
+                            &raquo;</a>
+                        {{#with allProps}}
+                            {{> object-definition}}
+                        {{/with}}
+                    {{/each}}
 
-                        {{#if id}}
-                            <h2>{{id}}</h2>
-                        {{/if}}
+                    {{#if id}}
+                        <h2>{{id}}</h2>
+                    {{/if}}
 
 
 
 
-                 {{!--    {{#if_eq type 'object'}} --}}
-                            {{#with this.properties}}
-                                {{> object-definition}}
-                            {{/with}}
-{{!--                        {{/if_eq}} --}}
-				</td>
+                    {{!--    {{#if_eq type 'object'}} --}}
+                    {{#with this.properties}}
+                        {{> object-definition}}
+                    {{/with}}
+                    {{!--                        {{/if_eq}} --}}
+                </td>
                 {{!--
                 <td>
                     {{#is_req this @key}}
@@ -56,9 +57,9 @@
                     {{/is_req}}
                 </td>
                 --}}
-			</tr>
-		{{/each}}
-		</tbody>
-	</table>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
 </div>
 

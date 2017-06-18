@@ -24,11 +24,13 @@ class ItemForm extends React.Component {
 
             <div className="itemFormRow">
               There's
-              <input id="searchFilterClusters" type="radio" name="singleOrMultiple" value="multipleItems" className="hideInput" />
+              <input id="searchFilterClusters" type="radio" name="singleOrMultiple" value="multipleItems"
+                     className="hideInput"/>
               <label htmlFor="searchFilterClusters" className="itemFormRadioButton">
                 a bunch of stuff
               </label>
-              <input id="searchFilterItems" type="radio" name="singleOrMultiple" value="singleItem" className="hideInput" />
+              <input id="searchFilterItems" type="radio" name="singleOrMultiple" value="singleItem"
+                     className="hideInput"/>
               <label htmlFor="searchFilterItems" className="itemFormRadioButton">
                 a thing
               </label>
@@ -38,28 +40,32 @@ class ItemForm extends React.Component {
 
             <div className="itemFormRow">
               called
-              <input id="itemFormInputName" name="name" className="universalTextFieldSettings" type="text" placeholder="a name" />
+              <input id="itemFormInputName" name="name" className="universalTextFieldSettings" type="text"
+                     placeholder="a name"/>
             </div>
 
             {/* Location */}
 
             <div className="itemFormRow">
               in
-              <input id="itemFormInputLocation" name="location" className="universalTextFieldSettings" type="text" placeholder="a place" />
+              <input id="itemFormInputLocation" name="location" className="universalTextFieldSettings" type="text"
+                     placeholder="a place"/>
             </div>
 
             {/* Cost */}
 
             <div className="itemFormRow">
               and costs around
-              <input id="itemFormInputCost" name="cost" className="universalTextFieldSettings" type="text" placeholder="a price" />.
+              <input id="itemFormInputCost" name="cost" className="universalTextFieldSettings" type="text"
+                     placeholder="a price"/>.
             </div>
 
             {/* URL */}
 
             <div className="itemFormRow">
               You can find a good image of it at
-              <input id="itemFormInputURL" name="imageUrl" className="universalTextFieldSettings" type="text" placeholder="a URL" />.
+              <input id="itemFormInputURL" name="imageUrl" className="universalTextFieldSettings" type="text"
+                     placeholder="a URL"/>.
             </div>
 
             {/* Rarity */}
@@ -70,20 +76,27 @@ class ItemForm extends React.Component {
                 In terms of its rarity, it seems to be
               </div>
               <div>
-                <input id="itemFormInputRarityUnique" type="radio" name="itemRarity" value="Unique" className="hideInput" />
-                <label htmlFor="itemFormInputRarityUnique" className="itemFormCheckbox">Unique: remarkably different and one of a kind</label>
+                <input id="itemFormInputRarityUnique" type="radio" name="itemRarity" value="Unique"
+                       className="hideInput"/>
+                <label htmlFor="itemFormInputRarityUnique" className="itemFormCheckbox">Unique: remarkably different and
+                  one of a kind</label>
               </div>
               <div>
-                <input id="itemFormInputRarityRare" type="radio" name="itemRarity" value="Rare" className="hideInput" />
-                <label htmlFor="itemFormInputRarityRare" className="itemFormCheckbox">Rare: very limited in number or exclusively made</label>
+                <input id="itemFormInputRarityRare" type="radio" name="itemRarity" value="Rare" className="hideInput"/>
+                <label htmlFor="itemFormInputRarityRare" className="itemFormCheckbox">Rare: very limited in number or
+                  exclusively made</label>
               </div>
               <div>
-                <input id="itemFormInputRarityUncommon" type="radio" name="itemRarity" value="Uncommon" className="hideInput" />
-                <label htmlFor="itemFormInputRarityUncommon" className="itemFormCheckbox">Uncommon: plenty from a certain merchant or area</label>
+                <input id="itemFormInputRarityUncommon" type="radio" name="itemRarity" value="Uncommon"
+                       className="hideInput"/>
+                <label htmlFor="itemFormInputRarityUncommon" className="itemFormCheckbox">Uncommon: plenty from a
+                  certain merchant or area</label>
               </div>
               <div>
-                <input id="itemFormInputRarityRegional" type="radio" name="itemRarity" value="Regional" className="hideInput" />
-                <label htmlFor="itemFormInputRarityRegional" className="itemFormCheckbox">Regional: plenty throughout the entire region</label>
+                <input id="itemFormInputRarityRegional" type="radio" name="itemRarity" value="Regional"
+                       className="hideInput"/>
+                <label htmlFor="itemFormInputRarityRegional" className="itemFormCheckbox">Regional: plenty throughout
+                  the entire region</label>
               </div>
 
             </div>

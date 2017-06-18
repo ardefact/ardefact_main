@@ -43,10 +43,10 @@ function populateUsers(UserModel) {
 function populateItems(ItemModel) {
   const saveMockItem = i => new ItemModel(MockArdefacts[i]).save()
     .then(() => {
-      if (i < MockArdefacts.length - 1) return saveMockItem(i+1);
+      if (i < MockArdefacts.length - 1) return saveMockItem(i + 1);
     });
 
-   return saveMockItem(0);
+  return saveMockItem(0);
 }
 
 if (!module.parent) {

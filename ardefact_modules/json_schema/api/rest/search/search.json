@@ -6,7 +6,9 @@
   "properties": {
     "args": {
       "allOf": [
-        {"$ref" : "/rest/input_args"},
+        {
+          "$ref": "/rest/input_args"
+        },
         {
           "type": "object",
           "properties": {
@@ -24,7 +26,11 @@
                 },
                 "kind": {
                   "type": {
-                    "enum": ["item", "cluster", "user"]
+                    "enum": [
+                      "item",
+                      "cluster",
+                      "user"
+                    ]
                   }
                 }
               }
@@ -38,7 +44,9 @@
     },
     "returns": {
       "allOf": [
-        {"$ref": "/rest/returns"},
+        {
+          "$ref": "/rest/returns"
+        },
         {
           "type": "object",
           "properties": {

@@ -5,8 +5,8 @@
   "description": "input variables",
   "properties": {
     "auth_token": {
-      "type":"string",
-      "description":"token to authenticate against"
+      "type": "string",
+      "description": "token to authenticate against"
     }
   }
 }

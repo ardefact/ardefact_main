@@ -41,10 +41,12 @@
       }
     }
   },
-  "required": ["hid",
+  "required": [
+    "hid",
     "created_at",
     "original_poster_hid",
     "headline",
     "detailed_info",
-    "main_picture"]
+    "main_picture"
+  ]
 }

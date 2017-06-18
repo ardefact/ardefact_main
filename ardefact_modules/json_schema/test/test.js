@@ -4,8 +4,8 @@ var Chai = require('chai');
 
 var Schemas = require('./../index.js');
 
-describe('Ardefact JSON Schema and helpers.', function() {
-  it('serialize json schema then unserialize it', function(done) {
+describe('Ardefact JSON Schema and helpers.', function () {
+  it('serialize json schema then unserialize it', function (done) {
     const UserSchema = Schemas.api.models.User;
 
     Chai.assert.isOk(UserSchema, "Should exist.");
@@ -21,17 +21,18 @@ describe('Ardefact JSON Schema and helpers.', function() {
     done();
   });
 
-  it('validate an object', function(done) {
-    const tloc = {
-      "location": {
-        "geo_location": {
-          "type": "Point",
-          "coordinate": [5.0, 3.0]
+  it('validate an object', function (done) {
+    const tloc   = {
+      "location"     : {
+        "geo_location" : {
+          "type"       : "Point",
+          "coordinate" : [5.0, 3.0]
         }
       },
-      "timestamp_ms": 1337
+      "timestamp_ms" : 1337
     };
-    const result = Schemas.validateSchema(tloc,
+    const result = Schemas.validateSchema(
+      tloc,
       Schemas.api.models.TLocation);
 
     Chai.expect(result).to.equal(true);
@@ -44,7 +45,7 @@ describe('Ardefact JSON Schema and helpers.', function() {
     done();
   });
 
-  it("Schema obj should be frozen", function(done) {
+  it("Schema obj should be frozen", function (done) {
     function modifySchemas() {
       Schemas.foo = "bar";
     }

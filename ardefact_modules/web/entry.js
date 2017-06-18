@@ -8,22 +8,10 @@ import App from './views/App.jsx';
 import ItemListForm from './views/item_list.jsx';
 
 function start() {
-
-  /*
-  if (!Cookies.get('auth_token')) {
-    ReactDOM.render(
-      <LoginForm />,
-      document.getElementById("ardefactBody")
-    );
-  } else {
-    window.location = "/itemform.html";
-  }
-  */
-
- ReactDOM.render(
-   <App />,
-   document.getElementById("ardefactBody")
- );
+  ReactDOM.render(
+    <App />,
+    document.getElementById("ardefactBody")
+  );
 
 }
 
@@ -44,11 +32,11 @@ function logout() {
 }
 
 window.ardefact = {
-  Cookies: Cookies,
-  isUserLoggedIn: isUserLoggedIn,
-  clearAllCookies: clearAllCookies,
-  start: start,
-  logout: logout
+  Cookies         : Cookies,
+  isUserLoggedIn  : isUserLoggedIn,
+  clearAllCookies : clearAllCookies,
+  start           : start,
+  logout          : logout
 };
 
 

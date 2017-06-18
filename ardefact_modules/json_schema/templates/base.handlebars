@@ -1,52 +1,52 @@
 {{> header}}
 <div class="container">
-	<header class="row">
-		<hgroup class="col-lg-12">
-			<div class="page-header">
-				<h1>{{page.title}}</h1>
-			</div>
-		</hgroup>
-	</header>
+    <header class="row">
+        <hgroup class="col-lg-12">
+            <div class="page-header">
+                <h1>{{page.title}}</h1>
+            </div>
+        </hgroup>
+    </header>
 
-	<div class="row">
-		<div class="col-lg-3">
-			{{> sidebar}}
-		</div>
+    <div class="row">
+        <div class="col-lg-3">
+            {{> sidebar}}
+        </div>
 
-		<div class="col-lg-9">
-			{{#each page.sections}}
-			<article id="{{id}}" class="row">
-				<header class="col-lg-12">
-					<h2>{{id}}</h2>
-					{{#if description}}
-					<p class="lead">{{description}}</p>
-					{{/if}}
-				</header>
+        <div class="col-lg-9">
+            {{#each page.sections}}
+                <article id="{{id}}" class="row">
+                    <header class="col-lg-12">
+                        <h2>{{id}}</h2>
+                        {{#if description}}
+                            <p class="lead">{{description}}</p>
+                        {{/if}}
+                    </header>
 
-				{{#each schemas}}
-				<section id="{{id}}" class="col-lg-12">
-					{{#each links}}
-						{{> endpoint}}
-					{{/each}}
+                    {{#each schemas}}
+                        <section id="{{id}}" class="col-lg-12">
+                            {{#each links}}
+                                {{> endpoint}}
+                            {{/each}}
 
-					{{!-- object definition area --}}
-					<section id="{{id}}-properties">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">{{id}}</h3>
-							</div>
-                            <h2> {{description}}</h2>
+                            {{!-- object definition area --}}
+                            <section id="{{id}}-properties">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">{{id}}</h3>
+                                    </div>
+                                    <h2> {{description}}</h2>
 
-							{{#with objectDefinition.allProps}}
-								{{> object-definition}}
-							{{/with}}
-						</div>
-					</section>
-				</section>
-				{{/each}}
-			</article>
-			{{/each}}
-		</div>
-	</div>
+                                    {{#with objectDefinition.allProps}}
+                                        {{> object-definition}}
+                                    {{/with}}
+                                </div>
+                            </section>
+                        </section>
+                    {{/each}}
+                </article>
+            {{/each}}
+        </div>
+    </div>
 </div>
 {{> footer}}

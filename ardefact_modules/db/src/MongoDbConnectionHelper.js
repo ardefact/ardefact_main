@@ -1,11 +1,11 @@
 'use strict';
 
-var MongoClient = require('mongodb').MongoClient,
-    Mongoose    = require('mongoose'),
+var MongoClient           = require('mongodb').MongoClient,
+    Mongoose              = require('mongoose'),
     MongooseAutoIncrement = require('mongoose-auto-increment'),
-    Q           = require('q');
+    Q                     = require('q');
 
-var ArdefactUtils = require('utils'),
+var ArdefactUtils  = require('utils'),
     ArdefactConfig = require('config');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
@@ -26,7 +26,8 @@ const createConnection = options => {
 function put(db, collection, filter, object) {
   const deferred = Q.defer();
   try {
-    db.collection(collection).replaceOne(filter,
+    db.collection(collection).replaceOne(
+      filter,
       object,
       {upsert : true});
     deferred.resolve();
@@ -60,7 +61,7 @@ function getMongooseConnection(uri, options) {
   mongoose.Promise = Q.Promise;
 
   mongoose.connect(uri, options, error => {
-    if(error) {
+    if (error) {
       LOG.error(error);
     }
   });
@@ -74,7 +75,7 @@ function getMongooseConnection(uri, options) {
       setupDb(db);
       LOG.info(`Connected to ${uri}`);
       deferred.resolve(mongoose);
-    } catch(error) {
+    } catch (error) {
       deferred.reject(error);
     }
   });
@@ -93,6 +94,6 @@ function setupDb(db) {
 module.exports = {
   put                   : put,
   getMongooseConnection : getMongooseConnection,
-  setupDb: setupDb
+  setupDb               : setupDb
 };
 

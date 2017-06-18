@@ -8,7 +8,7 @@ var RestUtils = require('../RestUtils');
 
 function wrapEndpointWithValidators(endpoint, validators) {
   return (req, res, db) => {
-    validators.reduce(Q.when, Q({req:req, res:res, db:db}))
+    validators.reduce(Q.when, Q({req : req, res : res, db : db}))
       .then(() => endpoint(req, res, db))
       .catch(error => {
         RestUtils.writeError(req, res, 500, error);
@@ -31,6 +31,6 @@ function validUser(args) {
 
 
 module.exports = {
-  wrapEndpointWithValidators: wrapEndpointWithValidators,
-  validUser: validUser,
+  wrapEndpointWithValidators : wrapEndpointWithValidators,
+  validUser                  : validUser,
 };

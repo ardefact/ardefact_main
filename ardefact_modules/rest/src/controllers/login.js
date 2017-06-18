@@ -1,11 +1,11 @@
 'use strict';
 
 var Uuid = require('uuid'),
-    Q = require('q'),
-    _ = require('lodash');
+    Q    = require('q'),
+    _    = require('lodash');
 
 var ArdefactDatabaseBridge = require('db'),
-    ArdefactUtils = require('utils');
+    ArdefactUtils          = require('utils');
 
 var RestUtils = require('./../RestUtils');
 
@@ -75,5 +75,5 @@ function handleRequest(req, res, db) {
 }
 
 module.exports = {
-  handleRequest: handleRequest,
+  handleRequest : handleRequest,
 };

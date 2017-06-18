@@ -29,5 +29,5 @@ const mkCountDownLatch = (howMany, deferred, result) => {
 };
 
 module.exports = {
-  mkCountDownLatch: mkCountDownLatch
+  mkCountDownLatch : mkCountDownLatch
 };

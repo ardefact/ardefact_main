@@ -36,7 +36,7 @@
       "$ref": "/models/Availability"
     },
     "last_known_tlocations": {
-      "type":"array",
+      "type": "array",
       "description": "An array of last known locations",
       "items": {
         "$ref": "/models/TLocation"

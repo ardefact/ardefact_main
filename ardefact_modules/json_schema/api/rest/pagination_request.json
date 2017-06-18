@@ -3,7 +3,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description": "Pagination request",
   "type": "object",
-  "properties":{
+  "properties": {
     "after": {
       "type": "string",
       "description": "return items after this one."

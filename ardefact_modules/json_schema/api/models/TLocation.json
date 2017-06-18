@@ -12,5 +12,8 @@
       "description": "UTC timestamp in ms"
     }
   },
-  "required": ["location", "timestamp_ms"]
+  "required": [
+    "location",
+    "timestamp_ms"
+  ]
 }

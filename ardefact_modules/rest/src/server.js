@@ -2,9 +2,9 @@
 
 var Express = require('express');
 
-var ArdefactUtils = require('utils'),
+var ArdefactUtils          = require('utils'),
     ArdefactDatabaseBridge = require('db'),
-    ArdefactConfig = require('config');
+    ArdefactConfig         = require('config');
 
 var ApiRouter = require('./ApiRouter');
 
@@ -41,5 +41,5 @@ function makeRestServer(args, options) {
 }
 
 module.exports = {
-  makeRestServer: makeRestServer,
+  makeRestServer : makeRestServer,
 };

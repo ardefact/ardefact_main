@@ -9,10 +9,10 @@ var DBHelper = require('./src/MongoDbConnectionHelper'),
     Item     = require('./src/collections/Item');
 
 module.exports = {
-  connect: DBHelper.getMongooseConnection,
-  collections: {
-    User: User,
-    Item: Item,
+  connect     : DBHelper.getMongooseConnection,
+  collections : {
+    User : User,
+    Item : Item,
   }
 };
 

@@ -51,11 +51,11 @@ describe("Item model tests.", function () {
     });
 
     it('Get items by hid', function () {
-        const testItemI = i => ItemModel.findByHid(hashids.encode(i))
-          .then(item => {
-            Chai.expect(item).to.containSubset(MockItems[i]);
-            if (i < MockItems.length - 1) return testItemI(i + 1);
-          });
+      const testItemI = i => ItemModel.findByHid(hashids.encode(i))
+        .then(item => {
+          Chai.expect(item).to.containSubset(MockItems[i]);
+          if (i < MockItems.length - 1) return testItemI(i + 1);
+        });
 
       return testItemI(0);
     });

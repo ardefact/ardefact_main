@@ -6,7 +6,7 @@ var ArdefactConfig = require('config');
 
 var JSON_HEADERS =
       {
-        'Content-Type': 'application/json',
+        'Content-Type' : 'application/json',
       };
 
 if (ArdefactConfig.isDebugMode()) {
@@ -18,14 +18,14 @@ function makeResult(errorCode, errorMessage, startTimeMs, results) {
     results = {};
   }
   return {
-    error: {
-      code: errorCode,
-      message: errorMessage
+    error   : {
+      code    : errorCode,
+      message : errorMessage
     },
-    stats: {
-      server_time_ms: Date.now() - startTimeMs
+    stats   : {
+      server_time_ms : Date.now() - startTimeMs
     },
-    results: results
+    results : results
   };
 }
 
@@ -40,7 +40,7 @@ const writeSuccess = (req, res, httpCode, results) => {
 };
 
 module.exports = {
-  makeResult: makeResult,
-  writeError: writeError,
-  writeSuccess: writeSuccess
+  makeResult   : makeResult,
+  writeError   : writeError,
+  writeSuccess : writeSuccess
 };

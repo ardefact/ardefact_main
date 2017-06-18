@@ -1,6 +1,6 @@
 'use strict';
 
-var FS = require('fs'),
+var FS   = require('fs'),
     Path = require('path');
 
 const CONFIG_VARS = {
@@ -52,12 +52,12 @@ function getConfig(configName) {
 
 
 module.exports = {
-  isDebugMode: isDebugMode,
-  getConfig: getConfig,
-  CONFIG_VARS: CONFIG_VARS,
+  isDebugMode : isDebugMode,
+  getConfig   : getConfig,
+  CONFIG_VARS : CONFIG_VARS,
 
-  _test: {
-    getMode: getMode,
-    getConfigFromFile: getConfigFromFile
+  _test : {
+    getMode           : getMode,
+    getConfigFromFile : getConfigFromFile
   }
 };

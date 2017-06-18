@@ -1,12 +1,12 @@
 'use strict';
 
 var Express = require('express'),
-    _ = require('lodash'),
-    Uuid = require('uuid'),
-    Bcrypt = require('bcrypt');
+    _       = require('lodash'),
+    Uuid    = require('uuid'),
+    Bcrypt  = require('bcrypt');
 
 var ArdefactDatabaseBridge = require('db'),
-    ArdefactUtils = require('utils');
+    ArdefactUtils          = require('utils');
 
 var RestUtils = require('./RestUtils');
 
@@ -25,8 +25,6 @@ function makeExpressRouter(db) {
   const curryHandler = handler => (req, res) => handler(req, res, db);
 
 
-
-
   // record start time
   restRouter.use((req, res, next) => {
     req.startTimeMs = Date.now();
@@ -42,5 +40,5 @@ function makeExpressRouter(db) {
 }
 
 module.exports = {
-  makeRouter: makeExpressRouter,
+  makeRouter : makeExpressRouter,
 };

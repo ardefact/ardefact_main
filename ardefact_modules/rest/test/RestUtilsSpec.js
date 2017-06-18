@@ -6,8 +6,8 @@ var ArdefactJsonSchema = require('json_schema');
 
 var RestUtils = require('../src/RestUtils');
 
-describe('REST server utilities.', function() {
-  it('makeResult should conform to json schema', function(done) {
+describe('REST server utilities.', function () {
+  it('makeResult should conform to json schema', function (done) {
     const mockResult = RestUtils.makeResult(1337, 'foo', 0);
 
     Chai.expect(

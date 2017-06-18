@@ -4,19 +4,19 @@ var _ = require('lodash'),
     Q = require('q');
 
 var ArdefactDatabaseBridge = require('db'),
-    ArdefactUtils = require('utils'),
-    RestUtils = require('./../RestUtils'),
-    Validators = require('../validators/validators');
+    ArdefactUtils          = require('utils'),
+    RestUtils              = require('./../RestUtils'),
+    Validators             = require('../validators/validators');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
 function adaptItemForRest(mongooseItem) {
   return {
-    hid: mongooseItem.hid,
-    headline: mongooseItem.headline,
-    detailed_info: mongooseItem.detailed_info,
-    pictures: mongooseItem.pictures,
-    created_at: mongooseItem.created_at,
+    hid           : mongooseItem.hid,
+    headline      : mongooseItem.headline,
+    detailed_info : mongooseItem.detailed_info,
+    pictures      : mongooseItem.pictures,
+    created_at    : mongooseItem.created_at,
   };
 }
 
@@ -50,12 +50,12 @@ function _get_recent(req, res, db) {
   const ItemModel = ArdefactDatabaseBridge.collections.Item.getModel(db);
 
   var condition = {};
-  var count = 50;
+  var count     = 50;
 
   if (req.body.pagination) {
     if (req.body.pagination.after) {
       const afterTimeStamp = Number(req.body.pagination.after);
-      condition = {"created_at.timestamp_ms" : {$lt : afterTimeStamp}};
+      condition            = {"created_at.timestamp_ms" : {$lt : afterTimeStamp}};
     }
 
     if (req.body.pagination.count) {
@@ -66,11 +66,11 @@ function _get_recent(req, res, db) {
   const query = ItemModel
     .find(condition)
     .limit(count)
-    .sort({"created_at.timestamp_ms": -1});
+    .sort({"created_at.timestamp_ms" : -1});
 
   return query.exec().then(items => {
-    RestUtils.writeSuccess(req, res, 200, _.map(_.values(items), adaptItemForRest));
-  })
+      RestUtils.writeSuccess(req, res, 200, _.map(_.values(items), adaptItemForRest));
+    })
     .catch(error => RestUtils.writeError(req, res, 500, error));
 }
 
@@ -80,6 +80,6 @@ const get_recent = Validators.wrapEndpointWithValidators(
 );
 
 module.exports = {
-  get_item: get_item,
-  get_recent: get_recent,
+  get_item   : get_item,
+  get_recent : get_recent,
 };

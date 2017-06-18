@@ -19,37 +19,39 @@ const hashids = new Hashids(COLLECTION_NAME);
 
 function makeSchema() {
   const convertedSchema =
-          createMongooseSchema(ArdefactJSONSchemas.id_2_obj,
+          createMongooseSchema(
+            ArdefactJSONSchemas.id_2_obj,
             ArdefactJSONSchemas.api.models.Item);
 
   delete convertedSchema.hid;
 
-  const mongooseSchema = new Mongoose.Schema(convertedSchema,
+  const mongooseSchema = new Mongoose.Schema(
+    convertedSchema,
     {
-      strict: true
+      strict : true
     });
 
   mongooseSchema.index(
-    {original_poster_hid: "hashed"},
-    {background: true});
+    {original_poster_hid : "hashed"},
+    {background : true});
   mongooseSchema.index(
-    {"created_at.timestamp_ms": 1},
-    {background: true});
+    {"created_at.timestamp_ms" : 1},
+    {background : true});
   mongooseSchema.index(
-    {cluster_hid: "hashed"},
-    {background:true});
+    {cluster_hid : "hashed"},
+    {background : true});
 
   // register auto increement plugin for Users so that
   // _id is auto incremented for us.
   mongooseSchema.plugin(AutoIncrement.plugin, COLLECTION_NAME);
 
   // virtuals
-  mongooseSchema.virtual('hid').get(function(){
+  mongooseSchema.virtual('hid').get(function () {
     return hashids.encode(this._id);
   });
 
   // statics
-  mongooseSchema.statics.findByHid = function(hid) {
+  mongooseSchema.statics.findByHid = function (hid) {
     const id = hashids.decode(hid)[0];
     return this.findById(id).exec();
   };
@@ -60,8 +62,8 @@ function makeSchema() {
 var COMPILED_MODEL = false;
 
 module.exports = {
-  getSchema: makeSchema,
-  getModel: mongooseInstance => {
+  getSchema       : makeSchema,
+  getModel        : mongooseInstance => {
     if (!mongooseInstance) {
       throw 'mongooseInstance is required.';
     }
@@ -70,5 +72,5 @@ module.exports = {
     }
     return COMPILED_MODEL;
   },
-  COLLECTION_NAME: COLLECTION_NAME
+  COLLECTION_NAME : COLLECTION_NAME
 };

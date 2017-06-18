@@ -5,12 +5,12 @@ var _ = require('lodash');
 const MockItems = require('./_mockardefacts.json');
 
 function convertItem(old) {
-  const new_obj = old;
+  const new_obj      = old;
   new_obj.created_at = {
-    location: {
-      coordinate: [old.created_at.lng, old.created_at.lat]
+    location     : {
+      coordinate : [old.created_at.lng, old.created_at.lat]
     },
-    timestamp_ms: 1337
+    timestamp_ms : 1337
   };
 
   return new_obj;
