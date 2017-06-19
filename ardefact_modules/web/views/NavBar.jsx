@@ -1,4 +1,6 @@
 var React = require('react');
+
+import {Link} from 'react-router-dom';
 import $ from 'jquery';
 
 class NavBar extends React.Component {
@@ -22,16 +24,27 @@ class NavBar extends React.Component {
         </div>)
       ;
     }
+    var adminMenuItems = "";
+    if (window.ardefact.isUserAdmin()) {
+      adminMenuItems = (
+        <div className="navBar_links_left">
+          <div className="navBar_links_text">
+            <Link to="/user_admin">User Admin</Link>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className="navBar">
         <div className="navBar_links_left">
           <div className="navBar_links_logo">
-            <a href="/">
+            <Link to="/">
               <img src="images/logo/ardefact_logo_32px.png"/>
-            </a>
+            </Link>
           </div>
         </div>
+        {adminMenuItems}
         {menuItems}
       </div>
     );

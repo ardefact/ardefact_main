@@ -4,6 +4,7 @@ var FS   = require('fs'),
     Path = require('path');
 
 var Express        = require('express'),
+    Bcrypt         = require('bcrypt'),
     _              = require('lodash'),
     CookieParser   = require('cookie-parser'),
     Uuid           = require('uuid'),
@@ -43,6 +44,7 @@ function getLoggedInUser(req, db) {
 }
 
 function makeExpressRouter(db) {
+  const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
   const webRouter = Express.Router();
 
   webRouter.use(CookieParser());
@@ -78,6 +80,46 @@ function makeExpressRouter(db) {
     }).catch(error => {
       LOG.error(error);
       res.status(500).end(error.toString());
+    });
+  });
+
+  webRouter.post('/user_admin', (req, res, next) => {
+    getLoggedInUser(req, db).then(user => {
+      if (!user || !user.isAdmin()) {
+        res.status(404).end("Not found.");
+      } else {
+        LOG.info(req.body);
+        if (
+          !req.body.display_name ||
+          !req.body.first_name ||
+          !req.body.last_name ||
+          !req.body.email ||
+          !req.body.password
+        ) {
+          res.status(400).end("Missing some fields....");
+        } else {
+          // TODO: use configured number of salt rounds instead of magic val.
+          Bcrypt.hash(req.body.password, 12, function (err, result) {
+            if (err) {
+              res.status(500).end(JSON.stringify(err));
+            } else {
+              new UserModel(
+                {
+                  display_name: req.body.display_name.trim(),
+                  first_name: req.body.first_name.trim(),
+                  last_name: req.body.last_name.trim(),
+                  email: req.body.email.trim(),
+                  password: result
+                })
+                .save()
+                .then(() => res.status(200).end())
+                .catch(error => res.status(400).end(JSON.stringify(error)));
+            }
+
+          });
+        }
+      }
+
     });
   });
 

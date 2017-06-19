@@ -22,6 +22,10 @@ function isUserLoggedIn() {
   return Cookies.get('auth_token');
 }
 
+function isUserAdmin() {
+  return isUserLoggedIn() && Cookies.get('is_admin') === 'true';
+}
+
 function clearAllCookies() {
   Cookies.remove('is_admin', {path : ''});
   Cookies.remove('auth_token', {path : ''});
@@ -38,6 +42,7 @@ function logout() {
 window.ardefact = {
   Cookies         : Cookies,
   isUserLoggedIn  : isUserLoggedIn,
+  isUserAdmin     : isUserAdmin,
   clearAllCookies : clearAllCookies,
   start           : start,
   logout          : logout

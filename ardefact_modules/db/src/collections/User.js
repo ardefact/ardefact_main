@@ -73,6 +73,10 @@ function makeSchema() {
     return deferred.promise;
   };
 
+  mongooseSchema.methods.isAdmin = function() {
+    return this.admin === true;
+  };
+
   // statics
   mongooseSchema.statics.findByHid = function (hid) {
     const id = hashids.decode(hid)[0];
