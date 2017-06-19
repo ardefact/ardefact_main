@@ -76,14 +76,14 @@ class LoginForm extends React.Component {
             The journey begins.
           </div>
 
-          <div className="signinFieldRow">
-            <input id="email" name="signinPageInputEmail" className="universalTextFieldSettings textFieldEmailIcon"
+          <div className="signinFieldRow fillUpRowDiv">
+            <input id="email" name="signinPageInputEmail" className="universalTextFieldSettings textFieldEmailIcon fillUpRowInput"
                    type="text" placeholder="Email" onChange={this.handleChange}/>
           </div>
 
-          <div className="signinFieldRow">
+          <div className="signinFieldRow fillUpRowDiv">
             <input id="password" name="signinPageInputPassword"
-                   className="universalTextFieldSettings textFieldPasswordIcon" type="password" placeholder="Password"
+                   className="universalTextFieldSettings textFieldPasswordIcon fillUpRowInput" type="password" placeholder="Password"
                    autoComplete="off" onChange={this.handleChange}/>
           </div>
           <button type="button" id="signinButton" name="signinPageButton" onClick={this.handleSubmit}>

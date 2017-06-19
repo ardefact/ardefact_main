@@ -38,33 +38,33 @@ class ItemForm extends React.Component {
 
             {/* Name */}
 
-            <div className="itemFormRow">
+            <div className="itemFormRow fillUpRowDiv">
               called
-              <input id="itemFormInputName" name="name" className="universalTextFieldSettings" type="text"
+              <input id="itemFormInputName" name="name" className="universalTextFieldSettings fillUpRowInput" type="text"
                      placeholder="a name"/>
             </div>
 
             {/* Location */}
 
-            <div className="itemFormRow">
+            <div className="itemFormRow fillUpRowDiv">
               in
-              <input id="itemFormInputLocation" name="location" className="universalTextFieldSettings" type="text"
+              <input id="itemFormInputLocation" name="location" className="universalTextFieldSettings fillUpRowInput" type="text"
                      placeholder="a place"/>
             </div>
 
             {/* Cost */}
 
-            <div className="itemFormRow">
+            <div className="itemFormRow fillUpRowDiv">
               and costs around
-              <input id="itemFormInputCost" name="cost" className="universalTextFieldSettings" type="text"
+              <input id="itemFormInputCost" name="cost" className="universalTextFieldSettings fillUpRowInput" type="text"
                      placeholder="a price"/>.
             </div>
 
             {/* URL */}
 
-            <div className="itemFormRow">
+            <div className="itemFormRow fillUpRowDiv">
               You can find a good image of it at
-              <input id="itemFormInputURL" name="imageUrl" className="universalTextFieldSettings" type="text"
+              <input id="itemFormInputURL" name="imageUrl" className="universalTextFieldSettings fillUpRowInput" type="text"
                      placeholder="a URL"/>.
             </div>
 
