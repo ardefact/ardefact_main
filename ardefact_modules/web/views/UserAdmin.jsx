@@ -22,8 +22,8 @@ class UserAdmin extends React.Component {
     this.userAddForm[event.target.name] = event.target.value;
     this.setState(
       {
-        resultBanner: this.state.resultBanner,
-        userAddForm: this.userAddForm
+        resultBanner : this.state.resultBanner,
+        userAddForm  : this.userAddForm
       }
     );
   }
@@ -38,16 +38,16 @@ class UserAdmin extends React.Component {
         success : function (data, textStatus, response) {
           self.setState(
             {
-              resultBanner: "SUCCESS!",
-              userAddForm: {},
+              resultBanner : "SUCCESS!",
+              userAddForm  : {},
             }
           );
         },
         error   : function (r, ts) {
           self.setState(
             {
-              resultBanner: `Failure!  ${JSON.stringify(r,1 ,1)}`,
-              userAddForm: self.userAddForm
+              resultBanner : `Failure!  ${JSON.stringify(r, 1, 1)}`,
+              userAddForm  : self.userAddForm
             }
           );
         }
@@ -87,7 +87,7 @@ class UserAdmin extends React.Component {
             </div>
           </div>
         </form>
-        <div style={{color:'red'}}>{this.state.resultBanner}</div>
+        <div style={{color : 'red'}}>{this.state.resultBanner}</div>
       </div>
     );
 

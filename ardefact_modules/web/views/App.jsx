@@ -5,6 +5,7 @@ import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import LoginForm from './login.jsx';
 import ItemForm from './ItemForm.jsx';
+import ItemList from './ItemList.jsx';
 import UserAdmin from './UserAdmin.jsx';
 
 class App extends React.Component {
@@ -18,8 +19,9 @@ class App extends React.Component {
     if (window.ardefact.isUserLoggedIn()) {
       body = (
         <Switch>
-          <Route path='/user_admin' component={UserAdmin} />
-          <Route path='/' component={ItemForm} />
+          <Route path='/user_admin' component={UserAdmin}/>
+          <Route path="/item_list" component={ItemList}/>
+          <Route path='/' component={ItemForm}/>
         </Switch>
       );
     } else {

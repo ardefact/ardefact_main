@@ -1,4 +1,4 @@
-const path = require('path');
+const path           = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
@@ -28,14 +28,14 @@ module.exports = {
   node    : {
     fs : "empty"
   },
-  plugins: [
+  plugins : [
     /*
-    new UglifyJSPlugin(
-      {
-        compress: true,
-        comments: false,
+     new UglifyJSPlugin(
+     {
+     compress: true,
+     comments: false,
 
-      })
-      */
+     })
+     */
   ],
 };

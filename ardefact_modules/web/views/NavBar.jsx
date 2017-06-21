@@ -10,6 +10,7 @@ class NavBar extends React.Component {
 
   render() {
 
+    // Common menu items for logged in users.
     var menuItems = <div></div>;
     if (window.ardefact.isUserLoggedIn()) {
       menuItems = (
@@ -22,14 +23,24 @@ class NavBar extends React.Component {
         </div>
       );
     }
+
+    // Admin only menu items.
     var adminMenuItems = "";
     if (window.ardefact.isUserAdmin()) {
       adminMenuItems = (
-        <div className="navBar_links_right_textArea">
-          <div className="navBar_links_text">
-            <Link to="/user_admin">User Admin</Link>
+        <a name="foo">
+          <div className="navBar_links_right_textArea">
+            <div className="navBar_links_text">
+              <Link to="/item_list">Submitted Items</Link>
+            </div>
           </div>
-        </div>
+
+          <div className="navBar_links_right_textArea">
+            <div className="navBar_links_text">
+              <Link to="/user_admin">User Admin</Link>
+            </div>
+          </div>
+        </a>
       );
     }
 
@@ -43,7 +54,7 @@ class NavBar extends React.Component {
           </div>
         </div>
         <div className="navBar_links_right">
-          {menuItems}        
+          {menuItems}
           {adminMenuItems}
         </div>
       </div>

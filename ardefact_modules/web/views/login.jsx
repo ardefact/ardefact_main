@@ -1,5 +1,5 @@
 var React = require('react');
-import { withRouter } from 'react-router';
+import {withRouter} from 'react-router';
 
 import $ from 'jquery';
 import Cookies from '../lib/js.cookie-2.1.4.min';
@@ -77,13 +77,15 @@ class LoginForm extends React.Component {
           </div>
 
           <div className="signinFieldRow fillUpRowDiv">
-            <input id="email" name="signinPageInputEmail" className="universalTextFieldSettings textFieldEmailIcon fillUpRowInput"
+            <input id="email" name="signinPageInputEmail"
+                   className="universalTextFieldSettings textFieldEmailIcon fillUpRowInput"
                    type="text" placeholder="Email" onChange={this.handleChange}/>
           </div>
 
           <div className="signinFieldRow fillUpRowDiv">
             <input id="password" name="signinPageInputPassword"
-                   className="universalTextFieldSettings textFieldPasswordIcon fillUpRowInput" type="password" placeholder="Password"
+                   className="universalTextFieldSettings textFieldPasswordIcon fillUpRowInput" type="password"
+                   placeholder="Password"
                    autoComplete="off" onChange={this.handleChange}/>
           </div>
           <button type="button" id="signinButton" name="signinPageButton" onClick={this.handleSubmit}>

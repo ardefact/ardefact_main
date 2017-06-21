@@ -85,42 +85,61 @@ function makeExpressRouter(db) {
 
   webRouter.post('/user_admin', (req, res, next) => {
     getLoggedInUser(req, db).then(user => {
-      if (!user || !user.isAdmin()) {
-        res.status(404).end("Not found.");
-      } else {
-        LOG.info(req.body);
-        if (
-          !req.body.display_name ||
-          !req.body.first_name ||
-          !req.body.last_name ||
-          !req.body.email ||
-          !req.body.password
-        ) {
-          res.status(400).end("Missing some fields....");
+        if (!user || !user.isAdmin()) {
+          res.status(404).end("Not found.");
         } else {
-          // TODO: use configured number of salt rounds instead of magic val.
-          Bcrypt.hash(req.body.password, 12, function (err, result) {
-            if (err) {
-              res.status(500).end(JSON.stringify(err));
-            } else {
-              new UserModel(
-                {
-                  display_name: req.body.display_name.trim(),
-                  first_name: req.body.first_name.trim(),
-                  last_name: req.body.last_name.trim(),
-                  email: req.body.email.trim(),
-                  password: result
-                })
-                .save()
-                .then(() => res.status(200).end())
-                .catch(error => res.status(400).end(JSON.stringify(error)));
-            }
-
-          });
+          LOG.info(req.body);
+          if (
+            !req.body.display_name ||
+            !req.body.first_name ||
+            !req.body.last_name ||
+            !req.body.email ||
+            !req.body.password
+          ) {
+            res.status(400).end("Missing some fields....");
+          } else {
+            // TODO: use configured number of salt rounds instead of magic val.
+            Bcrypt.hash(req.body.password, 12, function (err, result) {
+              if (err) {
+                res.status(500).end(JSON.stringify(err));
+              } else {
+                new UserModel(
+                  {
+                    display_name : req.body.display_name.trim(),
+                    first_name   : req.body.first_name.trim(),
+                    last_name    : req.body.last_name.trim(),
+                    email        : req.body.email.trim(),
+                    password     : result
+                  })
+                  .save()
+                  .then(() => res.status(200).end())
+                  .catch(error => res.status(400).end(JSON.stringify(error)));
+              }
+            });
+          }
         }
+      })
+      .catch(error => res.end(500, JSON.stringify(error)));
+  });
+
+  webRouter.post('/item_list', (req, res, next) => {
+    getLoggedInUser(req, db).then(user => {
+      if (!user || !user.isAdmin()) {
+        res.status(404).end();
+      } else {
+        LOG.info("Querying db for itemform items");
+        db.connection.collection('itemform').find().toArray((error, docs) => {
+          if (error) {
+            res.status(500).end(JSON.stringify(error));
+          } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).end(JSON.stringify(docs));
+          }
+        })
       }
 
     });
+
   });
 
   webRouter.use('/', Express.static(WEB_PATH));

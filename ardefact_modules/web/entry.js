@@ -6,7 +6,6 @@ import Cookies from './lib/js.cookie-2.1.4.min';
 
 import LoginForm from './views/login.jsx';
 import App from './views/App.jsx';
-import ItemListForm from './views/item_list.jsx';
 
 function start() {
   ReactDOM.render(

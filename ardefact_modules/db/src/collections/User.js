@@ -73,7 +73,7 @@ function makeSchema() {
     return deferred.promise;
   };
 
-  mongooseSchema.methods.isAdmin = function() {
+  mongooseSchema.methods.isAdmin = function () {
     return this.admin === true;
   };
 
