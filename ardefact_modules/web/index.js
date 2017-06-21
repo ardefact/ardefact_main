@@ -65,7 +65,12 @@ function makeExpressRouter(db) {
       if (!user) {
         res.status(403).end("Not authenticated");
       } else {
-        var entry = _.extend({submitter : user.email}, req.body);
+        var entry = _.extend(
+          {
+            submitter : user.email,
+            timestamp: new Date().toJSON()
+          },
+          req.body);
         delete entry.itemSubmitButton;
         db.connection.collection('itemform').save(entry, function (err, records) {
           if (err) {
