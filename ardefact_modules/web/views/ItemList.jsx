@@ -28,7 +28,7 @@ class ItemList extends React.Component {
           )
         },
         error   : function (error) {
-          this.setState(
+          self.setState(
             {
               rows  : [],
               error : error,
