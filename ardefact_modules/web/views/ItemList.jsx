@@ -45,9 +45,11 @@ class ItemList extends React.Component {
 
     if (this.state.rows === undefined) {
       return (
-        <div id="itemFormOuterArea">
-          <div id="itemFormInnerArea">
-            Loading...
+        <div>
+          <div id="itemFormOuterArea">
+            <div id="itemFormInnerArea">
+              Loading...
+            </div>
           </div>
         </div>
       );

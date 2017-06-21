@@ -1559,7 +1559,7 @@ input#myMapUserPasswordCheckbox[type="checkbox"]:checked + label {
 #itemFormOuterArea {
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 128px;
+    padding-top: 128px;
     width: 640px;
 }
 
