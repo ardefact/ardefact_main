@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
     $.post({
              url     : '/a/login',
              data    : {
-               email      : email,
+               email      : email.trim(),
                password   : password,
                csrf_token : Cookies.get('csrf_token'),
              },
