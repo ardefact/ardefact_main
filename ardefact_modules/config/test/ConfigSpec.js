@@ -55,7 +55,7 @@ describe('Config tests.', function () {
     }
 
     Chai.expect(modifyObj).to.throw(
-      "Can't add property foo, object is not extensible");
+      "Cannot add property foo, object is not extensible");
 
     done();
   });

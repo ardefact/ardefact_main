@@ -28,14 +28,4 @@ module.exports = {
   node    : {
     fs : "empty"
   },
-  plugins : [
-    /*
-     new UglifyJSPlugin(
-     {
-     compress: true,
-     comments: false,
-
-     })
-     */
-  ],
 };

@@ -51,7 +51,7 @@ describe('Ardefact JSON Schema and helpers.', function () {
     }
 
     Chai.expect(modifySchemas).to
-      .throw("Can't add property foo, object is not extensible");
+      .throw("Cannot add property foo, object is not extensible");
 
     const schemaObj = Schemas.api.models.TLocation;
 
@@ -60,7 +60,7 @@ describe('Ardefact JSON Schema and helpers.', function () {
     }
 
     Chai.expect(modifySchema).to
-      .throw("Can't add property foo, object is not extensible");
+      .throw("Cannot add property foo, object is not extensible");
 
     done();
   });
