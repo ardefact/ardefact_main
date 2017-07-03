@@ -45,6 +45,7 @@ function getLoggedInUser(req, db) {
 
 function makeExpressRouter(db) {
   const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
+  const ItemFormModel = ArdefactDatabaseBridge.collections.ItemForm.getModel(db);
   const webRouter = Express.Router();
 
   webRouter.use(CookieParser());
@@ -68,10 +69,11 @@ function makeExpressRouter(db) {
         var entry = _.extend(
           {
             submitter : user.email,
-            timestamp: new Date().toJSON()
+            last_touched_ms: new Date().toJSON()
           },
           req.body);
         delete entry.itemSubmitButton;
+        // TODO: Use ItemFormModel when we ar ready to migrate from itemform
         db.connection.collection('itemform').save(entry, function (err, records) {
           if (err) {
             LOG.error(err);
@@ -81,6 +83,14 @@ function makeExpressRouter(db) {
             res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
           }
         });
+        /*
+        new ItemFormModel(entry).save().then(result => {
+          LOG.info(result);
+          res.set('Content-Type', 'text/html');
+          res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
+        })
+          .catch(error => res.status(500).end("couldn't save"));
+          */
       }
     }).catch(error => {
       LOG.error(error);

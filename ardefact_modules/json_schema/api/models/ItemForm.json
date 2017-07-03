@@ -4,5 +4,35 @@
   "description": "An item or a collection of items.",
   "type": "object",
   "properties": {
+    "submitter": {
+      "description": "Email of submitter.",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name of the item.",
+      "type": "string"
+    },
+    "pictures": {
+      "type": "array",
+      "items": {
+        "$ref": "/models/Image"
+      }
+    },
+    "cost": {
+      "$ref:": "/models/Price"
+    },
+    "rarity": {
+     "type": "number",
+      "description": "Degree of rarity."
+    },
+    "last_touched_ms": {
+      "type": "number",
+      "description": "UTC timestamp in ms."
+    },
+    "is_draft": {
+      "type": "boolean",
+      "description": "Is it still a draft?"
+    }
+
   }
 }

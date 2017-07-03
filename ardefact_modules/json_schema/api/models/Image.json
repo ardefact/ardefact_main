@@ -9,7 +9,7 @@
       "type": "object",
       "properties": {
         "thumbnails": {
-          "description": "x_y -> URI suffix",
+          "description": "x_y -> image filename",
           "type": "object"
         },
         "full": {
