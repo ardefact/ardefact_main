@@ -12,7 +12,8 @@ var Express        = require('express'),
     ReactDOMServer = require('react-dom/server'),
     Handlebars     = require('handlebars'),
     React          = require('react'),
-    Webpack        = require('webpack');
+    Webpack        = require('webpack'),
+    multer         = require('multer');
 
 var ExpressSession = require('express-session');
 const MongoStore   = require('connect-mongo')(ExpressSession);
@@ -48,6 +49,17 @@ function makeExpressRouter(db) {
   const ItemFormModel = ArdefactDatabaseBridge.collections.ItemForm.getModel(db);
   const webRouter = Express.Router();
 
+  const storage =   multer.diskStorage({
+      destination: function (req, file, callback) {
+          callback(null, './uploads');
+      },
+      filename: function (req, file, callback) {
+          callback(null, file.fieldname + '-' + Date.now());
+      }
+  });
+
+  const upload = multer({ storage : storage}).single('userPhoto');
+
   webRouter.use(CookieParser());
 
   webRouter.get('/', (req, res, next) => {
@@ -74,7 +86,7 @@ function makeExpressRouter(db) {
           req.body);
         delete entry.itemSubmitButton;
         // TODO: Use ItemFormModel when we ar ready to migrate from itemform
-        db.connection.collection('itemform').save(entry, function (err, records) {
+        db.connection.collection('itemforms').save(entry, function (err, records) {
           if (err) {
             LOG.error(err);
             res.status(500).end("Couldn't save");
@@ -83,14 +95,6 @@ function makeExpressRouter(db) {
             res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
           }
         });
-        /*
-        new ItemFormModel(entry).save().then(result => {
-          LOG.info(result);
-          res.set('Content-Type', 'text/html');
-          res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
-        })
-          .catch(error => res.status(500).end("couldn't save"));
-          */
       }
     }).catch(error => {
       LOG.error(error);
@@ -155,6 +159,65 @@ function makeExpressRouter(db) {
 
     });
 
+  });
+
+  webRouter.post('/a/item_form', (req, res, next) => {
+
+    getLoggedInUser(req, db).then(user => {
+      if (!user) {
+        res.status(403).end("Not authenticated");
+      } else {
+
+        let data = {
+          name: req.body.name,
+          location: req.body.location,
+          cost: req.body.cost,
+          rarity: req.body.rarity,
+          isCluster: req.body.isCluster,
+          submitter : user.email,
+          last_touched_ms: + new Date()
+        };
+
+        ItemFormModel.findOne({ 'submitter': user.email }, function (err, result) {
+
+          LOG.info(result);
+
+          if(result) {
+
+            result = _.extend(result, data);
+            result['pictures'] = [{uris: {full: "xxxxxx"}}, {uris: {full: "xxxxxx2"}}];
+            result.save().then(
+              result => {
+                res.set('Content-Type', 'text/html');
+                res.status(200).end();
+              }
+            );
+          }
+          else {
+            ItemFormModel.create(data).then(
+              result => {
+                res.set('Content-Type', 'text/html');
+                res.status(200).end();
+              }
+            );
+          }
+
+        }).catch(err => LOG.error(err));
+      }
+
+    });
+  });
+
+  webRouter.get('/a/item_form', (req, res, next) => {
+    getLoggedInUser(req, db).then(user => {
+      if (!user) {
+          res.status(404).end();
+      } else {
+        ItemFormModel.findOne({ 'submitter': user.email }, function (err, result) {
+            res.status(200).end(JSON.stringify(result));
+        }).catch(err => LOG.error(err));
+      }
+    });
   });
 
   webRouter.use('/', Express.static(WEB_PATH));

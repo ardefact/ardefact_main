@@ -32,6 +32,14 @@
     "is_draft": {
       "type": "boolean",
       "description": "Is it still a draft?"
+    },
+    "location" : {
+      "type" : "string",
+      "description" : "temp location field"
+    },
+    "isCluster" : {
+      "type" : "boolean",
+      "description" : "is the item a cluster"
     }
 
   }

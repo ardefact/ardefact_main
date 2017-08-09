@@ -7,6 +7,7 @@ import LoginForm from './login.jsx';
 import ItemForm from './ItemForm.jsx';
 import ItemList from './ItemList.jsx';
 import UserAdmin from './UserAdmin.jsx';
+import CoolItemForm from './CoolItemForm.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +22,9 @@ class App extends React.Component {
         <Switch>
           <Route path='/user_admin' component={UserAdmin}/>
           <Route path="/item_list" component={ItemList}/>
+          <Route path="/item_form" component={CoolItemForm}/>
           <Route path='/' component={ItemForm}/>
+
         </Switch>
       );
     } else {
