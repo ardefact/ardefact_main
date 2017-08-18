@@ -13,7 +13,8 @@ var Express        = require('express'),
     Handlebars     = require('handlebars'),
     React          = require('react'),
     Webpack        = require('webpack'),
-    multer         = require('multer');
+    fileUpload     = require('express-fileupload'),
+    ExifImage      = require('exif').ExifImage;
 
 var ExpressSession = require('express-session');
 const MongoStore   = require('connect-mongo')(ExpressSession);
@@ -49,18 +50,9 @@ function makeExpressRouter(db) {
   const ItemFormModel = ArdefactDatabaseBridge.collections.ItemForm.getModel(db);
   const webRouter = Express.Router();
 
-  const storage =   multer.diskStorage({
-      destination: function (req, file, callback) {
-          callback(null, './uploads');
-      },
-      filename: function (req, file, callback) {
-          callback(null, file.fieldname + '-' + Date.now());
-      }
-  });
-
-  const upload = multer({ storage : storage}).single('userPhoto');
-
   webRouter.use(CookieParser());
+
+  webRouter.use(fileUpload());
 
   webRouter.get('/', (req, res, next) => {
     // TODO:  Only do this for form pages.
@@ -216,6 +208,66 @@ function makeExpressRouter(db) {
         ItemFormModel.findOne({ 'submitter': user.email }, function (err, result) {
             res.status(200).end(JSON.stringify(result));
         }).catch(err => LOG.error(err));
+      }
+    });
+  });
+
+  webRouter.post('/upload', (req, res, next) => {
+    getLoggedInUser(req, db).then(user => {
+      if (!user) {
+        res.status(404).end();
+      } else {
+
+        let sampleFile = req.files.userImage;
+        let fileName = user.email + +new Date();
+        sampleFile.mv(WEB_PATH + '/uploads/' + fileName, function(err) {
+          if (err) {
+            LOG.error(err);
+            return res.status(500).send(err);
+          }
+
+
+          new ExifImage({ image : WEB_PATH + '/uploads/' + fileName }, function (err, exifData) {
+            if (err)
+              LOG.error(err)
+            else
+              console.log(exifData); // Do something with your data!
+          });
+
+          ItemFormModel.findOne({ 'submitter': user.email }, function (err, result) {
+
+            if(result) {
+              if( Object.prototype.toString.call( result['pictures'] ) === '[object Array]' ) {
+                result['pictures'].push({uris: {full: fileName}});
+              }
+              else {
+                result['pictures'] = [{uris: {full: fileName}}];
+              }
+              result.save().then(
+                result => {
+                  res.set('Content-Type', 'text/html');
+                  res.status(200).end();
+                }
+              );
+            }
+            else {
+              let data = {
+                submitter : user.email,
+                last_touched_ms: + new Date(),
+                pictures: [{uris: {full: fileName}}]
+              };
+
+              ItemFormModel.create(data).then(
+                result => {
+                  res.set('Content-Type', 'text/html');
+                  res.status(200).end();
+                }
+              );
+            }
+
+          }).catch(err => LOG.error(err));
+
+        });
       }
     });
   });

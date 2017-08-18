@@ -2017,3 +2017,26 @@ button#itemFormButton:hover {
 .footerCopyright {
     color: #666;
 }
+
+.itemFormPictures img {
+    width: 100%;
+    hight: auto;
+}
+
+.itemFormPictures .col1{
+    width: 50%;
+    float: left;
+}
+
+.itemFormPictures .col2{
+    width: 50%;
+    float: right;
+}
+
+.itemFormPictures .col1 img{
+
+}
+
+.itemFormPictures .col2 img{
+
+}
