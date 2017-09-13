@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import _ from 'lodash';
 
 export default class CoolItemForm extends React.Component {
   constructor() {
@@ -16,7 +17,7 @@ export default class CoolItemForm extends React.Component {
     };
 
     this.getDraft = this.getDraft.bind(this);
-    this.submitForm = this.submitForm.bind(this);
+    this.updateForm = _.debounce(this.updateForm.bind(this), 100);
     this.uploadImage = this.uploadImage.bind(this);
     this.handleRarityChange= this.handleRarityChange.bind(this);
   }
@@ -62,7 +63,10 @@ export default class CoolItemForm extends React.Component {
       },
       success: (data, textStatus, response) => {
         console.log(response);
-
+        const res = JSON.parse(response.responseText);
+        this.setState({
+          pictures: this.state.pictures.concat(res)
+        });
       }
     });
   }
@@ -73,11 +77,19 @@ export default class CoolItemForm extends React.Component {
 
   getDraft() {
     $.ajax({
-      url: '/a/item_form',
+      url: '/api/item_form',
       success: (data, textStatus, response) => {
         const res = JSON.parse(response.responseText);
         if(res != null) {
-          this.setState({location: res.location, cost: res.cost, name: res.name, rarity: res.rarity, isCluster: res.isCluster ? 1 : 0, gettingDraft: false, pictures: res.pictures});
+          this.setState({
+            location: res.location,
+            cost: res.cost,
+            name: res.name,
+            rarity: res.rarity,
+            isCluster: res.isCluster ? 1 : 0,
+            gettingDraft: false,
+            pictures: res.pictures
+          });
         }
         else {
           this.setState({gettingDraft: false});
@@ -86,8 +98,7 @@ export default class CoolItemForm extends React.Component {
     });
   }
 
-  submitForm(e) {
-    e.preventDefault();
+  updateForm() {
 
     let data = {
       name: this.state.name,
@@ -98,58 +109,58 @@ export default class CoolItemForm extends React.Component {
     };
 
     $.ajax({
-      url: '/a/item_form',
+      url: '/api/item_form',
       data: data,
       method: 'POST'
     });
   }
 
   isClusterChange(e) {
-    this.setState({isCluster: e.target.value});
+    this.setState({isCluster: e.target.value}, this.updateForm);
   }
 
   nameChange(e) {
-    this.setState({name: e.target.value});
+    this.setState({name: e.target.value}, this.updateForm);
   }
 
   locationChange(e) {
-    this.setState({location: e.target.value});
+    this.setState({location: e.target.value}, this.updateForm);
   }
 
   costChange(e) {
-    this.setState({cost: e.target.value});
+    this.setState({cost: e.target.value}, this.updateForm);
   }
 
   handleRarityChange(e) {
-    this.setState({rarity: e.target.value});
+    this.setState({rarity: e.target.value}, this.updateForm);
   }
 
-  removeImage(id) {
-    console.log(id);
+  removeImage(index) {
     $.ajax({
-      url: '/a/item_form/image/' + id,
-      method: 'DELETE'
+      url: '/api/item_form/image/' + index,
+      method: 'DELETE',
+      success: (data, textStatus, response) => {
+        var newPictures = this.state.pictures.slice();
+        newPictures.splice(index, 1);
+        this.setState({pictures: newPictures});
+      }
     });
   }
 
+  clickFileInput(e) {
+    e.preventDefault();
+
+    $(this.imageUpload).click();
+  }
+
+  submitItemForm(e) {
+    e.preventDefault();
+  }
+
   render() {
-
-    let column1Pictures = [];
-    let column2Pictures = [];
-
-    for(let i=0; i<this.state.pictures.length; i++) {
-      let item = this.state.pictures[i];
-      let element = (
-        <ImageDisplay src={item.uris.full} key={i} removeImage={this.removeImage.bind(this, item._id)}/>
-      );
-
-      if(i % 2 == 0) {
-        column1Pictures.push(element);
-      }
-      else {
-        column2Pictures.push(element);
-      }
-    }
+    const images = this.state.pictures.map((item, index) => {
+      return <ImageDisplay src={item.uris.full} key={index} removeImage={this.removeImage.bind(this, index)}/>;
+    });
 
     return (
       <form onSubmit={this.submitForm} style={{visibility: this.state.gettingDraft ? 'hidden' : 'visible'}}>
@@ -230,22 +241,19 @@ export default class CoolItemForm extends React.Component {
 
            </div>
 
-           <div className="itemFormRow fillUpRowDiv">
-             Pictures
-             <input name="userImage" className="fillUpRowInput" type="file" ref={c=>this.imageUpload=c}/>
-
-             <a onClick={this.handleImageUpload.bind(this)}>dfdksjgfldsj</a>
+           <div className="buttonArea">
+             <input style={{display: 'none'}} name="userImage" className="fillUpRowInput" type="file" ref={c=>this.imageUpload=c} onChange={this.handleImageUpload.bind(this)}/>
+             <button className="moreButton" onClick={this.clickFileInput.bind(this)}>Add Some Pictures</button>
            </div>
 
            <div className="itemFormPictures">
-             <div className="col1">{column1Pictures}</div>
-             <div className="col2">{column2Pictures}</div>
+             {images}
            </div>
 
            {/* Submit Button */}
 
-           <div id="foundButtonArea">
-             <button type="submit" id="moreButton" name="itemSubmitButton">
+           <div className="buttonArea">
+             <button type="submit" className="moreButton" name="itemSubmitButton" onClick={this.submitItemForm.bind(this)}>
                Add It To The Catalog
              </button>
            </div>

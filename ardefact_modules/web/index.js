@@ -9,34 +9,33 @@ var Express        = require('express'),
     CookieParser   = require('cookie-parser'),
     Uuid           = require('uuid'),
     Q              = require('q'),
-    ReactDOMServer = require('react-dom/server'),
-    Handlebars     = require('handlebars'),
+  //  ReactDOMServer = require('react-dom/server'),
+   // Handlebars     = require('handlebars'),
     React          = require('react'),
-    Webpack        = require('webpack'),
+   // Webpack        = require('webpack'),
     fileUpload     = require('express-fileupload'),
     ExifImage      = require('exif').ExifImage;
 
 var ExpressSession = require('express-session');
-const MongoStore   = require('connect-mongo')(ExpressSession);
+//const MongoStore   = require('connect-mongo')(ExpressSession);
 
 
-var WebpackConfig = require('./webpack.config');
-var compiler      = Webpack(WebpackConfig);
+//var WebpackConfig = require('./webpack.config');
+//var compiler      = Webpack(WebpackConfig);
 
 var ArdefactUtils          = require('utils');
 var ArdefactConfig         = require('config');
 var ArdefactDatabaseBridge = require('db');
 
-var cliArgs = require('commander').option('-p, --port <number>', 'port to server web content on', Number, ArdefactConfig.getConfig(ArdefactConfig.CONFIG_VARS.ARDEFACT_WEB_PORT)).parse(process.argv);
+//var cliArgs = require('commander').option('-p, --port <number>', 'port to server web content on', Number, ArdefactConfig.getConfig(ArdefactConfig.CONFIG_VARS.ARDEFACT_WEB_PORT)).parse(process.argv);
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
 const WEB_PATH = Path.join(Path.dirname(__filename), "www2");
 
-
 LOG.info(`Using ${WEB_PATH} for static content path`);
 
-const HTML_TEMPLATE = Handlebars.compile(FS.readFileSync(`${WEB_PATH}/index.html`).toString());
+//const HTML_TEMPLATE = Handlebars.compile(FS.readFileSync(`${WEB_PATH}/index.html`).toString());
 
 function getLoggedInUser(req, db) {
   if (!req.cookies.auth_token) {
@@ -48,6 +47,8 @@ function getLoggedInUser(req, db) {
 function makeExpressRouter(db) {
   const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
   const ItemFormModel = ArdefactDatabaseBridge.collections.ItemForm.getModel(db);
+  const ItemModel = ArdefactDatabaseBridge.collections.Item.getModel(db);
+
   const webRouter = Express.Router();
 
   webRouter.use(CookieParser());
@@ -63,35 +64,6 @@ function makeExpressRouter(db) {
       res.cookie("csrf_token", csrf_token);
     }
     next();
-  });
-
-  webRouter.post('/itemform', (req, res, next) => {
-    getLoggedInUser(req, db).then(user => {
-      if (!user) {
-        res.status(403).end("Not authenticated");
-      } else {
-        var entry = _.extend(
-          {
-            submitter : user.email,
-            last_touched_ms: new Date().toJSON()
-          },
-          req.body);
-        delete entry.itemSubmitButton;
-        // TODO: Use ItemFormModel when we ar ready to migrate from itemform
-        db.connection.collection('itemforms').save(entry, function (err, records) {
-          if (err) {
-            LOG.error(err);
-            res.status(500).end("Couldn't save");
-          } else {
-            res.set('Content-Type', 'text/html');
-            res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
-          }
-        });
-      }
-    }).catch(error => {
-      LOG.error(error);
-      res.status(500).end(error.toString());
-    });
   });
 
   webRouter.post('/user_admin', (req, res, next) => {
@@ -153,8 +125,8 @@ function makeExpressRouter(db) {
 
   });
 
-  webRouter.post('/a/item_form', (req, res, next) => {
 
+  webRouter.post('/api/item_form', (req, res, next) => {
     getLoggedInUser(req, db).then(user => {
       if (!user) {
         res.status(403).end("Not authenticated");
@@ -177,7 +149,6 @@ function makeExpressRouter(db) {
           if(result) {
 
             result = _.extend(result, data);
-            result['pictures'] = [{uris: {full: "xxxxxx"}}, {uris: {full: "xxxxxx2"}}];
             result.save().then(
               result => {
                 res.set('Content-Type', 'text/html');
@@ -200,15 +171,62 @@ function makeExpressRouter(db) {
     });
   });
 
-  webRouter.get('/a/item_form', (req, res, next) => {
+  webRouter.get('/api/item_form', (req, res, next) => {
     getLoggedInUser(req, db).then(user => {
       if (!user) {
-          res.status(404).end();
+        res.status(404).end();
       } else {
         ItemFormModel.findOne({ 'submitter': user.email }, function (err, result) {
-            res.status(200).end(JSON.stringify(result));
+          res.status(200).end(JSON.stringify(result));
         }).catch(err => LOG.error(err));
       }
+    });
+  });
+
+
+  webRouter.post('/api/item', (req, res, next) => {
+    getLoggedInUser(req, db).then(user => {
+      if (!user) {
+        res.status(404).end();
+      } else {
+        let data = {
+          original_poster_hid: user.hid,
+
+        };
+
+        res.status(200).end(JSON.stringify(data));
+        return;
+
+        ItemModel.create({ 'submitter': user.email }, function (err, result) {
+          res.status(200).end(JSON.stringify(result));
+        }).catch(err => LOG.error(err));
+      }
+    });
+  });
+
+
+  webRouter.delete('/api/item_form/image/:image_index', (req, res, next) => {
+
+    getLoggedInUser(req, db).then(user => {
+      if (!user) {
+        res.status(403).end("Not authenticated");
+      } else {
+
+        ItemFormModel.findOne({ 'submitter': user.email }, function (err, result) {
+
+          FS.unlink(result['pictures'][req.params['image_index']]['uris']['full'], ()=>{
+            result['pictures'].splice(req.params.image_index, 1);
+            result.save().then(
+              result => {
+                res.set('Content-Type', 'text/html');
+                res.status(200).end();
+              }
+            );
+          });
+
+        }).catch(err => LOG.error(err));
+      }
+
     });
   });
 
@@ -234,6 +252,8 @@ function makeExpressRouter(db) {
               console.log(exifData); // Do something with your data!
           });
 
+          let promise = null;
+
           ItemFormModel.findOne({ 'submitter': user.email }, function (err, result) {
 
             if(result) {
@@ -243,12 +263,7 @@ function makeExpressRouter(db) {
               else {
                 result['pictures'] = [{uris: {full: fileName}}];
               }
-              result.save().then(
-                result => {
-                  res.set('Content-Type', 'text/html');
-                  res.status(200).end();
-                }
-              );
+              promise = result.save();
             }
             else {
               let data = {
@@ -257,13 +272,15 @@ function makeExpressRouter(db) {
                 pictures: [{uris: {full: fileName}}]
               };
 
-              ItemFormModel.create(data).then(
-                result => {
-                  res.set('Content-Type', 'text/html');
-                  res.status(200).end();
-                }
-              );
+              promise = ItemFormModel.create(data);
             }
+
+            promise.then(function(product) {
+              const index = product['pictures'].length-1;
+              const result = product['pictures'][index];
+              res.setHeader('Content-Type', 'application/json');
+              res.status(200).end(JSON.stringify(result));
+            });
 
           }).catch(err => LOG.error(err));
 

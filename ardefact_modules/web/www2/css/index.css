@@ -279,6 +279,15 @@ button#signinButton:hover {
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
+.buttonArea {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    display: block;
+    clear: both;
+    position: relative;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
 button#foundButton {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -926,7 +935,7 @@ input#searchFilterTravelers[type="checkbox"]:checked + label, input#searchFilter
     margin-right: 10%;
 }
 
-button#moreButton {
+button.moreButton {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -947,7 +956,7 @@ button#moreButton {
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
-button#moreButton:hover {
+button.moreButton:hover {
     background-color: #ffae7d;
     -webkit-transition-duration: 0.5s;
     -moz-transition-duration: 0.5s;
@@ -2020,23 +2029,20 @@ button#itemFormButton:hover {
 
 .itemFormPictures img {
     width: 100%;
-    hight: auto;
+    height: auto;
 }
 
-.itemFormPictures .col1{
-    width: 50%;
-    float: left;
+.btn {
+    outline: none;
+    border: 0;
+    padding: 24px 24px;
+    text-align: center;
+    /*width: 100%;*/
+    cursor: pointer;
+    font-size: 22px
 }
 
-.itemFormPictures .col2{
-    width: 50%;
-    float: right;
-}
-
-.itemFormPictures .col1 img{
-
-}
-
-.itemFormPictures .col2 img{
-
+.btn-watevs {
+    background-color: #ffae7d;
+    color: #ffffff;
 }
