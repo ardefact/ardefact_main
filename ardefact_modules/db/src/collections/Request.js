@@ -1,21 +1,21 @@
 'use strict';
 
 var Hashids = require('hashids'),
-    Q       = require('q'),
-    _       = require('lodash');
+  Q       = require('q'),
+  _       = require('lodash');
 
 var Mongoose             = require('mongoose'),
-    AutoIncrement        = require('mongoose-auto-increment'),
-    createMongooseSchema = require('json-schema-to-mongoose');
+  AutoIncrement        = require('mongoose-auto-increment'),
+  createMongooseSchema = require('json-schema-to-mongoose');
 
 var ArdefactJSONSchemas = require('json_schema'),
-    ArdefactUtils       = require('utils');
+  ArdefactUtils       = require('utils');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
 var getDb = require('./../MongoDbConnectionHelper').getDb;
 
-const COLLECTION_NAME = 'Item';
+const COLLECTION_NAME = 'Request';
 const USER_COLLECTION_NAME = require('./User').COLLECTION_NAME;
 
 const hashids = new Hashids(COLLECTION_NAME);
@@ -23,9 +23,9 @@ const userHashids = new Hashids(USER_COLLECTION_NAME);
 
 function makeSchema() {
   const convertedSchema =
-          createMongooseSchema(
-            ArdefactJSONSchemas.id_2_obj,
-            ArdefactJSONSchemas.api.models.Item);
+    createMongooseSchema(
+      ArdefactJSONSchemas.id_2_obj,
+      ArdefactJSONSchemas.api.models.Request);
 
   delete convertedSchema.hid;
 
@@ -36,33 +36,21 @@ function makeSchema() {
     });
 
   mongooseSchema.index(
-    {original_poster_hid : "hashed"},
+    {"requester_hid" : 1},
     {background : true});
   mongooseSchema.index(
-    {"created_at.timestamp_ms" : 1},
+    {"timestamp_ms" : 1},
     {background : true});
   mongooseSchema.index(
-    {cluster_hid : "hashed"},
+    {"fulfilled" : 1},
+    {background : true});
+  mongooseSchema.index(
+    {"item_hid" : 1},
     {background : true});
 
   // register auto increement plugin for Users so that
   // _id is auto incremented for us.
   mongooseSchema.plugin(AutoIncrement.plugin, COLLECTION_NAME);
-
-  // virtuals
-  mongooseSchema.virtual('hid').get(function () {
-    return hashids.encode(this._id);
-  });
-
-  mongooseSchema.virtual('original_poster_id').get(function () {
-    return userHashids.decode(this.original_poster_hid)[0];
-  });
-
-  // statics
-  mongooseSchema.statics.findByHid = function (hid) {
-    const id = hashids.decode(hid)[0];
-    return this.findById(id).exec();
-  };
 
   return mongooseSchema;
 }

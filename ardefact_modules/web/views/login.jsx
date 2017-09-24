@@ -41,7 +41,7 @@ class LoginForm extends React.Component {
                Cookies.set('auth_token', res['results']['hid'] + ',' + res['results']['auth_token']);
                Cookies.set('is_admin', res['results']['admin']);
                //window.location = "/";
-               self.props.history.push('/');
+               self.props.history.push('/item_form');
              },
              error   : function (r, ts) {
                alert("Please try again");

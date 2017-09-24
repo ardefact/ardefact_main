@@ -274,7 +274,8 @@ button#signinButton:hover {
 #foundButtonArea {
     margin-top: 12px;
     display: block;
-    clear: both;
+    /*clear: both;*/
+    float: right;
     position: relative;
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }

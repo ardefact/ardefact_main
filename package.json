@@ -36,6 +36,7 @@
     "express-session": "^1.13.0",
     "handlebars": "^4.0.10",
     "hashids": "^1.1.1",
+    "image-type": "^3.0.0",
     "jquery": "^3.2.1",
     "json-schema-to-mongoose": "^0.2.2",
     "jsonschema": "^1.1.0",

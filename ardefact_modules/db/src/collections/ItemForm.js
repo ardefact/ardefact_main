@@ -1,4 +1,4 @@
-'use strict';
+
 
 var Hashids = require('hashids'),
     Q       = require('q'),
@@ -13,6 +13,10 @@ var ArdefactJSONSchemas = require('json_schema'),
     ArdefactUtils       = require('utils');
 
 const COLLECTION_NAME = 'itemform';
+
+const LOG = ArdefactUtils.Logging.createLogger(__filename);
+
+var getDb = require('./../MongoDbConnectionHelper').getDb;
 
 function makeSchema() {
   const convertedSchema =
@@ -31,12 +35,21 @@ function makeSchema() {
     {unique : false, background : true}
   );
 
+  mongooseSchema.statics.findByEmail = function(email) {
+    return this.findOne({submitter : email}).exec();
+  };
+
+  mongooseSchema.statics.clearDraft = function(email) {
+    return this.findOne({submitter : email}).remove().exec()
+  };
+
   return mongooseSchema;
 }
 
 var COMPILED_MODEL = false;
 
-function getModel(mongooseInstance) {
+function getModel() {
+  var mongooseInstance = getDb();
   if (!mongooseInstance) {
     throw 'mongooseInstance is required.';
   }

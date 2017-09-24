@@ -9,7 +9,10 @@ var ArdefactDatabaseBridge = require('db'),
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
-function _get_user(req, res, db) {
+var db = ArdefactDatabaseBridge.getDb();
+
+function _get_user(req, res) {
+
   const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
   if (!req.body.hid) {
     RestUtils.writeError(req, res, 400, 'no hid given');

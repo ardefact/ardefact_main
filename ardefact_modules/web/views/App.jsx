@@ -7,7 +7,7 @@ import LoginForm from './login.jsx';
 import ItemForm from './ItemForm.jsx';
 import ItemList from './ItemList.jsx';
 import UserAdmin from './UserAdmin.jsx';
-import CoolItemForm from './CoolItemForm.jsx';
+import Item from './Item.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -22,9 +22,8 @@ class App extends React.Component {
         <Switch>
           <Route path='/user_admin' component={UserAdmin}/>
           <Route path="/item_list" component={ItemList}/>
-          <Route path="/item_form" component={CoolItemForm}/>
-          <Route path='/' component={ItemForm}/>
-
+          <Route path="/item_form" component={ItemForm}/>
+          <Route path="/item/:id" component={Item}/>
         </Switch>
       );
     } else {
@@ -34,7 +33,7 @@ class App extends React.Component {
     return (
       <div>
         <NavBar/>
-        <div>
+        <div style={{paddingTop: '64px'}}>
           {body}
         </div>
         <Footer/>

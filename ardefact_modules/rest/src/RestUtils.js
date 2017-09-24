@@ -39,8 +39,13 @@ const writeSuccess = (req, res, httpCode, results) => {
   res.end(JSON.stringify(makeResult(0, undefined, req.startTimeMs, results)));
 };
 
+function getUploadPath() {
+  return process.env.NODE_PATH + '/web/www2/uploads/';
+}
+
 module.exports = {
   makeResult   : makeResult,
   writeError   : writeError,
-  writeSuccess : writeSuccess
+  writeSuccess : writeSuccess,
+  getUploadPath: getUploadPath
 };

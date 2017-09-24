@@ -10,8 +10,8 @@ var Express        = require('express'),
 var ArdefactDatabaseBridge = require('db'),
     ArdefactUtils          = require('utils'),
     ArdefactConfig         = require('config'),
-    ArdefactWeb            = require('web'),
-    ArdefactRest           = require('rest');
+    ArdefactRest           = require('rest'),
+    ArdefactWeb            = require('web');
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
@@ -27,8 +27,8 @@ ArdefactDatabaseBridge.connect()
   .then(db => {
     LOG.info("Connected to MongoDB.  Spinning up server.");
 
+    var webRouter  = ArdefactWeb.makeWebRouter();
     var restRouter = ArdefactRest.makeRestRouter(db);
-    var webRouter  = ArdefactWeb.makeWebRouter(db);
 
     const app = Express();
 
