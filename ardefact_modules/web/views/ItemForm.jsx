@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
 
-export default class CoolItemForm extends React.Component {
+export default class ItemForm extends React.Component {
   constructor() {
     super();
 
