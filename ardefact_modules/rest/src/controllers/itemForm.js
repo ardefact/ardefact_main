@@ -8,7 +8,9 @@ var Hashids = require('hashids'),
     _       = require('lodash'),
     Bcrypt  = require('bcrypt'),
     RestUtils              = require('./../RestUtils'),
-    ExifImage      = require('exif').ExifImage;
+    ExifImage      = require('exif').ExifImage,
+    readChunk = require('read-chunk'),
+    imageType = require('image-type');
 
 var ArdefactUtils          = require('utils');
 var ArdefactConfig         = require('config');
@@ -70,25 +72,28 @@ var get_item_form = (req, res, next) => {
 var add_image = (req, res, next) => {
   var user = res.locals.user;
   let sampleFile = req.files.userImage;
+
+  if(imageType(sampleFile.data) == null) {
+    return res.status(400).send('not an image');
+  }
+
   let fileName = user.email + +new Date();
   sampleFile.mv(RestUtils.getUploadPath() + fileName, function (err) {
-     if (err) {
-       LOG.error(err);
-       return res.status(500).send(err);
-     }
-
-
-     try {
-     new ExifImage({ image : RestUtils.getUploadPath() + fileName }, function (err, exifData) {
-     if (err)
+    if (err) {
      LOG.error(err);
-     else
-     LOG.info(exifData); // Do something with your data!
-     });
-     } catch(error) {
-     LOG.error(err);
-     }
+     return res.status(500).send(err);
+    }
 
+    try {
+    new ExifImage({ image : RestUtils.getUploadPath() + fileName }, function (err, exifData) {
+    if (err)
+    LOG.error(err);
+    else
+    LOG.info(exifData); // Do something with your data!
+    });
+    } catch(error) {
+    LOG.error(err);
+    }
 
     let promise = null;
 

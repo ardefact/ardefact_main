@@ -93,6 +93,19 @@ function create_item(req, res, next) {
 
   var detailedInfo = req.body.detailedInfo;
 
+  var price = Number(req.body.price);
+
+  var rarity = Number(req.body.rarity);
+
+  if(_.trim(headline) == '' || _.isNumber(_.trim(headline)) || isNaN(price) || headline == null || price == null ) {
+    return res.status(400).end('invalid request');
+  }
+
+  var stringPrice = String(price);
+  if(stringPrice.indexOf(".") != -1) {
+    price *= 100;
+  }
+
   var ItemFormModel = ArdefactDatabaseBridge.collections.ItemForm.getModel();
 
   ItemFormModel.findByEmail(user.email).then(result => {
@@ -115,7 +128,7 @@ function create_item(req, res, next) {
       rarity: req.body.rarity,
       is_cluster: req.body.isCluster,
       prices: [{
-        amount: req.body.price
+        amount: price
       }]
     };
 

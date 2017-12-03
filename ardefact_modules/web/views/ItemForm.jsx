@@ -2,6 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
 
+import ReactCrop, {makeAspectCrop} from 'react-image-crop';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+
 export default class ItemForm extends React.Component {
   constructor() {
     super();
@@ -13,13 +16,17 @@ export default class ItemForm extends React.Component {
       cost: '',
       rarity: null,
       isCluster: null,
-      pictures: []
+      pictures: [],
+      crop: {aspect: 16 / 9},
+      image: '',
+      address: 'San Francisco, CA'
     };
 
     this.getDraft = this.getDraft.bind(this);
     this.updateForm = _.debounce(this.updateForm.bind(this), 300);
     this.uploadImage = this.uploadImage.bind(this);
     this.handleRarityChange= this.handleRarityChange.bind(this);
+    this.onChange = (address) => this.setState({ address })
   }
 
   componentDidMount() {
@@ -62,7 +69,8 @@ export default class ItemForm extends React.Component {
         this.setState({
           pictures: this.state.pictures.concat(res)
         });
-      }
+      },
+      error: () => {}
     });
   }
 
@@ -159,7 +167,7 @@ export default class ItemForm extends React.Component {
         headline: this.state.name,
         rarity: this.state.rarity,
         isCluster: this.state.isCluster == 1 ? true : false,
-        price: this.state.price
+        price: this.state.cost
       },
       success: (data, textStatus, response) => {
         this.props.history.push("/item_list");
@@ -167,12 +175,50 @@ export default class ItemForm extends React.Component {
     });
   }
 
+  cropChange(crop) {
+    this.setState({ crop });
+  }
+
+  imageChange(e) {
+    this.readURL.apply(this, [e.target])
+  }
+
+  onImageLoaded(image) {
+    this.setState({
+      crop: makeAspectCrop({
+        x: 0,
+        y: 0,
+        aspect: 16 / 9,
+        width: 50,
+      }, image.width / image.height),
+    });
+  }
+
+ readURL(input) {
+
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.setState({image: e.target.result});
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
   render() {
     const images = this.state.pictures.map((item, index) => {
       return <ImageDisplay src={item.uris.full} key={index} removeImage={this.removeImage.bind(this, index)}/>;
     });
 
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange,
+    };
+
     return (
+      <div>
       <form onSubmit={this.submitForm} style={{visibility: this.state.gettingDraft ? 'hidden' : 'visible'}}>
 
        <div id="itemFormOuterArea" className="clearFix">
@@ -273,6 +319,15 @@ export default class ItemForm extends React.Component {
        </div>
 
       </form>
+
+
+        <ReactCrop src={this.state.image} onChange={this.cropChange.bind(this)} crop={this.state.crop} onImageLoaded={this.onImageLoaded.bind(this)}/>
+
+        <input ref={c=>this.imageInput=c} type='file' onChange={this.imageChange.bind(this)}/>
+
+        <PlacesAutocomplete inputProps={inputProps} />
+
+      </div>
     )
   }
 }
