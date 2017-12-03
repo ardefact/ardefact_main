@@ -38,6 +38,7 @@
     "bio": "Code things.",
     "email": "terryjweber@gmail.com ",
     "password": "$2a$04$7EG9HUVFMykhzENAzqT/FuNEHfUVqjnHvPWQgPO.cGUWyaNjKMKFG",
-    "traveler": false
+    "traveler": false,
+    "admin": true
   }
 ]

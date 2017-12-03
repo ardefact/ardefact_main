@@ -10,6 +10,8 @@ var ArdefactUtils  = require('utils'),
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
+var _db;
+
 const createConnection = options => {
   const deferred = Q.defer();
 
@@ -66,13 +68,15 @@ function getMongooseConnection(uri, options) {
     }
   });
 
-  const db = mongoose.connection;
+  _db = mongoose.connection;
+
+  LOG.info(mongoose.connection)
 
   const deferred = Q.defer();
-  db.on('error', error => deferred.reject(error));
-  db.on('open', () => {
+  _db.on('error', error => deferred.reject(error));
+  _db.on('open', () => {
     try {
-      setupDb(db);
+      setupDb(_db);
       LOG.info(`Connected to ${uri}`);
       deferred.resolve(mongoose);
     } catch (error) {
@@ -91,9 +95,14 @@ function setupDb(db) {
   MongooseAutoIncrement.initialize(db);
 }
 
+function getDb() {
+  return _db;
+}
+
 module.exports = {
   put                   : put,
   getMongooseConnection : getMongooseConnection,
-  setupDb               : setupDb
+  setupDb               : setupDb,
+  getDb: getDb
 };
 

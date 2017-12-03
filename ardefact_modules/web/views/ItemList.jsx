@@ -9,18 +9,22 @@ import ReactTable from 'react-table'
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
 
+import Result from './Result.jsx';
+
 class ItemList extends React.Component {
   constructor(props) {
     super(props)
 
     const self = this;
-    this.state = {};
+    this.state = {rows: [], error: ""};
+  }
 
-    $.post(
+  componentDidMount() {
+    $.get(
       {
-        url     : '/item_list',
-        success : function (data, textStatus, response) {
-          self.setState(
+        url     : '/api/item_list',
+        success : (data, textStatus, response) => {
+          this.setState(
             {
               rows  : data,
               error : ""
@@ -28,7 +32,7 @@ class ItemList extends React.Component {
           )
         },
         error   : function (error) {
-          self.setState(
+          this.setState(
             {
               rows  : [],
               error : error,
@@ -55,22 +59,18 @@ class ItemList extends React.Component {
       );
     }
 
-    var row_i = 0;
-
-    var rows = _.map(
-      this.state.rows,
-      row => (
-        <div style={{whiteSpace : "pre-wrap"}} key={row_i++}>
-          {JSON.stringify(row, 1, 1)}
-        </div>
-      )
-    );
+    var rows = this.state.rows.map((item, index) => {
+      console.log(item)
+      let uri = '';
+      if(item.hasOwnProperty('main_picture')) {
+       uri =  item.main_picture.uris.full;
+      }
+      return <Result key={index} uri={uri} headline={item.headline} location="dfkdjf" price="kgfskdgfj" isCluster={item.is_cluster} id={item._id}/>
+    });
 
     return (
-      <div id="itemFormOuterArea">
-        <div id="itemFormInnerArea">
-          {rows}
-        </div>
+      <div id="searchResultsArea" className="clearFix">
+        {rows}
       </div>
     );
   }

@@ -39,6 +39,14 @@
       "items": {
         "$ref": "/models/Image"
       }
+    },
+    "is_cluster" : {
+      "type" : "boolean",
+      "description" : "is the item a cluster"
+    },
+    "rarity": {
+      "type": "number",
+      "description": "Degree of rarity."
     }
   },
   "required": [

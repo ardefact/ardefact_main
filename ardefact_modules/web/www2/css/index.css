@@ -274,6 +274,16 @@ button#signinButton:hover {
 #foundButtonArea {
     margin-top: 12px;
     display: block;
+    /*clear: both;*/
+    float: right;
+    position: relative;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.buttonArea {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    display: block;
     clear: both;
     position: relative;
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
@@ -926,7 +936,7 @@ input#searchFilterTravelers[type="checkbox"]:checked + label, input#searchFilter
     margin-right: 10%;
 }
 
-button#moreButton {
+button.moreButton {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -947,7 +957,7 @@ button#moreButton {
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
-button#moreButton:hover {
+button.moreButton:hover {
     background-color: #ffae7d;
     -webkit-transition-duration: 0.5s;
     -moz-transition-duration: 0.5s;
@@ -2016,4 +2026,24 @@ button#itemFormButton:hover {
 
 .footerCopyright {
     color: #666;
+}
+
+.itemFormPictures img {
+    width: 100%;
+    height: auto;
+}
+
+.btn {
+    outline: none;
+    border: 0;
+    padding: 24px 24px;
+    text-align: center;
+    /*width: 100%;*/
+    cursor: pointer;
+    font-size: 22px
+}
+
+.btn-watevs {
+    background-color: #ffae7d;
+    color: #ffffff;
 }

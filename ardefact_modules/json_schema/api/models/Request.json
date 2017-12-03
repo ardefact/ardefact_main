@@ -1,0 +1,27 @@
+{
+  "id": "/models/Request",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "A request for an item.",
+  "type": "object",
+  "properties": {
+    "requester_hid": {
+      "type": "string"
+    },
+    "item_hid": {
+      "type": "string"
+    },
+    "timestamp_ms": {
+      "type": "number"
+    },
+    "fulfilled": {
+      "description": "Is request fulfilled.",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "requester_hid",
+    "item_hid",
+    "timestamp_ms",
+    "fulfilled"
+  ]
+}

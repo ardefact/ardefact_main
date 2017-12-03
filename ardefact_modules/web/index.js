@@ -9,46 +9,36 @@ var Express        = require('express'),
     CookieParser   = require('cookie-parser'),
     Uuid           = require('uuid'),
     Q              = require('q'),
-    ReactDOMServer = require('react-dom/server'),
-    Handlebars     = require('handlebars'),
     React          = require('react'),
-    Webpack        = require('webpack');
+    FileUpload     = require('express-fileupload');
 
 var ExpressSession = require('express-session');
-const MongoStore   = require('connect-mongo')(ExpressSession);
+//const MongoStore   = require('connect-mongo')(ExpressSession);
 
 
-var WebpackConfig = require('./webpack.config');
-var compiler      = Webpack(WebpackConfig);
+//var WebpackConfig = require('./webpack.config');
+//var compiler      = Webpack(WebpackConfig);
 
 var ArdefactUtils          = require('utils');
 var ArdefactConfig         = require('config');
 var ArdefactDatabaseBridge = require('db');
+var ArdefactRouteControllers = require('rest');
 
-var cliArgs = require('commander').option('-p, --port <number>', 'port to server web content on', Number, ArdefactConfig.getConfig(ArdefactConfig.CONFIG_VARS.ARDEFACT_WEB_PORT)).parse(process.argv);
+//var cliArgs = require('commander').option('-p, --port <number>', 'port to server web content on', Number, ArdefactConfig.getConfig(ArdefactConfig.CONFIG_VARS.ARDEFACT_WEB_PORT)).parse(process.argv);
 
 const LOG = ArdefactUtils.Logging.createLogger(__filename);
 
 const WEB_PATH = Path.join(Path.dirname(__filename), "www2");
 
-
 LOG.info(`Using ${WEB_PATH} for static content path`);
 
-const HTML_TEMPLATE = Handlebars.compile(FS.readFileSync(`${WEB_PATH}/index.html`).toString());
+function makeExpressRouter() {
 
-function getLoggedInUser(req, db) {
-  if (!req.cookies.auth_token) {
-    return Q.resolve(false);
-  }
-  return ArdefactDatabaseBridge.collections.User.verifyAuthToken(req.cookies.auth_token, db);
-}
-
-function makeExpressRouter(db) {
-  const UserModel = ArdefactDatabaseBridge.collections.User.getModel(db);
-  const ItemFormModel = ArdefactDatabaseBridge.collections.ItemForm.getModel(db);
   const webRouter = Express.Router();
 
   webRouter.use(CookieParser());
+
+  webRouter.use(FileUpload());
 
   webRouter.get('/', (req, res, next) => {
     // TODO:  Only do this for form pages.
@@ -61,43 +51,31 @@ function makeExpressRouter(db) {
     next();
   });
 
-  webRouter.post('/itemform', (req, res, next) => {
-    getLoggedInUser(req, db).then(user => {
+  webRouter.use('/api', (req, res, next) => {
+    if (!req.cookies.auth_token) {
+      return Q.resolve(false);
+    }
+
+    //TODO check for logged out routes
+
+    ArdefactDatabaseBridge.collections.User.verifyAuthToken(req.cookies.auth_token, ArdefactDatabaseBridge.getDb()).then(user => {
       if (!user) {
-        res.status(403).end("Not authenticated");
-      } else {
-        var entry = _.extend(
-          {
-            submitter : user.email,
-            last_touched_ms: new Date().toJSON()
-          },
-          req.body);
-        delete entry.itemSubmitButton;
-        // TODO: Use ItemFormModel when we ar ready to migrate from itemform
-        db.connection.collection('itemform').save(entry, function (err, records) {
-          if (err) {
-            LOG.error(err);
-            res.status(500).end("Couldn't save");
-          } else {
-            res.set('Content-Type', 'text/html');
-            res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
-          }
-        });
-        /*
-        new ItemFormModel(entry).save().then(result => {
-          LOG.info(result);
-          res.set('Content-Type', 'text/html');
-          res.status(200).end(`thanks! <a href="/">Click to go back and submit more!</a>`);
-        })
-          .catch(error => res.status(500).end("couldn't save"));
-          */
+        res.status(404).end();
       }
-    }).catch(error => {
-      LOG.error(error);
-      res.status(500).end(error.toString());
-    });
+      else {
+        res.locals.user = user;
+        next();
+      }
+    }).catch(
+      error => {
+        res.end(500, JSON.stringify(error));
+        LOG.error(error);
+      }
+    );
   });
 
+
+  /*
   webRouter.post('/user_admin', (req, res, next) => {
     getLoggedInUser(req, db).then(user => {
         if (!user || !user.isAdmin()) {
@@ -136,33 +114,35 @@ function makeExpressRouter(db) {
       })
       .catch(error => res.end(500, JSON.stringify(error)));
   });
+  */
 
-  webRouter.post('/item_list', (req, res, next) => {
-    getLoggedInUser(req, db).then(user => {
-      if (!user || !user.isAdmin()) {
-        res.status(404).end();
-      } else {
-        LOG.info("Querying db for itemform items");
-        db.connection.collection('itemform').find().toArray((error, docs) => {
-          if (error) {
-            res.status(500).end(JSON.stringify(error));
-          } else {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).end(JSON.stringify(docs));
-          }
-        })
-      }
+  webRouter.get('/api/item_list', ArdefactRouteControllers.item.get_items);
 
-    });
+  webRouter.post('/api/item_form', ArdefactRouteControllers.itemForm.update_item_form);
 
-  });
+  webRouter.get('/api/item_form', ArdefactRouteControllers.itemForm.get_item_form);
+
+  webRouter.post('/api/item_form/image', ArdefactRouteControllers.itemForm.add_image);
+
+  webRouter.delete('/api/item_form/image/:image_index', ArdefactRouteControllers.itemForm.remove_image);
+
+  webRouter.post('/api/item',  ArdefactRouteControllers.item.create_item);
+
+  webRouter.post('/api/request',  ArdefactRouteControllers.request.request_item);
+
+  webRouter.get('/api/item/:id',  ArdefactRouteControllers.item.find_by_id);
+
+  webRouter.delete('/api/item/:id',  ArdefactRouteControllers.item.remove_item);
 
   webRouter.use('/', Express.static(WEB_PATH));
 
-  // Always return the main index.html, so react-router render the route in the client
   webRouter.get('*', (req, res) => {
     res.sendFile(Path.resolve(WEB_PATH, 'index.html'));
   });
+
+
+
+
 
   return webRouter;
 }
